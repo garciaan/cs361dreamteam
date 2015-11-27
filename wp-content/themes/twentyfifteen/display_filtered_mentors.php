@@ -35,7 +35,7 @@ get_header(); ?>
 			$categories = $wpdb->get_results("select career_cats.career_cat_id,career_cats.category from career_cats");
 			?>
 				<form action='<?php echo $_SERVER['PHP_SELF']; ?>' method="get">
-					<select name="career_category">
+					<select name="career_category" onchange='if(this.value != 0) { this.form.submit(); }'>
 						<?php
 						foreach ($categories as $category){
 							//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
@@ -48,7 +48,6 @@ get_header(); ?>
 
 						?>
 					</select>
-					<input type="submit">
 				</form>
 				<table>
 					<thead>
