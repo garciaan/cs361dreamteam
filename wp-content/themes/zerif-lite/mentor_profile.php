@@ -25,109 +25,40 @@ get_header(); ?>
 
 			<main id="main" class="site-main" role="main">
 				
-				<h2>My Profile</h2>
-				<p>Change any entry by replacing the text [need to query for user and auto populate fields, then add mySQL UPDATE]</p>
-				<form method="post" id="mentorapp_form">
-					<table>
-						<tr>
-							<td>
-								Name:&nbsp<input type="text" name="mentor_name" id="mentor_name" rows="1" value="" />
-								Phone Number:&nbsp<input type="text" name="mentor_phone" id="mentor_phone" rows="1" value="" />
-								Email Address:&nbsp<input type="text" name="mentor_email" id="mentor_email" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Home Address:&nbsp<input type="text" name="mentor_address" id="mentor_address" rows="1" value="" />
-								Select Country (with states):<select id="country" name ="country"></select>
-								Select State: <select name ="state" id ="state"></select>
- 								<script language="javascript">populateCountries("country", "state");</script>
- 								Time Zone:&nbsp<input type="text" name="time_zone" id="time_zone" rows="1" value="" />
-								Employer:&nbsp<input type="text" name="mentor_employer" id="mentor_employer" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Career Category:&nbsp
-								<select name="mentor_category" id="mentor_category">
-								  <option value="100">Military</option>
-								  <option value="101">Scientist</option>
-								  <option value="102">Communications</option>
-								  <option value="103">Medical</option>
-								  <option value="104">Engine Repair</option>
-								  <option value="105">Nuclear Physics</option>
-								  <option value="106">Linguistics</option>
-								</select>
-								Years of Experience:&nbsp<input type="text" name="mentor_years" id="mentor_years" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Description of Experience:&nbsp<textarea name="mentor_experience" id="mentor_experience"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Preferred method of contact for mentor sessions:
-								<select name="mentor_contact" id="mentor_contact">
-								  <option value="1">By Phone</option>
-								  <option value="2">By Email</option>
-								  <option value="3">In Person</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Number of mentor sessions you are available for in the first year?:&nbsp<input type="text" name="mentor_year1" id="mentor_year1" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Mentor session time allotted (example; 30 minutes on the phone)?&nbsp<input type="text" name="mentor_sessiontime" id="mentor_sessiontime" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Reference 1: Name and contact info (email - Phone)&nbsp<input type="text" name="mentor_ref1" id="mentor_ref1" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Reference 2: Name and contact info (email - Phone)&nbsp<input type="text" name="mentor_ref2" id="mentor_ref2" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								What makes you a good mentor?&nbsp<textarea name="mentor_qualification" id="mentor_qualification"></textarea>
-							</td>
-						</tr>
-					</table>
-					<br /><br />
-					<input type="submit" name="submit" id="submit" value="Send"/>
-				</form>
-
-
 				<?php
 
-					//$wpdb->show_errors();
+					$wpdb->show_errors();
 
 					$photo = "http://localhost/wp-content/uploads/2015/11/person-150x150.jpg";
-					$mentor_name = $_POST['mentor_name'];
-					$mentor_phone = $_POST['mentor_phone'];
-					$mentor_address = $_POST['mentor_address'];
-					$mentor_employer = $_POST['mentor_employer'];
-					$mentor_category = $_POST['mentor_category'];
-					$mentor_years = $_POST['mentor_years'];
-					$mentor_contact = $_POST['mentor_contact'];
-					$mentor_year1 = $_POST['mentor_year1'];
-					$mentor_sessiontime = $_POST['mentor_sessiontime'];
-					$mentor_email = $_POST['mentor_email'];
-					$country = $_POST['country'];
-					$time_zone = $_POST['time_zone'];
-					$mentor_experience = $_POST['mentor_experience'];
-					$mentor_ref1 = $_POST['mentor_ref1'];
-					$mentor_ref2 = $_POST['mentor_ref2'];
-					$mentor_qualification = $_POST['mentor_qualification'];
+					$user = "Lt Uhura";
+
+					global $wpdb;
+					$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.full_name = '".$user."'");
+
+					if(!empty($results)) { 
+						foreach($results as $r) {	 
+							$mentor_id = $r->id;
+							$mentor_name = $r->full_name;
+							$mentor_phone = $r->phone;
+							$mentor_email = $r->email;
+							$mentor_address = $r->address;
+							$country = $r->location;
+							$state = $r->state;
+							$time_zone = $r->time_zone;
+							$mentor_employer = $r->employer;
+							$mentor_category = $r->career_cat;
+							$mentor_years = $r->yrs_exp;
+							$mentor_experience = $r->desc_exp;
+							$mentor_contact = $r->contact_meth;
+							$mentor_year1 = $r->session_num;
+							$mentor_sessiontime = $r->session_time;
+							$mentor_ref1 = $r->ref_1;
+							$mentor_ref2 = $r->ref_2;
+							$mentor_qualification = $r->why_mentor;
+						}
+					} else {
+						echo "ERROR: SELECT returned with ".$wpdb->print_error();
+					}
 
 					if(isset($_POST['submit'])) 
 					{ 
@@ -255,26 +186,145 @@ get_header(); ?>
 
 						if ( empty($_POST) ) 
 							{ 
-								print 'I got nothing from you'; 
+								print 'Error: I got no post data'; 
 								exit; 
 							} else 
 							{ 
 								if($flag==1) 
 									{ 
 										
-										$wpdb->insert( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'address' => $mentor_address, 'state' => $state, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'email' => $mentor_email, 'location' => $country, 'time_zone' => $time_zone, 'desc_exp' => $mentor_experience, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s'));
-										
-										//$wpdb->insert( ‘mentor’, array(`full_name` => $mentor_name, `phone` => $mentor_phone, `address` => $mentor_address), array( ‘%s’, ‘%s’, ‘%s’));
+										$mentor_name = $_POST['mentor_name'];
+										$mentor_phone = $_POST['mentor_phone'];
+										$mentor_address = $_POST['mentor_address'];
+										$time_zone = $_POST['time_zone'];
+										$mentor_employer = $_POST['mentor_employer'];
+										$mentor_category = $_POST['mentor_category'];
+										$mentor_years = $_POST['mentor_years'];
+										$mentor_contact = $_POST['mentor_contact'];
+										$mentor_year1 = $_POST['mentor_year1'];
+										$mentor_sessiontime = $_POST['mentor_sessiontime'];
+										$mentor_email = $_POST['mentor_email'];
+										$country = $_POST['country'];
+										$mentor_experience = $_POST['mentor_experience'];
+										$mentor_ref1 = $_POST['mentor_ref1'];
+										$mentor_ref2 = $_POST['mentor_ref2'];
+										$mentor_qualification = $_POST['mentor_qualification'];
+
+										$results = $wpdb->update( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'email' => $mentor_email, 'address' => $mentor_address, 'location' => $country, 'State' => $state, 'time_zone' => $time_zone, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'desc_exp' => $mentor_experience, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array('id' => $mentor_id), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%d', '%d', '%s', '%s', '%s'), array('%s'));
 				
-										if(! $wpdb->insert_id)
+										if(! $results)
 										{
-											echo "ERROR: INSERT returned with ".$wpdb->print_error();
+											echo "ERROR: UPDATE returned with ".$results;
+										} else
+										{
+											echo "Congratulations, you have updated";
 										}
 									}  
 							}
 					}
 
 				?>
+
+				<h2>My Profile</h2>
+				<p>Update your profile</p>
+				<form method="post" id="mentorapp_form">
+					<table>
+						<tr>
+							<td>
+								<?php echo "Name:&nbsp<input type=text name=mentor_name id=mentor_name rows=1 value= '".$mentor_name. "' />" ?>
+								<?php echo "Phone Number:&nbsp<input type=text name=mentor_phone id=mentor_phone rows=1 value= '".$mentor_phone."' />" ?>
+								<?php echo "Email Address:&nbsp<input type=text name=mentor_email id=mentor_email rows=1 value= '".$mentor_email."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Home Address:&nbsp<input type=text name=mentor_address id=mentor_address rows=1 value= '".$mentor_address."' />" ?>
+								Select Country (with states):<select id="country" name ="country"></select>
+								Select State: <select name ="state" id ="state"></select>
+ 								<script language="javascript">populateCountries("country", "state");</script>
+								<?php echo "Time Zone:&nbsp<input type=text name=time_zone id=time_zone rows=1 value= '".$time_zone."' />" ?>
+								<?php echo "Employer:&nbsp<input type=text name=mentor_employer id=mentor_employer rows=1 value= '".$mentor_employer."' />" ?>
+
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Career Category:&nbsp
+								<select name="mentor_category" id="mentor_category">
+								  <option value="100">Military</option>
+								  <option value="101">Scientist</option>
+								  <option value="102">Communications</option>
+								  <option value="103">Medical</option>
+								  <option value="104">Engine Repair</option>
+								  <option value="105">Nuclear Physics</option>
+								  <option value="106">Linguistics</option>
+								</select>
+								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentor_years id=mentor_years rows=1 value=".$mentor_years." />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Description of experience and what you want to learn:&nbsp<textarea name=mentor_experience id=mentor_experience>".$mentor_experience."</textarea>" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Preferred method of contact for mentor sessions:
+								<select name="mentor_contact" id="mentor_contact">
+								  
+								<?php
+								 
+								 if($mentor_contact == 1){
+								 	echo "<option value=1 selected>By Phone</option>";
+								  	echo "<option value=2>By Email</option>";
+								  	echo "<option value=3>In Person</option>";
+								 }else if($mentor_contact == 2){
+									echo "<option value=1>By Phone</option>";
+								  	echo "<option value=2 selected>By Email</option>";
+								  	echo "<option value=3>In Person</option>";
+								  }else if($mentor_contact == 3){
+								  	echo "<option value=1>By Phone</option>";
+								  	echo "<option value=2>By Email</option>";
+								  	echo "<option value=3 selected>In Person</option>";
+								  }else{
+								  	echo "<option value=1>By Phone</option>";
+								  	echo "<option value=2>By Email</option>";
+								  	echo "<option value=3>In Person</option>";
+								  }
+								?>
+
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Number of mentor sessions you are available for in the first year?:&nbsp<input type=text name=mentor_year1 id=mentor_year1 rows=1 value=".$mentor_year1." />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Mentor session time allotted (example; 30 minutes on the phone)?&nbsp<input type=text name=mentor_sessiontime id=mentor_sessiontime rows=1 value=".$mentor_sessiontime." />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Reference 1: Name and contact info (email - Phone)&nbsp<input type=text name=mentor_ref1 id=mentor_ref1 rows=1 value= '".$mentor_ref1."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Reference 2: Name and contact info (email - Phone)&nbsp<input type=text name=mentor_ref2 id=mentor_ref2 rows=1 value= '".$mentor_ref2."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "What makes you a good mentor?&nbsp<textarea name=mentor_qualification id=mentor_qualification>".$mentor_qualification."</textarea>" ?>
+							</td>
+						</tr>
+					</table>
+					<br /><br />
+					<input type="submit" name="submit" id="submit" value="Send"/>
+				</form>
 
 			</main><!-- #main -->
 

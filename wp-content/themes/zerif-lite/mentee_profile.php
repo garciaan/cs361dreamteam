@@ -25,108 +25,39 @@ get_header(); ?>
 
 			<main id="main" class="site-main" role="main">
 				
-				<h2>MENTEE PROFILE</h2>
-				<p>Update your profile [need to query for mentee and need to add mySQL UPDATE]</p>
-				<form method="post" id="menteeapp_form">
-					<table>
-						<tr>
-							<td>
-								Name:&nbsp<input type="text" name="mentee_name" id="mentee_name" rows="1" value="" />
-								Phone Number:&nbsp<input type="text" name="mentee_phone" id="mentee_phone" rows="1" value="" />
-								Email Address:&nbsp<input type="text" name="mentee_email" id="mentee_email" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Home Address:&nbsp<input type="text" name="mentee_address" id="mentee_address" rows="1" value="" />
-								Select Country (with states):<select id="country" name ="country"></select>
-								Select State: <select name ="state" id ="state"></select>
- 								<script language="javascript">populateCountries("country", "state");</script>
-								Employer:&nbsp<input type="text" name="mentee_employer" id="mentee_employer" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Career Category Sought:&nbsp
-								<select name="mentee_category" id="mentee_category">
-								  <option value="100">Military</option>
-								  <option value="101">Scientist</option>
-								  <option value="102">Communications</option>
-								  <option value="103">Medical</option>
-								  <option value="104">Engine Repair</option>
-								  <option value="105">Nuclear Physics</option>
-								  <option value="106">Linguistics</option>
-								</select>
-								Years of Experience in Category:&nbsp<input type="text" name="mentee_years" id="mentee_years" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								 Description of experience and what you want to learn:&nbsp<textarea name="mentee_experience" id="mentee_experience"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Preferred method of contact for mentee sessions:
-								<select name="mentee_contact" id="mentee_contact">
-								  <option value="1">By Phone</option>
-								  <option value="2">By Email</option>
-								  <option value="3">In Person</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Number of mentee sessions requested in the first year?:&nbsp<input type="text" name="mentee_year1" id="mentee_year1" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								mentee session time requested (example; 30 minutes on the phone)?&nbsp<input type="text" name="mentee_sessiontime" id="mentee_sessiontime" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Reference 1: Name and contact info (email - Phone)&nbsp<input type="text" name="mentee_ref1" id="mentee_ref1" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Reference 2: Name and contact info (email - Phone)&nbsp<input type="text" name="mentee_ref2" id="mentee_ref2" rows="1" value="" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								What makes you a good mentee? Why do you want a mentee?&nbsp<textarea name="mentee_qualification" id="mentee_qualification"></textarea>
-							</td>
-						</tr>
-					</table>
-					<br /><br />
-					<input type="submit" name="submit" id="submit" value="Send"/>
-				</form>
-
-
 				<?php
 
-					//$wpdb->show_errors();
+					$wpdb->show_errors();
 
 					$photo = "http://localhost/wp-content/uploads/2015/11/person-150x150.jpg";
-					$mentee_name = $_POST['mentee_name'];
-					$mentee_phone = $_POST['mentee_phone'];
-					$mentee_email = $_POST['mentee_email'];
-					$mentee_address = $_POST['mentee_address'];
-					$country = $_POST['country'];
-					$state = $_POST['state'];
-					$mentee_employer = $_POST['mentee_employer'];
-					$mentee_category = $_POST['mentee_category'];
-					$mentee_years = $_POST['mentee_years'];
-					$mentee_experience = $_POST['mentee_experience'];
-					$mentee_contact = $_POST['mentee_contact'];
-					$mentee_year1 = $_POST['mentee_year1'];
-					$mentee_sessiontime = $_POST['mentee_sessiontime'];
-					$mentee_ref1 = $_POST['mentee_ref1'];
-					$mentee_ref2 = $_POST['mentee_ref2'];
-					$mentee_qualification = $_POST['mentee_qualification'];
+					$user = "Eric Anderson";
+
+					global $wpdb;
+					$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentee.full_name = '".$user."'");
+
+					if(!empty($results)) { 
+						foreach($results as $r) {	 
+							$mentee_id = $r->mentee_id;
+							$mentee_name = $r->full_name;
+							$mentee_phone = $r->phone;
+							$mentee_email = $r->email;
+							$mentee_address = $r->address;
+							$country = $r->location;
+							$state = $r->state;
+							$mentee_employer = $r->employer;
+							$mentee_category = $r->career_cat;
+							$mentee_years = $r->yrs_exp;
+							$mentee_experience = $r->desc_exp;
+							$mentee_contact = $r->contact_meth;
+							$mentee_year1 = $r->session_num;
+							$mentee_sessiontime = $r->session_time;
+							$mentee_ref1 = $r->ref_1;
+							$mentee_ref2 = $r->ref_2;
+							$mentee_qualification = $r->why_mentee;
+						}
+					} else {
+						echo "ERROR: SELECT returned with ".$wpdb->print_error();
+					}
 
 					if(isset($_POST['submit'])) 
 					{ 
@@ -254,13 +185,29 @@ get_header(); ?>
 
 						if ( empty($_POST) ) 
 							{ 
-								print 'I got nothing from you'; 
-								exit; 
+
+								echo "Error: I got no post data";
+
 							} else 
 							{ 
 								if($flag==1) 
 									{ 
-										
+										$mentee_name = $_POST['mentee_name'];
+										$mentee_phone = $_POST['mentee_phone'];
+										$mentee_email = $_POST['mentee_email'];
+										$mentee_address = $_POST['mentee_address'];
+										$country = $_POST['country'];
+										$state = $_POST['state'];
+										$mentee_employer = $_POST['mentee_employer'];
+										$mentee_category = $_POST['mentee_category'];
+										$mentee_years = $_POST['mentee_years'];
+										$mentee_experience = $_POST['mentee_experience'];
+										$mentee_contact = $_POST['mentee_contact'];
+										$mentee_year1 = $_POST['mentee_year1'];
+										$mentee_sessiontime = $_POST['mentee_sessiontime'];
+										$mentee_ref1 = $_POST['mentee_ref1'];
+										$mentee_ref2 = $_POST['mentee_ref2'];
+										$mentee_qualification = $_POST['mentee_qualification'];
 
 										echo "Photo: ".$photo."<br/>";
 										echo "Name: ".$mentee_name."<br/>";
@@ -281,20 +228,121 @@ get_header(); ?>
 										echo "Qualifications: ".$mentee_qualification."<br/>";
 
 
-										$wpdb->insert( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'));
+										$results = $wpdb->update( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array('mentee_id' => $mentee_id), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'), array('%s'));
 														
-										if(! $wpdb->insert_id)
+										if(! $results)
 										{
-											echo "ERROR: INSERT returned with ".$wpdb->print_error();
+											echo "ERROR: UPDATE returned with ".$results;
 										} else
 										{
-											echo "Congratulations, you have been added as a Mentee!";
+											echo "Congratulations, you have updated";
 										}
 									}  
 							}
 					}
 
 				?>
+
+				<h2>MENTEE PROFILE</h2>
+				<p>Update your profile</p>
+				<form method="post" id="menteeapp_form">
+					<table>
+						<tr>
+							<td>
+								<?php echo "Name:&nbsp<input type=text name=mentee_name id=mentee_name rows=2 value= '".$mentee_name. "' />" ?>
+								<?php echo "Phone Number:&nbsp<input type=text name=mentee_phone id=mentee_phone rows=1 value= '".$mentee_phone."' />" ?>
+								<?php echo "Email Address:&nbsp<input type=text name=mentee_email id=mentee_email rows=1 value= '".$mentee_email."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Home Address:&nbsp<input type=text name=mentee_address id=mentee_address rows=1 value= '".$mentee_address."' />" ?>
+								Select Country (with states):<select id="country" name ="country"></select>
+								Select State: <select name ="state" id ="state"></select>
+ 								<script language="javascript">populateCountries("country", "state");</script>
+								<?php echo "Employer:&nbsp<input type=text name=mentee_employer id=mentee_employer rows=1 value= '".$mentee_employer."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Career Category Sought:&nbsp
+								<select name="mentee_category" id="mentee_category">
+								  <option value="100">Military</option>
+								  <option value="101">Scientist</option>
+								  <option value="102">Communications</option>
+								  <option value="103">Medical</option>
+								  <option value="104">Engine Repair</option>
+								  <option value="105">Nuclear Physics</option>
+								  <option value="106">Linguistics</option>
+								</select>
+								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentee_years id=mentee_years rows=1 value=".$mentee_years." />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 <?php echo "Description of experience and what you want to learn:&nbsp<textarea name=mentee_experience id=mentee_experience>".$mentee_experience."</textarea>" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Preferred method of contact for mentee sessions:
+								<select name="mentee_contact" id="mentee_contact">
+								  
+								<?php
+								 
+								 if($mentee_contact == 1){
+								 	echo "<option value=1 selected>By Phone</option>";
+								  	echo "<option value=2>By Email</option>";
+								  	echo "<option value=3>In Person</option>";
+								 }else if($mentee_contact == 2){
+									echo "<option value=1>By Phone</option>";
+								  	echo "<option value=2 selected>By Email</option>";
+								  	echo "<option value=3>In Person</option>";
+								  }else if($mentee_contact == 3){
+								  	echo "<option value=1>By Phone</option>";
+								  	echo "<option value=2>By Email</option>";
+								  	echo "<option value=3 selected>In Person</option>";
+								  }else{
+								  	echo "<option value=1>By Phone</option>";
+								  	echo "<option value=2>By Email</option>";
+								  	echo "<option value=3>In Person</option>";
+								  }
+								?>
+
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Number of mentee sessions requested in the first year?:&nbsp<input type=text name=mentee_year1 id=mentee_year1 rows=1 value=".$mentee_year1." />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "mentee session time requested (example; 30 minutes on the phone)?&nbsp<input type=text name=mentee_sessiontime id=mentee_sessiontime rows=1 value=".$mentee_sessiontime." />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Reference 1: Name and contact info (email - Phone)&nbsp<input type=text name=mentee_ref1 id=mentee_ref1 rows=1 value= '".$mentee_ref1."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "Reference 2: Name and contact info (email - Phone)&nbsp<input type=text name=mentee_ref2 id=mentee_ref2 rows=1 value= '".$mentee_ref2."' />" ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo "What makes you a good mentee? Why do you want a mentee?&nbsp<textarea name=mentee_qualification id=mentee_qualification>".$mentee_qualification."</textarea>" ?>
+							</td>
+						</tr>
+					</table>
+					<br /><br />
+					<input type="submit" name="submit" id="submit" value="Send"/>
+				</form>
+
+
 
 			</main><!-- #main -->
 
