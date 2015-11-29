@@ -287,12 +287,20 @@ get_header(); ?>
 
 
 										$wpdb->insert( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'address' => $mentor_address, 'state' => $state, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'email' => $mentor_email, 'location' => $country, 'time_zone' => $time_zone, 'desc_exp' => $mentor_experience, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s'));
-										
-										//$wpdb->insert( ‘mentor’, array(`full_name` => $mentor_name, `phone` => $mentor_phone, `address` => $mentor_address), array( ‘%s’, ‘%s’, ‘%s’));
-				
+														
 										if(! $wpdb->insert_id)
 										{
 											echo "ERROR: INSERT returned with ".$wpdb->print_error();
+										} else
+										{
+											$wpdb->insert( 'mentor_career', array('mentor_ID' => $wpdb->insert_id, 'career_ID' => $mentor_category), array( '%d', '%d'));
+											if(! $wpdb->insert_id)
+											{
+												echo "ERROR: INSERT returned with ".$wpdb->print_error();
+											} else
+											{
+												echo "Congratulations, you have been added as a Mentor!";
+											}
 										}
 									}  
 							}
@@ -320,11 +328,11 @@ get_header(); ?>
 			echo'<div class="menu-actions-container">';
 			echo'<ul id="menu-actions" class="menu">';
 			
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="http://localhost/mentor-profile-2/">Edit Profile</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="http://localhost/List-Mentees/">My Mentees</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="http://localhost/Mentee-Add/">Add Mentees</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="http://localhost/Mentee-Progress/">Post Mentee Progress</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="http://localhost/Mentee-Contact">Communicate with a Mentee</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="mentor-profile-2/">Edit Profile</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="List-Mentees/">My Mentees</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="Mentee-Add/">Add Mentees</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="Mentee-Progress/">Post Mentee Progress</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="Mentee-Contact">Communicate with a Mentee</a></li>';
 			
 			echo'</ul>';
 			echo'</div>';
@@ -333,8 +341,8 @@ get_header(); ?>
 
 			echo'<aside id="meta-2" class="widget widget_meta"><h2 class="widget-title">Meta</h2>';
 			echo'<ul>';
-			echo'<li><a href="http://localhost/wp-admin/">Site Admin</a></li>';
-			echo'<li><a href="http://localhost/wp-login.php?action=logout&#038;_wpnonce=f8c3f072d6">Log out</a></li>';
+			echo'<li><a href="wp-admin/">Site Admin</a></li>';
+			echo'<li><a href="wp-login.php?action=logout&#038;_wpnonce=f8c3f072d6">Log out</a></li>';
 			echo'</ul>';
 			echo'</aside>';
 			echo'</div>';
