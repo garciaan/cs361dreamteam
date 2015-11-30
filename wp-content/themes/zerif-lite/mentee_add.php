@@ -31,7 +31,9 @@ get_header(); ?>
 					global $wpdb;
 					$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By mentee.mentee_id");
 
-					$mentor_id = 4;
+					$user_id = get_current_user_id();
+					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentor_id = (int)($wpdb->get_var($sql));
 
 					echo "<table border=0>";
 

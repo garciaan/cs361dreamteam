@@ -109,6 +109,7 @@ get_header(); ?>
 				<?php
 
 					//$wpdb->show_errors();
+					$user_id = get_current_user_id();
 
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$mentee_name = $_POST['mentee_name'];
@@ -252,6 +253,7 @@ get_header(); ?>
 							echo "Please Describe What Makes You a Good mentee"; 
 						}
 
+
 						if ( empty($_POST) ) 
 							{ 
 								print 'I got nothing from you'; 
@@ -280,21 +282,25 @@ get_header(); ?>
 										echo "Reference 2: ".$mentee_ref2."<br/>";
 										echo "Qualifications: ".$mentee_qualification."<br/>";
 
-
-										$wpdb->insert( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'));
-														
-										if(! $wpdb->insert_id)
+										$insert_result = $wpdb->insert( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'));
+										$mentee_id = $wpdb->insert_id;
+										echo "Mentee ID: " . $mentee_id . "<br />";
+										if($insert_result == False) //$wpdb->insert returns 0 if error, 1 if pass
 										{
-											echo "ERROR: INSERT returned with ".$wpdb->print_error();
+											echo "ERROR: INSERT Mentee returned with ".$wpdb->print_error();
 										} else
 										{
-											$wpdb->insert( 'mentor_career', array('mentee_ID' => $wpdb->insert_id, 'career_ID' => $mentee_category), array( '%d', '%d'));
-											if(! $wpdb->insert_id)
+											$insert_result = $wpdb->insert( 'mentor_career', array('mentee_ID' => $wpdb->insert_id, 'career_ID' => $mentee_category), array( '%d', '%d'));
+											if($insert_result == False) //$wpdb->insert returns 0 if error, 1 if pass
 											{
-												echo "ERROR: INSERT returned with ".$wpdb->print_error();
+												echo "ERROR: INSERT mentor_career returned with ".$wpdb->print_error();
 											} else
 											{
 												echo "Congratulations, you have been added as a Mentee!";
+												//This connects the wp_id to the mentee id. Inserts if not there, updates if there
+												$sql = "INSERT INTO `wpid_to_mid` (`wp_id`, `mentee_id`) VALUES(" . $user_id . "," . $mentee_id . ") ON DUPLICATE KEY UPDATE `mentee_id` = " . $mentee_id;
+												//echo "SQL for wpid_to_mid: " . $sql . "<br>";
+												$wpdb->get_results($sql); //!!!!!!!!!!!!!!!!CAUTION, NO ERROR CHECKING YET!!!!!!!!!!!!!!!!!!!!!
 											}
 										}
 									}  
