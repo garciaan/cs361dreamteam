@@ -31,6 +31,8 @@ get_header(); ?>
 					global $wpdb;
 					$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By mentee.mentee_id");
 
+					$mentor_id = 4;
+
 					echo "<table border=0>";
 
 					if(!empty($results)) { 
@@ -52,7 +54,7 @@ get_header(); ?>
           					echo "<tr><td></td><td>".$r->session_num." Sessions of ".$r->session_time." mins per year requested</td></tr>";
           					echo "<tr><td></td><td>References: ".$r->ref_1."<br/>References: ".$r->ref_2."</td></tr>";
           					echo "<tr><td></td><td>Why I am a Mentee: ".$r->why_mentee."</td></tr>";
-          					echo "<tr><td></td><td><a href=http://localhost/list-mentees/ >‎Add this Mentee</a> </td></tr>";
+          					echo "<tr><td></td><td><form method=post id=menteeadd_form><input type=hidden name=menteeID id=menteeID value=".$r->mentee_id."><input type=submit value='Add Mentee'></form></td></tr>";
           					echo "</table>";
           					echo "</td></tr>";
      					}
@@ -62,6 +64,8 @@ get_header(); ?>
 					echo "</table>";
 
 				?>
+
+				
 
 			</main><!-- #main -->
 
@@ -81,11 +85,11 @@ get_header(); ?>
 			echo'<aside id="nav_menu-3" class="widget widget_nav_menu"><h2 class="widget-title">Actions</h2>';
 			echo'<div class="menu-actions-container">';
 			echo'<ul id="menu-actions" class="menu">';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="http://localhost/mentor-profile-2/">Edit Profile</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="http://localhost/List-Mentees/">My Mentees</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="http://localhost/Mentee-Add/">Add Mentees</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="http://localhost/Mentee-Progress/">Post Mentee Progress</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="http://localhost/Mentee-Contact">Communicate with a Mentee</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="mentor-profile-2/">Edit Profile</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="List-Mentees/">My Mentees</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="Mentee-Add/">Add Mentees</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="Mentee-Progress/">Post Mentee Progress</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="Mentee-Contact">Communicate with a Mentee</a></li>';
 			echo'</ul>';
 			echo'</div>';
 			echo'</aside>';
@@ -93,8 +97,8 @@ get_header(); ?>
 
 			echo'<aside id="meta-2" class="widget widget_meta"><h2 class="widget-title">Meta</h2>';
 			echo'<ul>';
-			echo'<li><a href="http://localhost/wp-admin/">Site Admin</a></li>';
-			echo'<li><a href="http://localhost/wp-login.php?action=logout&#038;_wpnonce=f8c3f072d6">Log out</a></li>';
+			echo'<li><a href="wp-admin/">Site Admin</a></li>';
+			echo'<li><a href="wp-login.php?action=logout&#038;_wpnonce=f8c3f072d6">Log out</a></li>';
 			echo'</ul>';
 			echo'</aside>';
 			echo'</div>';
