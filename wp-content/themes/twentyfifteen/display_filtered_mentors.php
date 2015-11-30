@@ -25,25 +25,25 @@ get_header(); ?>
 			// Include the page content template.
 			//get_template_part( 'content', 'page' );
 			if (!isset($_GET['career_category'])){
-				$career_cat = 1;
+				$career_cat = 100;
 			}
 			else {
 				$career_cat = $_GET['career_category'];
 			}
-			$sql = "select name,career_cats.category from mentors inner join career_cats on mentors.career_cat=career_cats.career_cat_id where career_cats.career_cat_id = $career_cat";
+			$sql = "select mentor.full_name,career_type.Career_Name from mentor inner join career_type on mentor.career_cat=career_type.Career_id where career_type.Career_id = $career_cat";
 			$filtered_mentors = $wpdb->get_results($sql);
-			$categories = $wpdb->get_results("select career_cats.career_cat_id,career_cats.category from career_cats");
+			$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
 			?>
 				<form action='<?php echo $_SERVER['PHP_SELF']; ?>' method="get">
 					<select name="career_category" onchange='if(this.value != 0) { this.form.submit(); }'>
 						<?php
 						foreach ($categories as $category){
 							//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
-							echo '<option value="' . $category->career_cat_id . '" ';
-							if ($_GET["career_category"] == $category->career_cat_id){
+							echo '<option value="' . $category->Career_id . '" ';
+							if ($_GET["career_category"] == $category->Career_id){
 								echo 'selected="selected"'; 
 							}
-							echo '>' . $category->category . '</option>'; 
+							echo '>' . $category->Career_Name . '</option>'; 
 						}
 
 						?>
@@ -60,8 +60,8 @@ get_header(); ?>
 					<?php
 						foreach ($filtered_mentors as $mentor){
 							echo "<tr>";
-							echo "<td>" . $mentor->name . "</td>";
-							echo "<td>" . $mentor->category . "</td>";
+							echo "<td>" . $mentor->full_name . "</td>";
+							echo "<td>" . $mentor->Career_Name . "</td>";
 							echo "</tr>";
 						}
 					?>

@@ -1,0 +1,145 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "Pirate Forms - Contact Form and SMTP Plugin"
+msgstr ""
+
+#. Short description.
+msgid "Makes your contact form page more engaging by creating a good-looking contact form on your website. The interaction with your visitors was never easie"
+msgstr ""
+
+#. Screenshot description.
+msgid "Screenshot 1. How to use contact form in posts/pages"
+msgstr ""
+
+#. Screenshot description.
+msgid "Screenshot 2. How to customize contact form labels"
+msgstr ""
+
+#. Screenshot description.
+msgid "Screenshot 3. How to use reCaptcha"
+msgstr ""
+
+#. Screenshot description.
+msgid "Screenshot 4. Enabling SMTP"
+msgstr ""
+
+#. Found in description list item.
+msgid "It's easy to use"
+msgstr ""
+
+#. Found in description list item.
+msgid "It's fully customizable"
+msgstr ""
+
+#. Found in description list item.
+msgid "Provides reCaptcha"
+msgstr ""
+
+#. Found in description list item.
+msgid "Comes with SMTP"
+msgstr ""
+
+#. Found in description list item.
+msgid "Stores contacts in special databases"
+msgstr ""
+
+#. Found in description list item.
+msgid "Choosing the fields(required or not)"
+msgstr ""
+
+#. Found in description list item.
+msgid "Choosing the labels"
+msgstr ""
+
+#. Found in description list item.
+msgid "Choosing error messages"
+msgstr ""
+
+#. Found in description list item.
+msgid "reCAPTCHA"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store the contacts in the database"
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"Stay in touch with your visitors very easily. Pirate Contact Forms offers you a great and friendly contact form for your website. \n"
+"This is an easy-to-use WordPress contact form plugin. To create a contact form you just need to use the [pirate_forms] shortcode or the 'Pirate Forms' widget.\n"
+"This plugin is a fork of https://wordpress.org/plugins/proper-contact-form/"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Features:"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Pirate Forms is very easy to set up. You can quickly create an engaging contact form by using a shortcode and copying it where you want it to appear."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Pirate Contact Form plugin allows you to customize everything you want. You can change the field labels and decide what message to tell your visitors when an error shows up. You can also decide which fields are required and which are not."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Avoid spam messages and make sure the e-mails you receive are entirely addressed to you."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "With the SMTP option, you can be sure you won’t miss any e-mail from your visitors. The messages will be safely delivered from the source to your personal e-mail address."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "You can keep all the contacts in an archive by saving their e-mail addresses. Pirate Contact Form allows you to do that by providing contact databases."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "A simple to use WordPress plugin for creating a contact form using the [pirate_forms] shortcode or the 'Pirate Forms' widget."
+msgstr ""
+
+#. Found in installation list item.
+msgid "In your WordPress admin, go to <strong>Plugins &gt; Add New</strong>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "In the Search field type \"pirate forms\""
+msgstr ""
+
+#. Found in installation list item.
+msgid "Under \"Pirate Forms,\" click the <strong>Install Now</strong> link"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Once the process is complete, click the <strong>Activate Plugin</strong> link"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Now, you're able to add contact forms but, first, we could configure a few settings. These can be found at <strong>Settings &gt; Pirate Forms</strong>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Make the changes desired, then click the <strong>Save changes</strong> button at the bottom"
+msgstr ""
+
+#. Found in installation list item.
+msgid "To add this form to any page or post, just copy/paste or type \"[pirate_forms]\" into the page or post content and save. The form should appear on that page"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "Activating the Pirate Contact Form plugin is just like any other plugin. If you've uploaded the plugin package to your server already, skip to step 5 below:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Default value for notification sender email"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Spanish translations and layout fixes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "The first version of the plugin was implemented."
+msgstr ""
