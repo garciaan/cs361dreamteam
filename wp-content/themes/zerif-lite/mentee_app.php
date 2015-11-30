@@ -110,7 +110,7 @@ get_header(); ?>
 
 					//$wpdb->show_errors();
 
-					$photo = "http://localhost/wp-content/uploads/2015/11/person-150x150.jpg";
+					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$mentee_name = $_POST['mentee_name'];
 					$mentee_phone = $_POST['mentee_phone'];
 					$mentee_email = $_POST['mentee_email'];

@@ -111,7 +111,7 @@ get_header(); ?>
 
 					//$wpdb->show_errors();
 
-					$photo = "http://localhost/wp-content/uploads/2015/11/person-150x150.jpg";
+					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$mentor_name = $_POST['mentor_name'];
 					$mentor_phone = $_POST['mentor_phone'];
 					$mentor_address = $_POST['mentor_address'];

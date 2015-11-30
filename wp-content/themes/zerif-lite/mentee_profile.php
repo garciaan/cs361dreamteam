@@ -29,7 +29,7 @@ get_header(); ?>
 
 					$wpdb->show_errors();
 
-					$photo = "http://localhost/wp-content/uploads/2015/11/person-150x150.jpg";
+					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$user = "Eric Anderson";
 
 					global $wpdb;
