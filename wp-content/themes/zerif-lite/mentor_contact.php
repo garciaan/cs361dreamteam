@@ -25,10 +25,38 @@ get_header(); ?>
 
 			<main id="main" class="site-main" role="main">
 
+				<?php
+					$user_id = get_current_user_id();
+					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentee_id = (int)($wpdb->get_var($sql));
+					//echo "My mentee ID: " . $mentee_id . "<br>";
+					//get mentor id
+					//NOTE: CURRENTLY ONLY GRABS THE FIRST ONE
+					$sql = "SELECT `mentor_id` FROM mentor2mentee WHERE `mentee_id` = '" . $mentee_id . "'";
+					//echo "<p>" . $sql . "</p>";
+					$result = $wpdb->get_var($sql);
+					if ($result){
+						$mentor_id = (int)$result;
+					}
+					else {
+						$mentor_id = 0;
+						$wpdb->print_error();
+
+					}
+					//get info of mentee
+					$sql = "SELECT `full_name`,`email` FROM mentor where id = '" . $mentor_id . "'";
+					//echo "<p>" . $sql . "</p>";
+					$result = $wpdb->get_row($sql);
+
+					$full_name = $result->full_name;
+					$email = $result->email;
+
+
+				?>
 				<form method="post" id="contactus_form">
-					Mentor Name:<input type="text" name="yourname" id="yourname" rows="1" value="" />
+					Mentor Name:<input type="text" name="yourname" id="yourname" rows="1" value="<?php echo $full_name; ?>" />
 					<br /><br />
-					Mentor Email:<input type="text" name="email" id="email" rows="1" value="" />
+					Mentor Email:<input type="text" name="email" id="email" rows="1" value="<?php echo $email; ?>" />
 					<br /><br />
 					Subject:<input type="text" name="subject" id="subject" rows="1" value=""></p>
 					<br /><br />

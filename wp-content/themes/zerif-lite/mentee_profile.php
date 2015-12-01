@@ -32,8 +32,13 @@ get_header(); ?>
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$user = "Eric Anderson";
 
+					$user_id = get_current_user_id();
+					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentee_id = (int)($wpdb->get_var($sql));
+
 					global $wpdb;
-					$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentee.full_name = '".$user."'");
+					$sql = 'SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentee.mentee_id = "' . $mentee_id . '"';
+					$results = $wpdb->get_results($sql);
 
 					if(!empty($results)) { 
 						foreach($results as $r) {	 
@@ -245,6 +250,9 @@ get_header(); ?>
 
 				<h2>MENTEE PROFILE</h2>
 				<p>Update your profile</p>
+				<?php
+					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
+				?>
 				<form method="post" id="menteeapp_form">
 					<table>
 						<tr>
@@ -267,13 +275,13 @@ get_header(); ?>
 							<td>
 								Career Category Sought:&nbsp
 								<select name="mentee_category" id="mentee_category">
-								  <option value="100">Military</option>
-								  <option value="101">Scientist</option>
-								  <option value="102">Communications</option>
-								  <option value="103">Medical</option>
-								  <option value="104">Engine Repair</option>
-								  <option value="105">Nuclear Physics</option>
-								  <option value="106">Linguistics</option>
+									<?php
+										foreach ($categories as $category){
+											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
+											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
+										}
+
+									?>
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentee_years id=mentee_years rows=1 value=".$mentee_years." />" ?>
 							</td>

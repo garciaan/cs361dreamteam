@@ -30,10 +30,16 @@ get_header(); ?>
 					$wpdb->show_errors();
 
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
-					$user = "Lt Uhura";
+					//$user = "Lt Uhura";
+
+					$user_id = get_current_user_id();
+					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentor_id = (int)($wpdb->get_var($sql));
 
 					global $wpdb;
-					$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.full_name = '".$user."'");
+					$sql = "SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.id = '".$mentor_id."'";
+					//echo "SQL Command: " . $sql . "<br>";
+					$results = $wpdb->get_results($sql);
 
 					if(!empty($results)) { 
 						foreach($results as $r) {	 
@@ -227,6 +233,9 @@ get_header(); ?>
 
 				<h2>My Profile</h2>
 				<p>Update your profile</p>
+				<?php
+					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
+				?>
 				<form method="post" id="mentorapp_form">
 					<table>
 						<tr>
@@ -251,13 +260,13 @@ get_header(); ?>
 							<td>
 								Career Category:&nbsp
 								<select name="mentor_category" id="mentor_category">
-								  <option value="100">Military</option>
-								  <option value="101">Scientist</option>
-								  <option value="102">Communications</option>
-								  <option value="103">Medical</option>
-								  <option value="104">Engine Repair</option>
-								  <option value="105">Nuclear Physics</option>
-								  <option value="106">Linguistics</option>
+									<?php
+										foreach ($categories as $category){
+											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
+											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
+										}
+
+									?>
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentor_years id=mentor_years rows=1 value=".$mentor_years." />" ?>
 							</td>
