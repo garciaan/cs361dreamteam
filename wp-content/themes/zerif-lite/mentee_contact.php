@@ -24,11 +24,40 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 
 			<main id="main" class="site-main" role="main">
+				<?php
+					$user_id = get_current_user_id();
+					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentor_id = (int)($wpdb->get_var($sql));
 
+					//get mentee id
+					//NOTE: CURRENTLY ONLY GRABS THE FIRST ONE
+					$sql = "SELECT `mentee_id` FROM mentor2mentee WHERE `mentor_id` = '" . $mentor_id . "'";
+					$result = $wpdb->get_var($sql);
+					if ($result){
+						$mentee_id = (int)$result;
+					}
+					else {
+						$mentee_id = 0;
+						$wpdb->print_error();
+
+					}
+					//get info of mentee
+					$sql = "SELECT `full_name`,`email` FROM mentee where mentee_id = '" . $mentee_id . "'";
+					
+					$result = $wpdb->get_row($sql);
+
+					$full_name = $result->full_name;
+					$email = $result->email;
+
+					//echo "Full name: " . $full_name;
+					//echo "Email: " . $email;
+
+
+				?>
 				<form method="post" id="contactus_form">
-					Mentee Name:<input type="text" name="yourname" id="yourname" rows="1" value="" />
+					Mentee Name:<input type="text" name="yourname" id="yourname" rows="1" value="<?php echo $full_name; ?>" />
 					<br /><br />
-					Mentee Email:<input type="text" name="email" id="email" rows="1" value="" />
+					Mentee Email:<input type="text" name="email" id="email" rows="1" value="<?php echo $email; ?>" />
 					<br /><br />
 					Subject:<input type="text" name="subject" id="subject" rows="1" value=""></p>
 					<br /><br />

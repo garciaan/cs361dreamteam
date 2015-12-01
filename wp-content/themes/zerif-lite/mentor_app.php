@@ -27,6 +27,9 @@ get_header(); ?>
 				
 				<h2>MENTOR QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentees can verify the authenticity and qualifications of mentors.</p>
+				<?php
+					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
+				?>
 				<form method="post" id="mentorapp_form">
 					<table>
 						<tr>
@@ -49,6 +52,7 @@ get_header(); ?>
 						<tr>
 							<td>
 								Career Category:&nbsp
+<<<<<<< HEAD
 									<?php
 									global $wpdb;
 									$results = $wpdb->get_results("SELECT * from career_type");
@@ -63,6 +67,17 @@ get_header(); ?>
 									} 
 									echo "</select>";
 								?>
+=======
+								<select name="mentee_category" id="mentee_category">
+									<?php
+										foreach ($categories as $category){
+											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
+											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
+										}
+
+									?>
+								</select>
+>>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								Years of Experience:&nbsp<input type="text" name="mentor_years" id="mentor_years" rows="1" value="" />
 							</td>
 						</tr>
@@ -300,19 +315,22 @@ get_header(); ?>
 
 
 
-										$wpdb->insert( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'address' => $mentor_address, 'state' => $state, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'email' => $mentor_email, 'location' => $country, 'time_zone' => $time_zone, 'desc_exp' => $mentor_experience, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s'));
-														
-										if(! $wpdb->insert_id)
+										$insert_result = $wpdb->insert( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'address' => $mentor_address, 'state' => $state, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'email' => $mentor_email, 'location' => $country, 'time_zone' => $time_zone, 'desc_exp' => $mentor_experience, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s'));
+										$mentor_id = $wpdb->insert_id;			
+										if($insert_result == False)
 										{
 											echo "ERROR: INSERT returned with ".$wpdb->print_error();
 										} else
 										{
-											$wpdb->insert( 'mentor_career', array('mentor_ID' => $wpdb->insert_id, 'career_ID' => $mentor_category), array( '%d', '%d'));
-											if(! $wpdb->insert_id)
+											$insert_result = $wpdb->insert( 'mentor_career', array('mentor_ID' => $wpdb->insert_id, 'career_ID' => $mentor_category), array( '%d', '%d'));
+											if($insert_result == False)
 											{
 												echo "ERROR: INSERT returned with ".$wpdb->print_error();
 											} else
 											{
+												//This connects the wp_id to the mentee id. Inserts if not there, updates if there
+												$sql = "INSERT INTO `wpid_to_mid` (`wp_id`, `mentor_id`) VALUES(" . $user_id . "," . $mentor_id . ") ON DUPLICATE KEY UPDATE `mentor_id` = " . $mentor_id;
+												$result = $wpdb->get_results($sql);
 												echo "Congratulations, you have been added as a Mentor!";
 											}
 										}

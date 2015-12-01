@@ -27,6 +27,9 @@ get_header(); ?>
 				
 				<h2>MENTEE QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentors can verify the authenticity and qualifications of mentees.</p>
+				<?php
+					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
+				?>
 				<form method="post" id="menteeapp_form">
 					<table>
 						<tr>
@@ -48,6 +51,7 @@ get_header(); ?>
 						<tr>
 							<td>
 								Career Category Sought:&nbsp
+<<<<<<< HEAD
 								<?php
 									global $wpdb;
 									$results = $wpdb->get_results("SELECT * from career_type");
@@ -62,6 +66,17 @@ get_header(); ?>
 									} 
 									echo "</select>";
 								?>
+=======
+								<select name="mentee_category" id="mentee_category">
+									<?php
+										foreach ($categories as $category){
+											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
+											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
+										}
+
+									?>
+								</select>
+>>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								Years of Experience in Category:&nbsp<input type="text" name="mentee_years" id="mentee_years" rows="1" value="" />
 							</td>
 						</tr>
@@ -310,11 +325,10 @@ get_header(); ?>
 												echo "ERROR: INSERT mentor_career returned with ".$wpdb->print_error();
 											} else
 											{
-												echo "Congratulations, you have been added as a Mentee!";
 												//This connects the wp_id to the mentee id. Inserts if not there, updates if there
 												$sql = "INSERT INTO `wpid_to_mid` (`wp_id`, `mentee_id`) VALUES(" . $user_id . "," . $mentee_id . ") ON DUPLICATE KEY UPDATE `mentee_id` = " . $mentee_id;
-												//echo "SQL for wpid_to_mid: " . $sql . "<br>";
-												$wpdb->get_results($sql); //!!!!!!!!!!!!!!!!CAUTION, NO ERROR CHECKING YET!!!!!!!!!!!!!!!!!!!!!
+												$result = $wpdb->get_results($sql);
+												echo "Congratulations, you have been added as a Mentee!";					
 											}
 										}
 									}  
