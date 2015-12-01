@@ -52,22 +52,6 @@ get_header(); ?>
 						<tr>
 							<td>
 								Career Category:&nbsp
-<<<<<<< HEAD
-									<?php
-									global $wpdb;
-									$results = $wpdb->get_results("SELECT * from career_type");
-									echo "<select name='mentor_category' id='mentor_category'>";
-
-									if(!empty($results)) { 
-				     					foreach($results as $r) {	 
-				          					echo "<option value='".$r->Career_id."'>".$r->Career_Name."</option>";
-				     					}
-									} else {
-				     					echo "ERROR: SELECT returned no entries";	 	 
-									} 
-									echo "</select>";
-								?>
-=======
 								<select name="mentee_category" id="mentee_category">
 									<?php
 										foreach ($categories as $category){
@@ -77,7 +61,6 @@ get_header(); ?>
 
 									?>
 								</select>
->>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								Years of Experience:&nbsp<input type="text" name="mentor_years" id="mentor_years" rows="1" value="" />
 							</td>
 						</tr>

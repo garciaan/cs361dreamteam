@@ -275,8 +275,7 @@ get_header(); ?>
 							<td>
 								Career Category Sought:&nbsp
 								<select name="mentee_category" id="mentee_category">
-<<<<<<< HEAD
-								<?php
+													<?php
 									global $wpdb;
 									$results = $wpdb->get_results("SELECT * from career_type");
 									if(!empty($results)) { 
@@ -291,15 +290,6 @@ get_header(); ?>
 				     					}
 									}
 								?>
-=======
-									<?php
-										foreach ($categories as $category){
-											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
-											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
-										}
-
-									?>
->>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentee_years id=mentee_years rows=1 value=".$mentee_years." />" ?>
 							</td>
@@ -329,6 +319,7 @@ get_header(); ?>
 				     					}
 									}
 								?>
+
 								</select>
 							</td>
 						</tr>

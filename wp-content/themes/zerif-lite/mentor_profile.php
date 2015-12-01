@@ -260,7 +260,6 @@ get_header(); ?>
 							<td>
 								Career Category:&nbsp
 								<select name="mentor_category" id="mentor_category">
-<<<<<<< HEAD
 								<?php
 									global $wpdb;
 									$results = $wpdb->get_results("SELECT * from career_type");
@@ -276,15 +275,6 @@ get_header(); ?>
 				     					}
 									}
 								?>
-=======
-									<?php
-										foreach ($categories as $category){
-											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
-											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
-										}
-
-									?>
->>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentor_years id=mentor_years rows=1 value=".$mentor_years." />" ?>
 							</td>
@@ -299,7 +289,7 @@ get_header(); ?>
 								Preferred method of contact for mentor sessions:
 								<select name="mentor_contact" id="mentor_contact">
 								  
-								<?php
+										<?php
 								 
 								 	$results = $wpdb->get_results("SELECT * from contact_method");
 								 	if(!empty($results)) { 
