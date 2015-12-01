@@ -30,7 +30,6 @@ get_header(); ?>
 					$wpdb->show_errors();
 
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
-					$user = "Eric Anderson";
 
 					$user_id = get_current_user_id();
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
