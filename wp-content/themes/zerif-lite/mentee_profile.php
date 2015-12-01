@@ -267,13 +267,21 @@ get_header(); ?>
 							<td>
 								Career Category Sought:&nbsp
 								<select name="mentee_category" id="mentee_category">
-								  <option value="100">Military</option>
-								  <option value="101">Scientist</option>
-								  <option value="102">Communications</option>
-								  <option value="103">Medical</option>
-								  <option value="104">Engine Repair</option>
-								  <option value="105">Nuclear Physics</option>
-								  <option value="106">Linguistics</option>
+								<?php
+									global $wpdb;
+									$results = $wpdb->get_results("SELECT * from career_type");
+									if(!empty($results)) { 
+				     					foreach($results as $r) {
+				     						if($mentee_category == $r->Career_id)
+				          					{
+				          						echo "<option value='".$r->Career_id."'selected>".$r->Career_Name."</option>";
+				          					} else 
+				          					{
+				          						echo "<option value='".$r->Career_id."'>".$r->Career_Name."</option>";
+				          					}
+				     					}
+									}
+								?>
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentee_years id=mentee_years rows=1 value=".$mentee_years." />" ?>
 							</td>
@@ -290,25 +298,19 @@ get_header(); ?>
 								  
 								<?php
 								 
-								 if($mentee_contact == 1){
-								 	echo "<option value=1 selected>By Phone</option>";
-								  	echo "<option value=2>By Email</option>";
-								  	echo "<option value=3>In Person</option>";
-								 }else if($mentee_contact == 2){
-									echo "<option value=1>By Phone</option>";
-								  	echo "<option value=2 selected>By Email</option>";
-								  	echo "<option value=3>In Person</option>";
-								  }else if($mentee_contact == 3){
-								  	echo "<option value=1>By Phone</option>";
-								  	echo "<option value=2>By Email</option>";
-								  	echo "<option value=3 selected>In Person</option>";
-								  }else{
-								  	echo "<option value=1>By Phone</option>";
-								  	echo "<option value=2>By Email</option>";
-								  	echo "<option value=3>In Person</option>";
-								  }
+								 	$results = $wpdb->get_results("SELECT * from contact_method");
+								 	if(!empty($results)) { 
+				     					foreach($results as $r) {	 
+				          					if($mentee_contact == $r->method_num)
+				          					{
+				          						echo "<option value='".$r->method_num."'selected>".$r->method_name."</option>";
+				          					} else 
+				          					{
+				          						echo "<option value='".$r->method_num."'>".$r->method_name."</option>";
+				          					}
+				     					}
+									}
 								?>
-
 								</select>
 							</td>
 						</tr>

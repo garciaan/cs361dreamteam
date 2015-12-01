@@ -48,15 +48,20 @@ get_header(); ?>
 						<tr>
 							<td>
 								Career Category Sought:&nbsp
-								<select name="mentee_category" id="mentee_category">
-								  <option value="100">Military</option>
-								  <option value="101">Scientist</option>
-								  <option value="102">Communications</option>
-								  <option value="103">Medical</option>
-								  <option value="104">Engine Repair</option>
-								  <option value="105">Nuclear Physics</option>
-								  <option value="106">Linguistics</option>
-								</select>
+								<?php
+									global $wpdb;
+									$results = $wpdb->get_results("SELECT * from career_type");
+									echo "<select name='mentee_category' id='mentee_category'>";
+
+									if(!empty($results)) { 
+				     					foreach($results as $r) {	 
+				          					echo "<option value='".$r->Career_id."'>".$r->Career_Name."</option>";
+				     					}
+									} else {
+				     					echo "ERROR: SELECT returned no entries";	 	 
+									} 
+									echo "</select>";
+								?>
 								Years of Experience in Category:&nbsp<input type="text" name="mentee_years" id="mentee_years" rows="1" value="" />
 							</td>
 						</tr>
@@ -68,11 +73,20 @@ get_header(); ?>
 						<tr>
 							<td>
 								Preferred method of contact for mentee sessions:
-								<select name="mentee_contact" id="mentee_contact">
-								  <option value="1">By Phone</option>
-								  <option value="2">By Email</option>
-								  <option value="3">In Person</option>
-								</select>
+									<?php
+									//global $wpdb;
+									$results = $wpdb->get_results("SELECT * from contact_method");
+									echo "<select name='mentee_contact' id='mentee_contact'>";
+
+									if(!empty($results)) { 
+				     					foreach($results as $r) {	 
+				          					echo "<option value='".$r->method_num."'>".$r->method_name."</option>";
+				     					}
+									} else {
+				     					echo "ERROR: SELECT returned no entries";	 	 
+									} 
+									echo "</select>";
+								?>
 							</td>
 						</tr>
 						<tr>
