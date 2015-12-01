@@ -30,26 +30,24 @@ get_header(); ?>
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
 					//echo "My mentee ID: " . $mentee_id . "<br>";
-					//get mentor id
-					//NOTE: CURRENTLY ONLY GRABS THE FIRST ONE
-					$sql = "SELECT `mentor_id` FROM mentor2mentee WHERE `mentee_id` = '" . $mentee_id . "'";
-					//echo "<p>" . $sql . "</p>";
-					$result = $wpdb->get_var($sql);
-					if ($result){
-						$mentor_id = (int)$result;
+					
+					if(isset($_POST['contact_mentor'])) {
+						$mentor_id = $_POST['contact_mentor'];
+						$sql = 'SELECT `full_name`,`email` FROM mentor WHERE mentor.id = "' . $mentor_id . '"';
+						//echo $sql;
+						$results = $wpdb->get_row($sql);
+						$full_name = $results->full_name;
+						$email = $results->email;
+
 					}
 					else {
-						$mentor_id = 0;
-						$wpdb->print_error();
-
+						$full_name = '';
+						$email = '';
 					}
-					//get info of mentee
-					$sql = "SELECT `full_name`,`email` FROM mentor where id = '" . $mentor_id . "'";
-					//echo "<p>" . $sql . "</p>";
-					$result = $wpdb->get_row($sql);
 
-					$full_name = $result->full_name;
-					$email = $result->email;
+					//echo "Full name: " . $full_name;
+					//echo "Email: " . $email;
+					
 
 
 				?>

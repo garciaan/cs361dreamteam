@@ -36,12 +36,12 @@ get_header(); ?>
 					$mentee_id = (int)($wpdb->get_var($sql));
 					//$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By id");
 					$results = $wpdb->get_results("SELECT * FROM mentor Join mentor2mentee ON mentor.id = mentor2mentee.mentor_id JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentor2mentee.mentee_id = '".$mentee_id."' GROUP By id");
-					echo "<table border=0>";
+					
 
 					if(!empty($results)) { 
+						echo '<form method="post" action="http://dreamplanner.campuslifeohs.com/contact/" id="contact_mentee">';
+						echo "<table border=0>";
      					foreach($results as $r) {	 
-          					echo "<tr><td>";
-          					echo "<table border=0>";
           					echo "<tr>";
           					echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
           					echo "<td><h1>".$r->full_name."</h1><h2>".$r->employer."</h2></td>";
@@ -55,9 +55,10 @@ get_header(); ?>
           					echo "<tr><td></td><td>".$r->session_num." Sessions of ".$r->session_time." mins per year</td></tr>";
           					echo "<tr><td></td><td>References: ".$r->ref_1."<br/>References: ".$r->ref_2."</td></tr>";
           					echo "<tr><td></td><td>Why I am a Mentor: ".$r->why_mentor."</td></tr>";
-          					echo "</table>";
-          					echo "</td></tr>";
+          					echo "<tr><td></td><td><button type='submit' value='" . $r->mentor_id . "' name='contact_mentor'>Contact Mentor</button></td></tr>";
      					}
+     					echo "</table>";
+     					echo '</form>';
 					} else {
      					//echo "ERROR: SELECT returned with ".$wpdb->print_error();
      					$error = $wpdb->print_error();
