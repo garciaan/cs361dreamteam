@@ -97,14 +97,37 @@ get_header(); ?>
 
 							echo "<table border=0>";
 								if(!empty($results)) {
+									$ids = array();
+									$career_name = '';
+									foreach($results as $key => $r){
+										
+										$last_id = end($ids);
+										$ids[] = $r->id;
+										if (count($ids) == 1) {
+											$career_name = $r->Career_Name;
+										}
+										else if (end($ids) == $last_id){
+											$career_name .= " - " . $r->Career_Name;
+										}
+										else {
+											$career_name = '';
+										}
+										
+									}
+									$ids = array();
 									foreach($results as $r) {
+										$last_id = end($ids);
+										$ids[] = $r->id;
+										if (end($ids) == $last_id){
+											continue;
+										}
 										echo "<tr><td>";
 										echo "<table border=0>";
 										echo "<tr>";
 										echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
 										echo "<td><h1>".$r->full_name."</h1><h2>".$r->employer."</h2></td>";
 										echo "</tr>";
-										echo "<tr><td><h4>Expertise</h4>:" .$r->Career_Name. "</td></tr>";
+										echo "<tr><td><h4>Expertise:</h4>" .$career_name. "</td></tr>";
 										echo "<tr><td></td><td>Years Experience: ".$r->yrs_exp."</td></tr>";
 										echo "<tr><td></td><td>".$r->desc_exp."</td></tr>";
 										echo "<tr><td></td><td>Address: ".$r->address." ".$r->state.", ".$r->location."</td></tr>";
