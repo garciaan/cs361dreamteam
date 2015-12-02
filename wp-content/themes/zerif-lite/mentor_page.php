@@ -55,7 +55,7 @@ get_header(); ?>
           					echo "<tr><td></td><td>".$r->session_num." Sessions of ".$r->session_time." mins per year</td></tr>";
           					echo "<tr><td></td><td>References: ".$r->ref_1."<br/>References: ".$r->ref_2."</td></tr>";
           					echo "<tr><td></td><td>Why I am a Mentor: ".$r->why_mentor."</td></tr>";
-          					echo "<tr><td></td><td><button type='submit' value='" . $r->mentor_id . "' name='contact_mentor'>Contact Mentor</button></td></tr>";
+          					echo "<tr><td></td><td><button type='submit' value='" . $r->id . "' name='contact_mentor'>Contact Mentor</button></td></tr>";
      					}
      					echo "</table>";
      					echo '</form>';
@@ -71,7 +71,6 @@ get_header(); ?>
      					}
      					
 					} 
-					echo "</table>";
 				?>
 
 			</main><!-- #main -->

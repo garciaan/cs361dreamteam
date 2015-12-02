@@ -95,7 +95,6 @@ get_header(); ?>
 
 							
 
-							echo "<table border=0>";
 								if(!empty($results)) {
 									$ids = array();
 									$career_name = '';
@@ -115,14 +114,15 @@ get_header(); ?>
 										
 									}
 									$ids = array();
+									echo '<form method="post" action="http://dreamplanner.campuslifeohs.com/contact/" id="contact_mentor">';
+									echo "<table border=0>";
 									foreach($results as $r) {
 										$last_id = end($ids);
 										$ids[] = $r->id;
 										if (end($ids) == $last_id){
 											continue;
 										}
-										echo "<tr><td>";
-										echo "<table border=0>";
+										
 										echo "<tr>";
 										echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
 										echo "<td><h1>".$r->full_name."</h1><h2>".$r->employer."</h2></td>";
@@ -136,14 +136,14 @@ get_header(); ?>
 										echo "<tr><td></td><td>".$r->session_num." Sessions of ".$r->session_time." mins per year</td></tr>";
 										echo "<tr><td></td><td>References: ".$r->ref_1."<br/>References: ".$r->ref_2."</td></tr>";
 										echo "<tr><td></td><td>Why I am a Mentor: ".$r->why_mentor."</td></tr>";
-										echo "</table>";
-										echo "</td></tr>";
+										echo "<tr><td></td><td><button type='submit' value='" . $r->id . "' name='contact_mentor'>Contact Mentor</button></td></tr>";
 									}
+									echo "</table>";
+									echo "</form>";
 								} else
 								{
 									echo "ERROR: SELECT returned with no results";
 								}
-								echo "</table>";
 						}
 					}
 				?>
