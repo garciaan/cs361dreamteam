@@ -34,6 +34,10 @@ get_header(); ?>
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 					
+					if ($mentor_id == 0){
+						echo "<h1>Please Become a Mentor First!</h1>";
+					}
+					else {
 					//$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By mentee.mentee_id");
 					$results = $wpdb->get_results("SELECT * FROM mentee Join mentor2mentee ON mentee.mentee_id = mentor2mentee.mentee_id JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentor2mentee.mentor_id = '".$mentor_id."'");
 					
@@ -76,7 +80,7 @@ get_header(); ?>
 					
 
 				?>
-
+				<?php } //ends the if mentor_id == 0 ?>
 			</main><!-- #main -->
 
 		</div><!-- #primary -->

@@ -26,9 +26,15 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 				<?php while ( have_posts() ) : the_post(); 
-				
-					get_template_part( 'content', 'page' );
-
+					$user_id = get_current_user_id();
+					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentor_id = (int)($wpdb->get_var($sql));
+					if ($mentor_id == 0){
+						echo "<h1>Please Become a Mentor First!</h1>";
+					}
+					else {
+						get_template_part( 'content', 'page' );
+					}
 					if ( comments_open() || '0' != get_comments_number() ) :
 
 						comments_template();

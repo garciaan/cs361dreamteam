@@ -29,7 +29,10 @@ get_header(); ?>
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 
-
+					if ($mentor_id == 0){
+						echo "<h1>Please Become a Mentor First!";
+					}
+					else {
 					if(isset($_POST['contact_mentee'])) {
 						$mentee_id = $_POST['contact_mentee'];
 						$sql = 'SELECT `full_name`,`email` FROM mentee WHERE mentee.mentee_id = "' . $mentee_id . '"';
@@ -112,7 +115,7 @@ get_header(); ?>
 					}
 				?>
 
-
+				<?php } //ends the if mentor_id == 0 ?>
 			</main><!-- #main -->
 
 		</div><!-- #primary -->

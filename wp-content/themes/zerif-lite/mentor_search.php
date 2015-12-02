@@ -27,78 +27,85 @@ get_header(); ?>
 			
 				<?php
 					//$wpdb->show_errors();
+					$user_id = get_current_user_id();
+					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentee_id = (int)($wpdb->get_var($sql));
 
-					if(isset($_POST['submit']))
-					{
-						$flag=1;
-						if($_POST['career_name']=='' && $_POST['location_name']=='' && $_POST['tz_name']=='')
+					if ($mentee_id == 0){
+						echo "<h1>Please Become a Mentee First!</h1>";
+					}
+					else {
+						if(isset($_POST['submit']))
 						{
-							$flag=0;
-							echo "Please Select at least one filter item<br>";
-						} else
-						{
-							// need to make these and or, then check which set
-							if($_POST['career_name']=='' || $_POST['location_name']=='' || $_POST['tz_name']=='')
+							$flag=1;
+							if($_POST['career_name']=='' && $_POST['location_name']=='' && $_POST['tz_name']=='')
 							{
-								$career = $_POST['career_name'];
-								$time_zone = $_POST['tz_name'];
-								$location = $_POST['location_name'];
-
-								//do career
-								if($_POST['career_name']!='' && $_POST['location_name']=='' && $_POST['tz_name']=='')
+								$flag=0;
+								echo "Please Select at least one filter item<br>";
+							} else
+							{
+								// need to make these and or, then check which set
+								if($_POST['career_name']=='' || $_POST['location_name']=='' || $_POST['tz_name']=='')
 								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where Career_Name = '".$career."'");
+									$career = $_POST['career_name'];
+									$time_zone = $_POST['tz_name'];
+									$location = $_POST['location_name'];
+
+									//do career
+									if($_POST['career_name']!='' && $_POST['location_name']=='' && $_POST['tz_name']=='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where Career_Name = '".$career."'");
+									}
+
+									// do career and location
+									if($_POST['career_name']!='' && $_POST['location_name']!='' && $_POST['tz_name']=='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."' AND Career_Name = '".$career."'");
+									}
+
+									// do career and timezone
+									if($_POST['career_name']!='' && $_POST['location_name']=='' && $_POST['tz_name']!='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.time_zone = '".$time_zone."' AND Career_Name = '".$career."'");
+									}
+
+									// do location name
+									if($_POST['career_name']=='' && $_POST['location_name']!='' && $_POST['tz_name']=='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."'");
+									}
+									// do location and timezone
+									if($_POST['career_name']=='' && $_POST['location_name']!='' && $_POST['tz_name']!='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."' AND mentor.time_zone = '".$time_zone."'");
+									}
+
+									// do timezone
+									if($_POST['career_name']=='' && $_POST['location_name']=='' && $_POST['tz_name']!='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.time_zone = '".$time_zone."'");
+									}
+
+									// do all three
+									if($_POST['career_name']!='' && $_POST['location_name']!='' && $_POST['tz_name']!='')
+									{
+										$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."' AND mentor.time_zone = '".$time_zone."' AND Career_Name = '".$career."'");
+									}
 								}
+								
+								
+								
 
-								// do career and location
-								if($_POST['career_name']!='' && $_POST['location_name']!='' && $_POST['tz_name']=='')
-								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."' AND Career_Name = '".$career."'");
-								}
+								echo $career." - ";
+								echo $location." - ";
+								echo $time_zone;
 
-								// do career and timezone
-								if($_POST['career_name']!='' && $_POST['location_name']=='' && $_POST['tz_name']!='')
-								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.time_zone = '".$time_zone."' AND Career_Name = '".$career."'");
-								}
-
-								// do location name
-								if($_POST['career_name']=='' && $_POST['location_name']!='' && $_POST['tz_name']=='')
-								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."'");
-								}
-								// do location and timezone
-								if($_POST['career_name']=='' && $_POST['location_name']!='' && $_POST['tz_name']!='')
-								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."' AND mentor.time_zone = '".$time_zone."'");
-								}
-
-								// do timezone
-								if($_POST['career_name']=='' && $_POST['location_name']=='' && $_POST['tz_name']!='')
-								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.time_zone = '".$time_zone."'");
-								}
-
-								// do all three
-								if($_POST['career_name']!='' && $_POST['location_name']!='' && $_POST['tz_name']!='')
-								{
-									$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.location = '".$location."' AND mentor.time_zone = '".$time_zone."' AND Career_Name = '".$career."'");
-								}
-							}
-							
-							
-							
-
-							echo $career." - ";
-							echo $location." - ";
-							echo $time_zone;
-
-							
-
+								
+								var_dump($results); //GETTING JUST COUNTRY DOESNT WORK (need career cat name)
 								if(!empty($results)) {
 									$ids = array();
 									$career_name = '';
-									foreach($results as $key => $r){
+									foreach($results as $r){
 										
 										$last_id = end($ids);
 										$ids[] = $r->id;
@@ -144,8 +151,8 @@ get_header(); ?>
 								{
 									echo "ERROR: SELECT returned with no results";
 								}
+							}
 						}
-					}
 				?>
 
 			<h1>Please select your search criteria from the following:</h1>
@@ -189,6 +196,7 @@ get_header(); ?>
 				<br /><br />
 				<input type="submit" name="submit" id="submit" value="Send"/>
 			</form>
+			<?php } //ends the if mentee_id == 0, checks to see if already mentee or not?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 

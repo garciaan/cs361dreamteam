@@ -60,10 +60,15 @@ get_header(); ?>
 							$mentee_qualification = $r->why_mentee;
 						}
 					} else {
-						echo "ERROR: SELECT returned with ".$wpdb->print_error();
+						if ($mentee_id == 0){
+							echo "<h1>Please Become a Mentee First!</h1>";
+						}
+						else{
+							echo "ERROR: SELECT returned with ".$wpdb->print_error();
+						}
 					}
 
-					if(isset($_POST['submit'])) 
+					if(isset($_POST['submit']) && $mentee_id != 0) 
 					{ 
 						$flag=1;
 						if($_POST['mentee_name']=='') 
@@ -246,12 +251,13 @@ get_header(); ?>
 					}
 
 				?>
-
+				<?php if ($mentee_id != 0){ ?>
 				<h2>MENTEE PROFILE</h2>
 				<p>Update your profile</p>
 				<?php
 					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
 				?>
+				
 				<form method="post" id="menteeapp_form">
 					<table>
 						<tr>
@@ -349,8 +355,9 @@ get_header(); ?>
 						</tr>
 					</table>
 					<br /><br />
-					<input type="submit" name="submit" id="submit" value="Send"/>
+						<input type="submit" name="submit" id="submit" value="Send"/>
 				</form>
+				<?php } ?>
 
 
 

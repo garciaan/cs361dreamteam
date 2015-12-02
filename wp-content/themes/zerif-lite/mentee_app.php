@@ -24,7 +24,8 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 
 			<main id="main" class="site-main" role="main">
-				
+				<?php if (is_user_logged_in()){
+				?>
 				<h2>MENTEE QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentors can verify the authenticity and qualifications of mentees.</p>
 				<?php
@@ -319,7 +320,14 @@ get_header(); ?>
 					}
 
 				?>
-
+				<?php 
+				} //ends the if user is logged in
+				else { 
+					echo "<h1>Please register or log in first!</h1>";
+					echo '<a href="http://dreamplanner.campuslifeohs.com/wp-login.php?action=register" class="btn btn-primary custom-button red-btn">Register Now</a>';
+					echo '<a href="http://dreamplanner.campuslifeohs.com/wp-login.php" class="btn btn-primary custom-button green-btn">Log In</a>';
+				}
+				?>
 			</main><!-- #main -->
 
 		</div><!-- #primary -->
