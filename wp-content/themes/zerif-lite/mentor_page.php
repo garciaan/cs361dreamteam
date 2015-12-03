@@ -35,42 +35,41 @@ get_header(); ?>
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
 					//$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By id");
-					$results = $wpdb->get_results("SELECT * FROM mentor Join mentor2mentee ON mentor.id = mentor2mentee.mentor_id JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentor2mentee.mentee_id = '".$mentee_id."' GROUP By id");
-					echo "<table border=0>";
+					
+					if ($mentee_id == 0){
+						echo "<h1>Please Become a Mentee First!</h1>";
+					}
+					else {
+						$results = $wpdb->get_results("SELECT * FROM mentor Join mentor2mentee ON mentor.id = mentor2mentee.mentor_id JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentor2mentee.mentee_id = '".$mentee_id."' GROUP By id");
+						
 
-					if(!empty($results)) { 
-     					foreach($results as $r) {	 
-          					echo "<tr><td>";
-          					echo "<table border=0>";
-          					echo "<tr>";
-          					echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
-          					echo "<td><h1>".$r->full_name."</h1><h2>".$r->employer."</h2></td>";
-          					echo "</tr>";
-          					echo "<tr><td><h3>Expertise</h3>:" .$r->Career_Name. "</td></tr>";
-          					echo "<tr><td></td><td>Years Experience: ".$r->yrs_exp."</td></tr>";
-          					echo "<tr><td></td><td>".$r->desc_exp."</td></tr>";
-          					echo "<tr><td></td><td>Address: ".$r->address." ".$r->state.", ".$r->location."</td></tr>";
-          					echo "<tr><td></td><td>Contact Me: ".$r->email."</td></tr>";
-          					echo "<tr><td></td><td>Phone: ".$r->phone."</td></tr>";
-          					echo "<tr><td></td><td>".$r->session_num." Sessions of ".$r->session_time." mins per year</td></tr>";
-          					echo "<tr><td></td><td>References: ".$r->ref_1."<br/>References: ".$r->ref_2."</td></tr>";
-          					echo "<tr><td></td><td>Why I am a Mentor: ".$r->why_mentor."</td></tr>";
-          					echo "</table>";
-          					echo "</td></tr>";
-     					}
-					} else {
-     					//echo "ERROR: SELECT returned with ".$wpdb->print_error();
-     					$error = $wpdb->print_error();
-     					if ($error){
-     						echo "<p>ERROR: SELECT returned with ". $error . "</p>";
-     					}
-     					else {
+						if(!empty($results)) { 
+							echo '<form method="post" action="http://dreamplanner.campuslifeohs.com/contact/" id="contact_mentee">';
+							echo "<table border=0>";
+	     					foreach($results as $r) {	 
+	          					echo "<tr>";
+	          					echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
+	          					echo "<td><h1>".$r->full_name."</h1><h2>".$r->employer."</h2></td>";
+	          					echo "</tr>";
+	          					echo "<tr><td><h3>Expertise</h3>:" .$r->Career_Name. "</td></tr>";
+	          					echo "<tr><td></td><td>Years Experience: ".$r->yrs_exp."</td></tr>";
+	          					echo "<tr><td></td><td>".$r->desc_exp."</td></tr>";
+	          					echo "<tr><td></td><td>Address: ".$r->address." ".$r->state.", ".$r->location."</td></tr>";
+	          					echo "<tr><td></td><td>Contact Me: ".$r->email."</td></tr>";
+	          					echo "<tr><td></td><td>Phone: ".$r->phone."</td></tr>";
+	          					echo "<tr><td></td><td>".$r->session_num." Sessions of ".$r->session_time." mins per year</td></tr>";
+	          					echo "<tr><td></td><td>References: ".$r->ref_1."<br/>References: ".$r->ref_2."</td></tr>";
+	          					echo "<tr><td></td><td>Why I am a Mentor: ".$r->why_mentor."</td></tr>";
+	          					echo "<tr><td></td><td><button type='submit' value='" . $r->id . "' name='contact_mentor'>Contact Mentor</button></td></tr>";
+	     					}
+	     					echo "</table>";
+	     					echo '</form>';
+						} else {
      						echo "<p>You do not yet have any mentors!</p>";
-
-     					}
-     					
-					} 
-					echo "</table>";
+     						$wpdb->print_error();
+	     					
+						} 
+					}
 				?>
 
 			</main><!-- #main -->

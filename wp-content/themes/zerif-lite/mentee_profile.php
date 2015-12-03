@@ -30,7 +30,6 @@ get_header(); ?>
 					$wpdb->show_errors();
 
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
-					$user = "Eric Anderson";
 
 					$user_id = get_current_user_id();
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
@@ -61,10 +60,15 @@ get_header(); ?>
 							$mentee_qualification = $r->why_mentee;
 						}
 					} else {
-						echo "ERROR: SELECT returned with ".$wpdb->print_error();
+						if ($mentee_id == 0){
+							echo "<h1>Please Become a Mentee First!</h1>";
+						}
+						else{
+							echo "ERROR: SELECT returned with ".$wpdb->print_error();
+						}
 					}
 
-					if(isset($_POST['submit'])) 
+					if(isset($_POST['submit']) && $mentee_id != 0) 
 					{ 
 						$flag=1;
 						if($_POST['mentee_name']=='') 
@@ -247,12 +251,13 @@ get_header(); ?>
 					}
 
 				?>
-
+				<?php if ($mentee_id != 0){ ?>
 				<h2>MENTEE PROFILE</h2>
 				<p>Update your profile</p>
 				<?php
 					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
 				?>
+				
 				<form method="post" id="menteeapp_form">
 					<table>
 						<tr>
@@ -275,8 +280,7 @@ get_header(); ?>
 							<td>
 								Career Category Sought:&nbsp
 								<select name="mentee_category" id="mentee_category">
-<<<<<<< HEAD
-								<?php
+													<?php
 									global $wpdb;
 									$results = $wpdb->get_results("SELECT * from career_type");
 									if(!empty($results)) { 
@@ -291,15 +295,6 @@ get_header(); ?>
 				     					}
 									}
 								?>
-=======
-									<?php
-										foreach ($categories as $category){
-											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
-											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
-										}
-
-									?>
->>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentee_years id=mentee_years rows=1 value=".$mentee_years." />" ?>
 							</td>
@@ -329,6 +324,7 @@ get_header(); ?>
 				     					}
 									}
 								?>
+
 								</select>
 							</td>
 						</tr>
@@ -359,8 +355,9 @@ get_header(); ?>
 						</tr>
 					</table>
 					<br /><br />
-					<input type="submit" name="submit" id="submit" value="Send"/>
+						<input type="submit" name="submit" id="submit" value="Send"/>
 				</form>
+				<?php } ?>
 
 
 

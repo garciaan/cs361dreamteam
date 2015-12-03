@@ -27,7 +27,24 @@ get_header(); ?>
 
 				<?php while ( have_posts() ) : the_post(); 
 				
-					get_template_part( 'content', 'page' );
+					
+
+					$user_id = get_current_user_id();
+					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentee_id = (int)($wpdb->get_var($sql));
+
+					if ($mentee_id == 0){
+						echo "<h1>Please Become a Mentee First!</h1>";
+					}
+					else {
+
+						get_template_part( 'content', 'page' );
+					}
+
+
+
+
+
 
 					if ( comments_open() || '0' != get_comments_number() ) :
 

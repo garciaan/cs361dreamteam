@@ -29,25 +29,22 @@ get_header(); ?>
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 
-					//get mentee id
-					//NOTE: CURRENTLY ONLY GRABS THE FIRST ONE
-					$sql = "SELECT `mentee_id` FROM mentor2mentee WHERE `mentor_id` = '" . $mentor_id . "'";
-					$result = $wpdb->get_var($sql);
-					if ($result){
-						$mentee_id = (int)$result;
+					if ($mentor_id == 0){
+						echo "<h1>Please Become a Mentor First!";
 					}
 					else {
-						$mentee_id = 0;
-						$wpdb->print_error();
+					if(isset($_POST['contact_mentee'])) {
+						$mentee_id = $_POST['contact_mentee'];
+						$sql = 'SELECT `full_name`,`email` FROM mentee WHERE mentee.mentee_id = "' . $mentee_id . '"';
+						$results = $wpdb->get_row($sql);
+						$full_name = $results->full_name;
+						$email = $results->email;
 
 					}
-					//get info of mentee
-					$sql = "SELECT `full_name`,`email` FROM mentee where mentee_id = '" . $mentee_id . "'";
-					
-					$result = $wpdb->get_row($sql);
-
-					$full_name = $result->full_name;
-					$email = $result->email;
+					else {
+						$full_name = '';
+						$email = '';
+					}
 
 					//echo "Full name: " . $full_name;
 					//echo "Email: " . $email;
@@ -118,7 +115,7 @@ get_header(); ?>
 					}
 				?>
 
-
+				<?php } //ends the if mentor_id == 0 ?>
 			</main><!-- #main -->
 
 		</div><!-- #primary -->

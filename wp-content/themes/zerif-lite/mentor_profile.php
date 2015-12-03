@@ -35,199 +35,202 @@ get_header(); ?>
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
-
-					global $wpdb;
-					$sql = "SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.id = '".$mentor_id."'";
-					//echo "SQL Command: " . $sql . "<br>";
-					$results = $wpdb->get_results($sql);
-
-					if(!empty($results)) { 
-						foreach($results as $r) {	 
-							$mentor_id = $r->id;
-							$mentor_name = $r->full_name;
-							$mentor_phone = $r->phone;
-							$mentor_email = $r->email;
-							$mentor_address = $r->address;
-							$country = $r->location;
-							$state = $r->state;
-							$time_zone = $r->time_zone;
-							$mentor_employer = $r->employer;
-							$mentor_category = $r->career_cat;
-							$mentor_years = $r->yrs_exp;
-							$mentor_experience = $r->desc_exp;
-							$mentor_contact = $r->contact_meth;
-							$mentor_year1 = $r->session_num;
-							$mentor_sessiontime = $r->session_time;
-							$mentor_ref1 = $r->ref_1;
-							$mentor_ref2 = $r->ref_2;
-							$mentor_qualification = $r->why_mentor;
-						}
-					} else {
-						echo "ERROR: SELECT returned with ".$wpdb->print_error();
+					if ($mentor_id == 0){
+						echo "<h1>Please Become a Mentor First!</h1>";
 					}
+					else {
+						global $wpdb;
+						$sql = "SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.id = '".$mentor_id."'";
+						//echo "SQL Command: " . $sql . "<br>";
+						$results = $wpdb->get_results($sql);
 
-					if(isset($_POST['submit'])) 
-					{ 
-						$flag=1;
-						if($_POST['mentor_name']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter Your Name<br>"; 
-						} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_name'])) 
-						{ 
-							$flag=0; echo "Please Enter Valid Name<br>"; 
-						} 
-
-						if($_POST['mentor_phone']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter Your Phone Number<br>"; 
-						} else if(!preg_match('/^[\+0-9\-\(\)\s]*$/',$_POST['mentor_phone'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Phone Number<br>"; 
-						} 
-
-						if($_POST['mentor_email']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter E-mail<br>"; 
-						} else if(!eregi("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$", $_POST['mentor_email'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter Valid E-Mail<br>"; 
-						} 
-
-						if($_POST['mentor_address']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter Your Address<br>"; 
-						} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_address'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Address<br>"; 
-						} 
-
-						if($_POST['mentor_employer']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter Your Employer<br>"; 
-						} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_employer'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Employer<br>"; 
-						} 
-
-						if($_POST['mentor_category']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter a Career Category<br>"; 
-						} else if(!preg_match('/[0-9]*/',$_POST['mentor_category'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Career Category<br>"; 
-						} 
-
-						if($_POST['mentor_years']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter Years of Experience<br>"; 
-						} else if(!preg_match('/[0-9]*/',$_POST['mentor_years'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Number of Years<br>"; 
-						} 
-
-						if($_POST['mentor_experience']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter a Description of Your Experience"; 
-						}
-						
-						if($_POST['mentor_year1']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter Number of Session in the First Year<br>"; 
-						} else if(!preg_match('/[0-9]*/',$_POST['mentor_year1'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Number of Sessions<br>"; 
-						} 
-
-						if($_POST['mentor_sessiontime']=='') 
-						{ 
-							$flag=0; 
-							echo "Please Enter the Duration of Session Time<br>"; 
-						} else if(!preg_match('/[0-9]*/',$_POST['mentor_sessiontime'])) 
-						{ 
-							$flag=0; 
-							echo "Please Enter a Valid Number of Minutes<br>"; 
-						} 
-
-						if($_POST['mentor_ref1']=='') 
-						{ 
-							$flag=0; 
-							echo "Please Enter a Name and Contact info<br>"; 
-						} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_ref1'])) 
-						{ 
-							$flag=0; 
-							echo "Please Enter a Valid Name and Contact Info<br>"; 
-						} 
-
-						if($_POST['mentor_ref2']=='') 
-						{ 
-							$flag=0;
-							echo "Please Enter a Name and Contact info<br>"; 
-						} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_ref2'])) 
-						{ 
-							$flag=0;
-							echo "Please Enter a Valid Name and Contact Info<br>"; 
-						} 
-
-						if($_POST['mentor_qualification']=='') 
-						{ 
-							$flag=0;
-							echo "Please Describe What Makes You a Good Mentor"; 
-						}
-
-						if ( empty($_POST) ) 
-							{ 
-								print 'Error: I got no post data'; 
-								exit; 
-							} else 
-							{ 
-								if($flag==1) 
-									{ 
-										
-										$mentor_name = $_POST['mentor_name'];
-										$mentor_phone = $_POST['mentor_phone'];
-										$mentor_address = $_POST['mentor_address'];
-										$time_zone = $_POST['time_zone'];
-										$mentor_employer = $_POST['mentor_employer'];
-										$mentor_category = $_POST['mentor_category'];
-										$mentor_years = $_POST['mentor_years'];
-										$mentor_contact = $_POST['mentor_contact'];
-										$mentor_year1 = $_POST['mentor_year1'];
-										$mentor_sessiontime = $_POST['mentor_sessiontime'];
-										$mentor_email = $_POST['mentor_email'];
-										$country = $_POST['country'];
-										$mentor_experience = $_POST['mentor_experience'];
-										$mentor_ref1 = $_POST['mentor_ref1'];
-										$mentor_ref2 = $_POST['mentor_ref2'];
-										$mentor_qualification = $_POST['mentor_qualification'];
-
-										$results = $wpdb->update( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'email' => $mentor_email, 'address' => $mentor_address, 'location' => $country, 'State' => $state, 'time_zone' => $time_zone, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'desc_exp' => $mentor_experience, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array('id' => $mentor_id), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%d', '%d', '%s', '%s', '%s'), array('%s'));
-				
-										if(! $results)
-										{
-											echo "ERROR: UPDATE returned with ".$results;
-										} else
-										{
-											echo "Congratulations, you have updated";
-										}
-									}  
+						if(!empty($results)) { 
+							foreach($results as $r) {	 
+								$mentor_id = $r->id;
+								$mentor_name = $r->full_name;
+								$mentor_phone = $r->phone;
+								$mentor_email = $r->email;
+								$mentor_address = $r->address;
+								$country = $r->location;
+								$state = $r->state;
+								$time_zone = $r->time_zone;
+								$mentor_employer = $r->employer;
+								$mentor_category = $r->career_cat;
+								$mentor_years = $r->yrs_exp;
+								$mentor_experience = $r->desc_exp;
+								$mentor_contact = $r->contact_meth;
+								$mentor_year1 = $r->session_num;
+								$mentor_sessiontime = $r->session_time;
+								$mentor_ref1 = $r->ref_1;
+								$mentor_ref2 = $r->ref_2;
+								$mentor_qualification = $r->why_mentor;
 							}
-					}
+						} else {
+							echo "ERROR: SELECT returned with ".$wpdb->print_error();
+						}
+
+						if(isset($_POST['submit'])) 
+						{ 
+							$flag=1;
+							if($_POST['mentor_name']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter Your Name<br>"; 
+							} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_name'])) 
+							{ 
+								$flag=0; echo "Please Enter Valid Name<br>"; 
+							} 
+
+							if($_POST['mentor_phone']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter Your Phone Number<br>"; 
+							} else if(!preg_match('/^[\+0-9\-\(\)\s]*$/',$_POST['mentor_phone'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Phone Number<br>"; 
+							} 
+
+							if($_POST['mentor_email']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter E-mail<br>"; 
+							} else if(!eregi("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$", $_POST['mentor_email'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter Valid E-Mail<br>"; 
+							} 
+
+							if($_POST['mentor_address']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter Your Address<br>"; 
+							} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_address'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Address<br>"; 
+							} 
+
+							if($_POST['mentor_employer']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter Your Employer<br>"; 
+							} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_employer'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Employer<br>"; 
+							} 
+
+							if($_POST['mentor_category']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter a Career Category<br>"; 
+							} else if(!preg_match('/[0-9]*/',$_POST['mentor_category'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Career Category<br>"; 
+							} 
+
+							if($_POST['mentor_years']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter Years of Experience<br>"; 
+							} else if(!preg_match('/[0-9]*/',$_POST['mentor_years'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Number of Years<br>"; 
+							} 
+
+							if($_POST['mentor_experience']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter a Description of Your Experience"; 
+							}
+							
+							if($_POST['mentor_year1']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter Number of Session in the First Year<br>"; 
+							} else if(!preg_match('/[0-9]*/',$_POST['mentor_year1'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Number of Sessions<br>"; 
+							} 
+
+							if($_POST['mentor_sessiontime']=='') 
+							{ 
+								$flag=0; 
+								echo "Please Enter the Duration of Session Time<br>"; 
+							} else if(!preg_match('/[0-9]*/',$_POST['mentor_sessiontime'])) 
+							{ 
+								$flag=0; 
+								echo "Please Enter a Valid Number of Minutes<br>"; 
+							} 
+
+							if($_POST['mentor_ref1']=='') 
+							{ 
+								$flag=0; 
+								echo "Please Enter a Name and Contact info<br>"; 
+							} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_ref1'])) 
+							{ 
+								$flag=0; 
+								echo "Please Enter a Valid Name and Contact Info<br>"; 
+							} 
+
+							if($_POST['mentor_ref2']=='') 
+							{ 
+								$flag=0;
+								echo "Please Enter a Name and Contact info<br>"; 
+							} else if(!preg_match('/[a-zA-Z_x7f-xff][a-zA-Z0-9_x7f-xff]*/',$_POST['mentor_ref2'])) 
+							{ 
+								$flag=0;
+								echo "Please Enter a Valid Name and Contact Info<br>"; 
+							} 
+
+							if($_POST['mentor_qualification']=='') 
+							{ 
+								$flag=0;
+								echo "Please Describe What Makes You a Good Mentor"; 
+							}
+
+							if ( empty($_POST) ) 
+								{ 
+									print 'Error: I got no post data'; 
+									exit; 
+								} else 
+								{ 
+									if($flag==1) 
+										{ 
+											
+											$mentor_name = $_POST['mentor_name'];
+											$mentor_phone = $_POST['mentor_phone'];
+											$mentor_address = $_POST['mentor_address'];
+											$time_zone = $_POST['time_zone'];
+											$mentor_employer = $_POST['mentor_employer'];
+											$mentor_category = $_POST['mentor_category'];
+											$mentor_years = $_POST['mentor_years'];
+											$mentor_contact = $_POST['mentor_contact'];
+											$mentor_year1 = $_POST['mentor_year1'];
+											$mentor_sessiontime = $_POST['mentor_sessiontime'];
+											$mentor_email = $_POST['mentor_email'];
+											$country = $_POST['country'];
+											$mentor_experience = $_POST['mentor_experience'];
+											$mentor_ref1 = $_POST['mentor_ref1'];
+											$mentor_ref2 = $_POST['mentor_ref2'];
+											$mentor_qualification = $_POST['mentor_qualification'];
+
+											$results = $wpdb->update( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'email' => $mentor_email, 'address' => $mentor_address, 'location' => $country, 'State' => $state, 'time_zone' => $time_zone, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'desc_exp' => $mentor_experience, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array('id' => $mentor_id), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%d', '%d', '%s', '%s', '%s'), array('%s'));
+					
+											if(! $results)
+											{
+												echo "ERROR: UPDATE returned with ".$results;
+											} else
+											{
+												echo "Congratulations, you have updated";
+											}
+										}  
+								}
+						}
 
 				?>
 
@@ -260,7 +263,6 @@ get_header(); ?>
 							<td>
 								Career Category:&nbsp
 								<select name="mentor_category" id="mentor_category">
-<<<<<<< HEAD
 								<?php
 									global $wpdb;
 									$results = $wpdb->get_results("SELECT * from career_type");
@@ -276,15 +278,6 @@ get_header(); ?>
 				     					}
 									}
 								?>
-=======
-									<?php
-										foreach ($categories as $category){
-											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
-											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
-										}
-
-									?>
->>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								</select>
 								<?php echo "Years of Experience in Category:&nbsp<input type=text name=mentor_years id=mentor_years rows=1 value=".$mentor_years." />" ?>
 							</td>
@@ -299,7 +292,7 @@ get_header(); ?>
 								Preferred method of contact for mentor sessions:
 								<select name="mentor_contact" id="mentor_contact">
 								  
-								<?php
+										<?php
 								 
 								 	$results = $wpdb->get_results("SELECT * from contact_method");
 								 	if(!empty($results)) { 
@@ -347,7 +340,7 @@ get_header(); ?>
 					<br /><br />
 					<input type="submit" name="submit" id="submit" value="Send"/>
 				</form>
-
+				<?php } //ends the if mentor_id == 0 ?>
 			</main><!-- #main -->
 
 		</div><!-- #primary -->

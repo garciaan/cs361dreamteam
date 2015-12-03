@@ -24,7 +24,8 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 
 			<main id="main" class="site-main" role="main">
-				
+				<?php if (is_user_logged_in()){
+				?>
 				<h2>MENTEE QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentors can verify the authenticity and qualifications of mentees.</p>
 				<?php
@@ -51,22 +52,6 @@ get_header(); ?>
 						<tr>
 							<td>
 								Career Category Sought:&nbsp
-<<<<<<< HEAD
-								<?php
-									global $wpdb;
-									$results = $wpdb->get_results("SELECT * from career_type");
-									echo "<select name='mentee_category' id='mentee_category'>";
-
-									if(!empty($results)) { 
-				     					foreach($results as $r) {	 
-				          					echo "<option value='".$r->Career_id."'>".$r->Career_Name."</option>";
-				     					}
-									} else {
-				     					echo "ERROR: SELECT returned no entries";	 	 
-									} 
-									echo "</select>";
-								?>
-=======
 								<select name="mentee_category" id="mentee_category">
 									<?php
 										foreach ($categories as $category){
@@ -76,7 +61,6 @@ get_header(); ?>
 
 									?>
 								</select>
->>>>>>> 9f1621e5f630e67d171c369d263fa64c9f3dad95
 								Years of Experience in Category:&nbsp<input type="text" name="mentee_years" id="mentee_years" rows="1" value="" />
 							</td>
 						</tr>
@@ -336,7 +320,14 @@ get_header(); ?>
 					}
 
 				?>
-
+				<?php 
+				} //ends the if user is logged in
+				else { 
+					echo "<h1>Please register or log in first!</h1>";
+					echo '<a href="http://dreamplanner.campuslifeohs.com/wp-login.php?action=register" class="btn btn-primary custom-button red-btn">Register Now</a>';
+					echo '<a href="http://dreamplanner.campuslifeohs.com/wp-login.php" class="btn btn-primary custom-button green-btn">Log In</a>';
+				}
+				?>
 			</main><!-- #main -->
 
 		</div><!-- #primary -->
