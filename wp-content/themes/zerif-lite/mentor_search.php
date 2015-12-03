@@ -134,7 +134,7 @@ get_header(); ?>
 										echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
 										echo "<td><h1>".$r->full_name."</h1><h2>".$r->employer."</h2></td>";
 										echo "</tr>";
-										echo "<tr><td><h4>Expertise:</h4>" .$career_name. "</td></tr>";
+										echo "<tr><td><h4>Expertise:</h4>" .$r->Career_Name. "</td></tr>";
 										echo "<tr><td></td><td>Years Experience: ".$r->yrs_exp."</td></tr>";
 										echo "<tr><td></td><td>".$r->desc_exp."</td></tr>";
 										echo "<tr><td></td><td>Address: ".$r->address." ".$r->state.", ".$r->location."</td></tr>";
