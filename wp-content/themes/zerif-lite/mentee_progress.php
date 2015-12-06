@@ -34,7 +34,59 @@ get_header(); ?>
 						echo "<h1>Please Become a Mentor First!</h1>";
 					}
 					else {
-						echo "Add progress messages or charts here.";
+						// Query to get the names of the series
+						$results = $wpdb->get_results("SELECT DISTINCT 'goal_name' FROM mentee_goals");
+						$labels = array();
+						$i = 1;
+						if(!empty($results)) {
+							foreach($results as $r) {
+								$labels[$i] = $r->goal_name;
+								$i++;
+							}
+						} else
+						{
+							echo "ERROR: SELECT returned with no results";
+						}
+						// Add filters to draw the graphs
+						add_filter( 'mycustom_series_filter', 'bar_chart_series', 165, 1);
+						add_filter( 'mycustom_data_filter', 'line_chart_data', 165, 1 );
+						add_filter( 'mycustom_data_filter', 'line_chart_data', 169, 2 );
+						//Function to draw the data for each graph type
+						function line_chart_data( $data, $chart_id, $type ) {
+	    					if($chart_id == 169){
+	    						$data = array(
+	    							array('Aug',3000),
+	    							array('Sep',5000),
+	    							array('Oct',1000),
+	    							array('Nov',1000),
+	    							array('Dec',20000),
+	    							array('Goal',24000)
+    							);
+	    					} else {
+	    						
+	    						$data = array(
+		    						array('Aug',2,10,1,7),
+		    						array('Sep',10,20,3,12),
+		    						array('Oct',14,51,4,14),
+		    						array('Nov',18,60,7,16),
+		    						array('Dec',35,80,10,20),
+		    						array('Goal',100,100,100,100)
+	    						);
+	    					}
+	    					
+	    					return $data;
+						}
+						// Function to name all the series
+						function bar_chart_series( $series, $chart_id, $type) {
+	    					$series = array(
+	    						array('label' => 'Month','type' => 'string'),
+	    						array('label' => 'Learning about my career','type' => 'number'),
+	    						array('label' => 'Reading the Starfleet Manual','type' => 'number'),
+	    						array('label' => 'Memorizing Starfleet Regulations','type' => 'number'),
+	    						array('label' => 'Financing','type' => 'number')
+								);
+	    					return $series;
+						}
 					}
 				?>
 
