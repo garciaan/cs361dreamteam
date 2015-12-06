@@ -150,22 +150,20 @@ get_header(); ?>
 				//get_sidebar();
 			echo'<div id="secondary" class="widget-area" role="complementary">';
 
-			if($wpdb->insert_id)
-			{
+
 			echo'<aside id="nav_menu-3" class="widget widget_nav_menu"><h2 class="widget-title">Actions</h2>';
 			echo'<div class="menu-actions-container">';
 			echo'<ul id="menu-actions" class="menu">';
-			
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="mentor-profile-2/">Edit Profile</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="Mentor-Skills">My Skills</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="List-Mentees/">My Mentees</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="Mentee-Add/">Add Mentees</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="Mentee-Progress/">Post Mentee Progress</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="Mentee-Contact">Communicate with a Mentee</a></li>';
-			
 			echo'</ul>';
 			echo'</div>';
 			echo'</aside>';
-			}
+
 
 			echo'<aside id="meta-2" class="widget widget_meta"><h2 class="widget-title">Meta</h2>';
 			echo'<ul>';
@@ -174,7 +172,7 @@ get_header(); ?>
 			echo'</ul>';
 			echo'</aside>';
 			echo'</div>';
-			
+
 			echo '</div>';
 		}
 	?>	

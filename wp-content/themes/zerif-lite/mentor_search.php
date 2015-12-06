@@ -101,7 +101,6 @@ get_header(); ?>
 								echo $time_zone;
 
 								
-								var_dump($results); //GETTING JUST COUNTRY DOESNT WORK (need career cat name)
 								if(!empty($results)) {
 									$ids = array();
 									$career_name = '';

@@ -24,11 +24,21 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 
 			<main id="main" class="site-main" role="main">
+				<?php
+					$user_id = get_current_user_id();
+					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+					$mentor_id = (int)($wpdb->get_var($sql));
+
+
+				?>
 
 				<?php while ( have_posts() ) : the_post(); 
-				
-					get_template_part( 'content', 'page' );
-
+					if($mentor_id == 0){
+						echo '<h1>Please Become a Mentor First!</h1>';
+					}
+					else {
+						get_template_part( 'content', 'page' );
+					}
 					if ( comments_open() || '0' != get_comments_number() ) :
 
 						comments_template();
@@ -58,6 +68,7 @@ get_header(); ?>
 			echo'<div class="menu-actions-container">';
 			echo'<ul id="menu-actions" class="menu">';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="mentor-profile-2/">Edit Profile</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="Mentor-Skills">My Skills</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="List-Mentees/">My Mentees</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="Mentee-Add/">Add Mentees</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="Mentee-Progress/">Post Mentee Progress</a></li>';

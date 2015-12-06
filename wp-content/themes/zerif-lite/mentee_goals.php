@@ -26,8 +26,22 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 			<?php
-				//hard coded for now
-				$mentee_id = 1;
+				$user_id = get_current_user_id();
+				$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+				$mentee_id = (int)($wpdb->get_var($sql));
+
+				function test_input($data) {
+						$data = trim($data);
+						$data = stripslashes($data);
+						$data = htmlspecialchars($data);
+						return $data;
+				}	
+
+				if ($mentee_id == 0){
+					echo "<h1>Please Become a Mentee First!</h1>";
+				}
+				else {
+
 				$goal_id = 0;
 
 				// define variables and set to empty values	
@@ -280,27 +294,23 @@ get_header(); ?>
 								echo "<td><form method='post' id='goalEdit_form'><input type='hidden' name='myID' id='myID' value= ".$r->goal_id."><input type='submit' name='submit_edit' id='submit_edit' value='Edit'></form></td>";
 								echo "</tr>";
 							}
-							echo "<tr><td colspan='6'><form method='post' id='goalEdit_form'><input type='submit' name='add_new' id='add_new' value='Add New'></form></td></tr>";
+							
 						} else {
-							echo "ERROR: SELECT returned with ".$wpdb->print_error();
+							echo '<tr><td colspan="6" style="text-align:center"><h3>You do not yet have any goals!</h3></td></tr>';
+							echo $wpdb->print_error();
 						}
-
+						echo "<tr><td colspan='6'><form method='post' id='goalEdit_form'><input type='submit' name='add_new' id='add_new' value='Add New'></form></td></tr>";
 						echo "</table>";
 
 						
 				}
 
-					function test_input($data) {
-						$data = trim($data);
-						$data = stripslashes($data);
-						$data = htmlspecialchars($data);
-						return $data;
-					}
+					
 
 				?>
 
 
-
+				<?php } //ends the else to the if not a mentee yet ?>
 				</main><!-- #main -->
 
 		</div><!-- #primary -->
@@ -323,6 +333,7 @@ get_header(); ?>
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="list-Mentors/">My Mentors</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="contact">Communicate with a mentor</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78"><a href="My-Finances">My Finances</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78"><a href="My-Goals">My Goals</a></li>';
 				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78"><a href="My-Chart">My Progress</a></li>';
 			echo'</ul>';
 			echo'</div>';
