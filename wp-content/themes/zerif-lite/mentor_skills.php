@@ -33,6 +33,9 @@ get_header(); ?>
 				
 				$skillErrs = array();
 				$skills = array();
+				for ($i = 0; $i < 10; $i++){
+					$skills[] = NULL;
+				}
 
 				$wp_id = get_current_user_id();
 
@@ -43,7 +46,7 @@ get_header(); ?>
 						$skill_name = "skill" . ($i + 1);
 						if (!empty($_POST[$skill_name])){
 
-							$skills[] = test_input($_POST[$skill_name]);	// check if name only contains letters and whitespace
+							$skills[$i] = test_input($_POST[$skill_name]);	// check if name only contains letters and whitespace
 							if (!preg_match("/^[a-zA-Z ]*$/",end($skills))) {
 								$skillErrs[] = "Only letters and white space allowed";
 							}
@@ -54,7 +57,32 @@ get_header(); ?>
 						}
 
 					}
-
+					$sql = "INSERT INTO `skills` (`wp_id`, `skill1`, `skill2`, `skill3`, `skill4`, `skill5`, `skill6`, `skill7`, `skill8`, `skill9`, `skill10`) VALUES(" . $wp_id;
+					for ($i = 0; $i < 10; $i++){
+						$sql .= ", ";
+						if ($skills[$i] == NULL){
+							$sql .= 'NULL';
+						}
+						else{
+							$sql .= "'" . $skills[$i] . "'";
+						}
+					}
+					$sql .= ") ON DUPLICATE KEY UPDATE ";
+					//skill1 = 'Computer Programming', skill2 = 'Living life'";
+					$sql .= "`skill1` = '" . $skills[0] . "'";
+					for ($i = 1; $i < 10; $i++){
+						$skill_name = "`skill" . ($i + 1) . "`";
+						$sql .= ', ';
+						$sql .= $skill_name . '=';
+						if ($skills[$i] == NULL){
+							$sql .= 'NULL';
+						}
+						else{
+							$sql .= "'" . $skills[$i] . "'";
+						}
+					}
+					echo "<br><br>" . $sql . "<br><br>";
+					$results = $wpdb->get_results($sql);
 					echo "<h2>Your Skills:</h2>";
 					foreach ($skills as $skill){
 						echo $skill . "<br>";
@@ -71,14 +99,21 @@ get_header(); ?>
 
 				<h2>Please Enter Relevant Skills</h2>
 				<?php 
-
+				$skills = array();
 				$sql = 'SELECT * FROM `skills` WHERE `wp_id` = ' . $wp_id;
-				$results = $wpdb->get_results($sql);
-				$i = 0;
-				foreach ($results as $row) {
-					$skills[$i] = $row->skill;
-					$i++;
-				}
+				//echo "<br><br>" . $sql . "<br><br>";
+
+				$row = $wpdb->get_row($sql);
+				$skills[] = $row->skill1;
+				$skills[] = $row->skill2;
+				$skills[] = $row->skill3;
+				$skills[] = $row->skill4;
+				$skills[] = $row->skill5;
+				$skills[] = $row->skill6;
+				$skills[] = $row->skill7;
+				$skills[] = $row->skill8;
+				$skills[] = $row->skill9;
+				$skills[] = $row->skill10;
 				?>
 				<form method="post" id="mentorskill_form">
 					<?php 
@@ -87,6 +122,7 @@ get_header(); ?>
 						$skill__form_name = "skill" . ($i + 1);
 						$skill_err_name = "skillErr" . ($i + 1);
 						$input_line = $skill_display_name . ': <input type="text" name="' . $skill__form_name . '" value="' . $skills[$i] . '">';
+						
 						if ($skillErrs[$i] != ''){
 							$input_line .= '<span class="error">* ' . $skillErrs[$i] . '</span>';
 						}  

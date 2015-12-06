@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: mentee_progress
+ * Template Name: mentee_progress_2
  */
 get_header(); ?>
 
@@ -25,7 +25,7 @@ get_header(); ?>
 
 			<main id="main" class="site-main" role="main">
 
-				<?php while ( have_posts() ) : the_post(); 
+				<?php 
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
@@ -33,15 +33,8 @@ get_header(); ?>
 						echo "<h1>Please Become a Mentor First!</h1>";
 					}
 					else {
-						get_template_part( 'content', 'page' );
+						echo "Add progress messages or charts here.";
 					}
-					if ( comments_open() || '0' != get_comments_number() ) :
-
-						comments_template();
-
-					endif;
-
-					endwhile; 
 				?>
 	
 
