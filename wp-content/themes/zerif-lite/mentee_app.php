@@ -295,14 +295,20 @@ get_header(); ?>
 										echo "Reference 2: ".$mentee_ref2."<br/>";
 										echo "Qualifications: ".$mentee_qualification."<br/>";
 
-										$insert_result = $wpdb->insert( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'));
-										$mentee_id = $wpdb->insert_id;
-										echo "Mentee ID: " . $mentee_id . "<br />";
-										if($insert_result == False) //$wpdb->insert returns 0 if error, 1 if pass
+										//$insert_result = $wpdb->insert( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'));
+										//$mentee_id = $wpdb->insert_id;
+										
+
+										$sql = "INSERT INTO `mentee` (`photo`,`full_name`,`phone`,`email`,`address`,`Country`,`State`,`employer`,`career_cat`,`yrs_exp`,`desc_exp`,`contact_meth`,`session_num`,`session_time`,`ref_1`,`ref_2`,`why_mentee`) VALUES ('" . $photo . "', '" . $mentee_name . "', '" . $mentee_phone . "', '" . $mentee_email . "', '" . $mentee_address . "', '" . $country . "', '" . $state . "','" . $mentee_employer . "' , '" . $mentee_category . "', '" . $mentee_years . "', '" . $mentee_experience . "', '" . $mentee_contact . "', '" . $mentee_year1 . "', '" . $mentee_sessiontime . "', '" . $mentee_ref1 . "', '" . $mentee_ref2 . "', '" . $mentee_qualification . "')";
+										$result = $wpdb->query($sql);
+										//echo "Mentee ID: " . $mentee_id . "<br />";
+										if($result === False) //$wpdb->insert returns False if error, but must check type too (===)
 										{
 											echo "ERROR: INSERT Mentee returned with ".$wpdb->print_error();
 										} else
-										{
+										{	$user_id = get_current_user_id();
+											$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
+											$mentee_id = (int)($wpdb->get_var($sql));
 											$insert_result = $wpdb->insert( 'mentor_career', array('mentee_ID' => $wpdb->insert_id, 'career_ID' => $mentee_category), array( '%d', '%d'));
 											if($insert_result == False) //$wpdb->insert returns 0 if error, 1 if pass
 											{
