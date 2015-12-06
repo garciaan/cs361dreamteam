@@ -34,8 +34,15 @@ get_header(); ?>
 						echo "<h1>Please Become a Mentor First!</h1>";
 					}
 					else {
-						echo "Add progress messages or charts here.";
+						get_template_part( 'content', 'page' );
 					}
+					if ( comments_open() || '0' != get_comments_number() ) :
+
+						comments_template();
+
+					endif;
+
+					endwhile; 
 				?>
 
 
