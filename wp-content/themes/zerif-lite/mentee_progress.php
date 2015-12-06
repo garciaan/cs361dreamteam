@@ -35,7 +35,7 @@ get_header(); ?>
 					}
 					else {
 						// Query to get the names of the series
-						$results = $wpdb->get_results("SELECT DISTINCT 'goal_name' FROM mentee_goals");
+						$results = $wpdb->get_results("SELECT DISTINCT `goal_description` FROM `goal_progress`");
 						$labels = array();
 						$i = 1;
 						if(!empty($results)) {

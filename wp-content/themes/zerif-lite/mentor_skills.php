@@ -31,6 +31,13 @@ get_header(); ?>
 
 				//$skill1 = $skill2 = $skill3 = $skill4 = $skill5 = $skill6 = $skill7 = $skill8 = $skill9 = $skill10 = "";
 				
+				function test_input($data) {
+					$data = trim($data);
+					$data = stripslashes($data);
+					$data = htmlspecialchars($data);
+					return $data;
+				}
+
 				$skillErrs = array();
 				$skills = array();
 				for ($i = 0; $i < 10; $i++){
@@ -81,20 +88,54 @@ get_header(); ?>
 							$sql .= "'" . $skills[$i] . "'";
 						}
 					}
-					echo "<br><br>" . $sql . "<br><br>";
+
+
+					//TESTING
+					$output_skills = array();
+					$test_sql = 'SELECT * FROM `skills` WHERE `wp_id` = ' . $wp_id;
+					$row = $wpdb->get_row($test_sql);
+					$output_skills[] = $row->skill1;
+					$output_skills[] = $row->skill2;
+					$output_skills[] = $row->skill3;
+					$output_skills[] = $row->skill4;
+					$output_skills[] = $row->skill5;
+					$output_skills[] = $row->skill6;
+					$output_skills[] = $row->skill7;
+					$output_skills[] = $row->skill8;
+					$output_skills[] = $row->skill9;
+					$output_skills[] = $row->skill10;
+
+					echo "<hr><hr><hr><hr>";
+					echo "<h2>FOR TESTING PURPOSES ONLY</h2>";
+					echo "<p>SQL Command: " . $sql . "</p><br>";
+					echo "<p>TESTING SQL STATEMENT: " . $test_sql . "</p><br>";
+					echo "<hr><p>Expected output:</p>";
+					print_r($skills);
+					echo "<hr><p>Actual output: </p>";
+					print_r($output_skills);
+					echo "<hr>";
+					echo '<table style="width:30%"><tr><td>Does input equal output?</td>';
+					if ($skills == $output_skills){
+						echo '<td bgcolor="#008000"> PASS </td>';
+					}
+					else {
+						echo '<td bgcolor="#FF0000"> FAIL </td>';
+					}
+					echo "</tr></table>";
+					echo "<hr><hr><hr><hr>";
+
+					//END TESTING
+
 					$results = $wpdb->get_results($sql);
 					echo "<h2>Your Skills:</h2>";
 					foreach ($skills as $skill){
-						echo $skill . "<br>";
+						if (!empty($skill)){
+							echo $skill . "<br>";
+						}
 					}
 				}
 					
-					function test_input($data) {
-						$data = trim($data);
-						$data = stripslashes($data);
-						$data = htmlspecialchars($data);
-						return $data;
-					}
+					
 				?>
 
 				<h2>Please Enter Relevant Skills</h2>
