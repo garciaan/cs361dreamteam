@@ -306,32 +306,27 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
-		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
+	if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) )
+		{
 			echo '</div>';
-		}
-		else {
+		}else 
+		{
 			echo '</div>';
 			echo '<div class="sidebar-wrap col-md-3 content-left-wrap">';
-				//get_sidebar();
+			//get_sidebar();
 			echo'<div id="secondary" class="widget-area" role="complementary">';
-
-			if($wpdb->insert_id)
-			{
 			echo'<aside id="nav_menu-3" class="widget widget_nav_menu"><h2 class="widget-title">Actions</h2>';
 			echo'<div class="menu-actions-container">';
 			echo'<ul id="menu-actions" class="menu">';
-			
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="mentor-profile-2/">Edit Profile</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="List-Mentees/">My Mentees</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="Mentee-Add/">Add Mentees</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="Mentee-Progress/">Post Mentee Progress</a></li>';
-				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="Mentee-Contact">Communicate with a Mentee</a></li>';
-			
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="mentee-profile/">Edit Profile</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-74"><a href="mentor-search/">Search for Mentors</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-75"><a href="list-Mentors/">My Mentors</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="contact">Communicate with a mentor</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78"><a href="My-Finances">My Finances</a></li>';
+				echo'<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78"><a href="My-Chart">My Progress</a></li>';
 			echo'</ul>';
 			echo'</div>';
 			echo'</aside>';
-			}
-
 			echo'<aside id="meta-2" class="widget widget_meta"><h2 class="widget-title">Meta</h2>';
 			echo'<ul>';
 			echo'<li><a href="wp-admin/">Site Admin</a></li>';
@@ -339,10 +334,9 @@ get_header(); ?>
 			echo'</ul>';
 			echo'</aside>';
 			echo'</div>';
-			
 			echo '</div>';
 		}
-	?>	
+	?>
 
 	</div><!-- .container -->
 
