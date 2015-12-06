@@ -307,8 +307,8 @@ get_header(); ?>
 											echo "ERROR: INSERT Mentee returned with ".$wpdb->print_error();
 										} else
 										{	$user_id = get_current_user_id();
-											$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
-											$mentee_id = (int)($wpdb->get_var($sql));
+											$sql = "SELECT `mentee_id` FROM `mentee` WHERE `email` = '" . $mentee_email . "'";
+											$mentee_id = $wpdb->get_var($sql);
 											$insert_result = $wpdb->insert( 'mentor_career', array('mentee_ID' => $wpdb->insert_id, 'career_ID' => $mentee_category), array( '%d', '%d'));
 											if($insert_result == False) //$wpdb->insert returns 0 if error, 1 if pass
 											{
@@ -317,8 +317,16 @@ get_header(); ?>
 											{
 												//This connects the wp_id to the mentee id. Inserts if not there, updates if there
 												$sql = "INSERT INTO `wpid_to_mid` (`wp_id`, `mentee_id`) VALUES(" . $user_id . "," . $mentee_id . ") ON DUPLICATE KEY UPDATE `mentee_id` = " . $mentee_id;
-												$result = $wpdb->get_results($sql);
-												echo "Congratulations, you have been added as a Mentee!";					
+												//echo "<p>" . $sql . "</p>";
+												$result = $wpdb->query($sql);
+												if ($result === False){
+													echo "ERROR: Could not attach user id to mentee id";
+													$wpdb->print_error();
+
+												}
+												else {
+													echo "Congratulations, you have been added as a Mentee!";
+												}					
 											}
 										}
 									}  

@@ -313,9 +313,18 @@ get_header(); ?>
 											} else
 											{
 												//This connects the wp_id to the mentee id. Inserts if not there, updates if there
+												$user_id = get_current_user_id();
 												$sql = "INSERT INTO `wpid_to_mid` (`wp_id`, `mentor_id`) VALUES(" . $user_id . "," . $mentor_id . ") ON DUPLICATE KEY UPDATE `mentor_id` = " . $mentor_id;
-												$result = $wpdb->get_results($sql);
-												echo "Congratulations, you have been added as a Mentor!";
+												//echo "<p>" . $sql . "</p>";
+												$result = $wpdb->query($sql);
+												if ($result === False){
+													echo "ERROR: Could not attach user id to mentor id";
+													$wpdb->print_error();
+
+												}
+												else {
+													echo "Congratulations, you have been added as a Mentor!";
+												}
 											}
 										}
 									}  
