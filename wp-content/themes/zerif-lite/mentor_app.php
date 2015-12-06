@@ -53,7 +53,7 @@ get_header(); ?>
 						<tr>
 							<td>
 								Career Category:&nbsp
-								<select name="mentee_category" id="mentee_category">
+								<select name="mentor_category" id="mentor_category">
 									<?php
 										foreach ($categories as $category){
 											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
