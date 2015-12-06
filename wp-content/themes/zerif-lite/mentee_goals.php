@@ -92,7 +92,7 @@ get_header(); ?>
 											echo "ERROR: UPDATE returned with ".$results;
 										} else
 										{
-											//echo "Congratulations, you have updated";
+											echo "Congratulations, you have updated";
 										}
 
 						echo "<form method='post' id='OK_form'>";
@@ -251,7 +251,7 @@ get_header(); ?>
 									echo "<td><form method='post' id='goalEdit_form'><input type='hidden' name='myID' id='myID' value= ".$r->goal_id."><input type='submit' name='submit_edit' id='submit_edit' value='Edit'></form></td>";
 									echo "</tr>";
 								}
-								echo "<tr><td  colspan='6'><input type='submit' name='add_new' id='add_new' value='Add New'></td></tr>";
+								echo "<tr><td  colspan='6'><form method='post' id='add_new'><input type='submit' name='add_new' id='add_new' value='Add New'></form></td></tr>";
 							} else {
 								echo "ERROR: SELECT returned with ".$wpdb->print_error();
 							}
