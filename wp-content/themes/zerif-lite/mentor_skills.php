@@ -53,6 +53,7 @@ get_header(); ?>
 						$skill_name = "skill" . ($i + 1);
 						if (!empty($_POST[$skill_name])){
 
+							//check inputs for destructive inputs
 							$skills[$i] = test_input($_POST[$skill_name]);	// check if name only contains letters and whitespace
 							if (!preg_match("/^[a-zA-Z ]*$/",end($skills))) {
 								$skillErrs[] = "Only letters and white space allowed";
@@ -64,6 +65,8 @@ get_header(); ?>
 						}
 
 					}
+
+					//insert into the database
 					$sql = "INSERT INTO `skills` (`wp_id`, `skill1`, `skill2`, `skill3`, `skill4`, `skill5`, `skill6`, `skill7`, `skill8`, `skill9`, `skill10`) VALUES(" . $wp_id;
 					for ($i = 0; $i < 10; $i++){
 						$sql .= ", ";
@@ -75,7 +78,6 @@ get_header(); ?>
 						}
 					}
 					$sql .= ") ON DUPLICATE KEY UPDATE ";
-					//skill1 = 'Computer Programming', skill2 = 'Living life'";
 					$sql .= "`skill1` = '" . $skills[0] . "'";
 					for ($i = 1; $i < 10; $i++){
 						$skill_name = "`skill" . ($i + 1) . "`";
@@ -88,9 +90,10 @@ get_header(); ?>
 							$sql .= "'" . $skills[$i] . "'";
 						}
 					}
-
+					$results = $wpdb->get_results($sql);
 
 					//TESTING
+					//sleep(3);
 					$output_skills = array();
 					$test_sql = 'SELECT * FROM `skills` WHERE `wp_id` = ' . $wp_id;
 					$row = $wpdb->get_row($test_sql);
@@ -126,7 +129,7 @@ get_header(); ?>
 
 					//END TESTING
 
-					$results = $wpdb->get_results($sql);
+					
 					echo "<h2>Your Skills:</h2>";
 					foreach ($skills as $skill){
 						if (!empty($skill)){

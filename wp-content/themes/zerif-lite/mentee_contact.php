@@ -109,7 +109,13 @@ get_header(); ?>
 								if($flag==1) 
 									{ 
 										wp_mail(get_option("admin_email"),trim($_POST[yourname])." sent you a message from ".get_option("blogname"),stripslashes(trim($_POST[message])),"From: ".trim($_POST[yourname])." <".trim($_POST[email]).">rnReply-To:".trim($_POST[email]));
-										echo "Mail Successfully Sent"; 
+										$sent = wp_mail(trim($_POST['email']),trim($_POST[yourname])." sent you a message from ".get_option("blogname"),stripslashes(trim($_POST[message])),"From: ".trim($_POST[yourname])." <".trim($_POST[email]).">rnReply-To:".trim($_POST[email]));
+										if ($sent){
+											echo "Mail Successfully Sent";
+										}
+										else {
+											echo "Mail Failed to send";
+										}
 									}  
 							}
 					}

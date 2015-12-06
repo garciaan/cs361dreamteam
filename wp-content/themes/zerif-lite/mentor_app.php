@@ -28,6 +28,7 @@ get_header(); ?>
 				?>
 				<h2>MENTOR QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentees can verify the authenticity and qualifications of mentors.</p>
+				<p><h3>ALL FIELDS REQUIRED</h3></p>
 				<?php
 					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
 				?>
