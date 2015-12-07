@@ -5,6 +5,11 @@ A hosted version of the Dream Planner site is at dreamplanner.campuslifeohs.com.
 
 Testing is embedded within the site. You will see TESTING PURPOSES ONLY throughout some of the site. You will also see your inputs displayed after a submission underneath forms. These are for displaying our unit testing and would not normally be included in our site. 
 
+NOTE: Post Mentee Progress under Mentor was outside the scope of the requirements for iteration 1 or 2. You will see a placeholder instead of data.
+
+NOTE: My Progress under Mentee is using prefilled information from the database (dummy data) so that we could verify charting, but it does not use the current user's goals and progress. 
+
+NOTE: My Finances under Mentee was outside the scope of the requirements for iteration 1 or 2. You will see a placeholder instead of data. 
 
 -----------------------
 REGISTERING ON THE SITE
@@ -71,3 +76,7 @@ SEARCH FOR MENTOR AS A MENTEE
 
 NOTE: You must have already applied as a mentee and be logged in
 
+------------
+OTHER USAGES
+------------
+Once logged in and applied as a mentor/mentee, try all items in the right side menu under the "Actions" category
