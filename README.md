@@ -67,8 +67,7 @@ SEARCH FOR MENTOR AS A MENTEE
 3. Click "Already a Mentee" in right side menu
 4. Click "Search for Mentors" in right side menu
 5. Choose search criteria
-(Optional)
-6. Click "Contact Mentor" to move to email form with mentor information
+6. Click "Contact Mentor" to move to email form with mentor information (Optional)
 
 NOTE: You must have already applied as a mentee and be logged in
 
