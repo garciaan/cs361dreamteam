@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2015 at 04:17 PM
+-- Generation Time: Dec 06, 2015 at 07:45 PM
 -- Server version: 5.5.42-37.1
 -- PHP Version: 5.4.31
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `campusli_dreamplanner`
 --
+CREATE DATABASE IF NOT EXISTS `campusli_dreamplanner` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `campusli_dreamplanner`;
 
 -- --------------------------------------------------------
 
@@ -31,11 +33,6 @@ CREATE TABLE IF NOT EXISTS `career_type` (
   `Career_Name` varchar(100) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `career_type`
---
-
-TRUNCATE TABLE `career_type`;
 --
 -- Dumping data for table `career_type`
 --
@@ -62,11 +59,6 @@ CREATE TABLE IF NOT EXISTS `contact_method` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `contact_method`
---
-
-TRUNCATE TABLE `contact_method`;
---
 -- Dumping data for table `contact_method`
 --
 
@@ -90,11 +82,6 @@ CREATE TABLE IF NOT EXISTS `goal_progress` (
   `mentee_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `goal_progress`
---
-
-TRUNCATE TABLE `goal_progress`;
 --
 -- Dumping data for table `goal_progress`
 --
@@ -133,13 +120,8 @@ CREATE TABLE IF NOT EXISTS `mentee` (
   `ref_1` varchar(255) NOT NULL,
   `ref_2` varchar(255) NOT NULL,
   `why_mentee` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `mentee`
---
-
-TRUNCATE TABLE `mentee`;
 --
 -- Dumping data for table `mentee`
 --
@@ -151,7 +133,8 @@ INSERT INTO `mentee` (`mentee_id`, `photo`, `full_name`, `phone`, `email`, `addr
 (4, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Andy Garcia', '5418686898', 'andy.w.garcia@gmail.com', '777 Hope Lane', 'Gibraltar', 'Gibraltar', 'Thrive', 101, 0, 'I want to learn how to move at lightspeed', 1, 2, 1, 't@email.com - 9999999999', 'a@email.com - 88888888888', 'I learn very well and I type fast'),
 (5, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'James Kirk', '1111111111', 'aasdf@afasdf.com', '1234 Otter Lane', 'USA', 'Arkansas', 'State Cider', 101, 0, 'I want to science', 1, 2, 1, 'asdf@sdf.com', 'asdfw@asdfw.com', 'I learn real good'),
 (11, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Stephanie Lin', '5555555555', 'asdfsad@gmail.com', '777 Street Lane', 'USA', 'California', 'Thrive', 101, 0, 'I want to science', 1, 2, 30, 'asdfasdf', 'asdfasdf', 'I am asian'),
-(15, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Newuser', '1111111111', 'asdasd@asdfasd.com', '111 Street Lane', 'USA', 'California', 'None', 106, 0, 'asdfasddsafasdf', 1, 3, 30, 'asdfdsf', 'asdfasdf', 'asdfasdsadf');
+(15, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Newuser', '1111111111', 'asdasd@asdfasd.com', '111 Street Lane', 'USA', 'California', 'None', 106, 0, 'asdfasddsafasdf', 1, 3, 30, 'asdfdsf', 'asdfasdf', 'asdfasdsadf'),
+(16, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Mentee', '3211234567', 'zed@zack.zoo', '123 Hog', 'USA', '', 'mojo', 102, 0, 'zilch', 1, 12, 30, 'toads@ponds.com', 'fish@pool.com', 'nada');
 
 -- --------------------------------------------------------
 
@@ -179,13 +162,8 @@ CREATE TABLE IF NOT EXISTS `mentor` (
   `ref_1` varchar(255) DEFAULT NULL,
   `ref_2` varchar(255) DEFAULT NULL,
   `why_mentor` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `mentor`
---
-
-TRUNCATE TABLE `mentor`;
 --
 -- Dumping data for table `mentor`
 --
@@ -201,7 +179,9 @@ INSERT INTO `mentor` (`id`, `photo`, `full_name`, `phone`, `address`, `state`, `
 (11, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Andy Garcia', '5418686898', '777 Hope Lane', '', 'Thrive', 101, 4, 1, 2, 1, 'andy.w.garcia@gmail.com', 'USA', 'PST', 'Student Student Student Student Student Student Student Student Student Student Student Student Student Student Student Student Student ', 'alexhenry@poop.com - 1111111111', 'henryalex@pee.com - 2222222222', 'I love to teach'),
 (12, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Stephanie Lin', '5555555555', '888 Green Way', '', 'Thrive', 100, 0, 1, 2, 30, 'adfd@adfas.com', 'USA', 'PST', 'Be boss', 'asdfds', 'asdfasdf', 'Because Im asian'),
 (17, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Newuser', '1111111111', '111 Street Lane', '', 'None', 106, 4, 1, 4, 40, 'asdfasd@asdfa.com', 'USA', 'PST', 'asdfasdfasdf', 'asdfadsfd', 'asdfasdf', 'asdfasdfasdf'),
-(18, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Kim McLeod', '555-555-5555', '123 Candy Cane Lane', '', 'Garfield', 101, 500, 1, 0, 1, 'kim.anne.mcleod@gmail.com', 'Algeria', '', 'I am #1 best scientist.', 'Kanye 1-800-867-5309', 'Bruce Willis bruce.willis@gainz.com', 'I\\''m awesome.');
+(18, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Kim McLeod', '555-555-5555', '123 Candy Cane Lane', '', 'Garfield', 101, 500, 1, 0, 1, 'kim.anne.mcleod@gmail.com', 'Algeria', '', 'I am #1 best scientist.', 'Kanye 1-800-867-5309', 'Bruce Willis bruce.willis@gainz.com', 'I\\''m awesome.'),
+(19, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Newereruser', '1111111111', '111 Boring way', '', 'None', 103, 99, 1, 4, 60, 'asdfds@ssdflkj.com', 'USA', 'PST', 'asdfasdf', 'asdsadf', 'asdfasdf', 'asdljasdf'),
+(20, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg', 'Lucy Abebe', '1234567891', 'xxx ', '', 'xyz health care', 103, 10, 1, 12, 60, 'marthagm445@gmail.com', 'USA', 'cst', 'emergency care', 'xyz@whatever.com', 'xyz@whatever.com', 'patient\r\nflexible');
 
 -- --------------------------------------------------------
 
@@ -215,11 +195,6 @@ CREATE TABLE IF NOT EXISTS `mentor2mentee` (
   `mentee_id` int(100) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `mentor2mentee`
---
-
-TRUNCATE TABLE `mentor2mentee`;
 --
 -- Dumping data for table `mentor2mentee`
 --
@@ -244,13 +219,8 @@ CREATE TABLE IF NOT EXISTS `mentor_career` (
   `mentor_ID` int(11) NOT NULL,
   `mentee_ID` int(11) NOT NULL,
   `career_ID` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `mentor_career`
---
-
-TRUNCATE TABLE `mentor_career`;
 --
 -- Dumping data for table `mentor_career`
 --
@@ -277,7 +247,10 @@ INSERT INTO `mentor_career` (`mc_ID`, `mentor_ID`, `mentee_ID`, `career_ID`) VAL
 (24, 17, 0, 106),
 (25, 0, 14, 106),
 (26, 0, 15, 106),
-(27, 18, 0, 101);
+(27, 18, 0, 101),
+(28, 19, 0, 103),
+(29, 20, 0, 103),
+(30, 0, 16, 102);
 
 -- --------------------------------------------------------
 
@@ -300,17 +273,14 @@ CREATE TABLE IF NOT EXISTS `skills` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Truncate table before insert `skills`
---
-
-TRUNCATE TABLE `skills`;
---
 -- Dumping data for table `skills`
 --
 
 INSERT INTO `skills` (`wp_id`, `skill1`, `skill2`, `skill3`, `skill4`, `skill5`, `skill6`, `skill7`, `skill8`, `skill9`, `skill10`) VALUES
 (7, 'Internal Medicine', 'Critical Care', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 'Computer Programming', 'Eating Soda Cans', 'Cleaning Toilets', 'Plugging USB drives in on the first try', 'Petting Dogs', NULL, NULL, NULL, NULL, NULL);
+(1, 'Computer Programming', 'Eating Soda Cans', 'Cleaning Toilets', 'Plugging USB drives in on the first try', 'Petting Dogs', NULL, NULL, NULL, NULL, NULL),
+(11, 'being groovy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -325,11 +295,6 @@ CREATE TABLE IF NOT EXISTS `wpid_to_mid` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Truncate table before insert `wpid_to_mid`
---
-
-TRUNCATE TABLE `wpid_to_mid`;
---
 -- Dumping data for table `wpid_to_mid`
 --
 
@@ -338,7 +303,10 @@ INSERT INTO `wpid_to_mid` (`wp_id`, `mentor_id`, `mentee_id`) VALUES
 (1, 11, 4),
 (3, 12, 11),
 (8, 17, 15),
-(11, 18, NULL);
+(11, 18, NULL),
+(13, 19, NULL),
+(7, 20, NULL),
+(10, NULL, 16);
 
 -- --------------------------------------------------------
 
@@ -353,11 +321,6 @@ CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
   `meta_value` longtext COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_commentmeta`
---
-
-TRUNCATE TABLE `wp_commentmeta`;
 --
 -- Dumping data for table `wp_commentmeta`
 --
@@ -391,11 +354,6 @@ CREATE TABLE IF NOT EXISTS `wp_comments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Truncate table before insert `wp_comments`
---
-
-TRUNCATE TABLE `wp_comments`;
---
 -- Dumping data for table `wp_comments`
 --
 
@@ -424,11 +382,28 @@ CREATE TABLE IF NOT EXISTS `wp_links` (
   `link_rss` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Truncate table before insert `wp_links`
+-- Table structure for table `wp_login_redirects`
 --
 
-TRUNCATE TABLE `wp_links`;
+CREATE TABLE IF NOT EXISTS `wp_login_redirects` (
+  `rul_type` enum('user','role','level','all','register') COLLATE utf8_unicode_ci NOT NULL,
+  `rul_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rul_url` longtext COLLATE utf8_unicode_ci,
+  `rul_url_logout` longtext COLLATE utf8_unicode_ci,
+  `rul_order` int(2) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `wp_login_redirects`
+--
+
+INSERT INTO `wp_login_redirects` (`rul_type`, `rul_value`, `rul_url`, `rul_url_logout`, `rul_order`) VALUES
+('all', NULL, 'http://dreamplanner.campuslifeohs.com', '', 0),
+('register', NULL, '', NULL, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -442,11 +417,6 @@ CREATE TABLE IF NOT EXISTS `wp_nf_objectmeta` (
   `meta_value` longtext NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `wp_nf_objectmeta`
---
-
-TRUNCATE TABLE `wp_nf_objectmeta`;
 --
 -- Dumping data for table `wp_nf_objectmeta`
 --
@@ -553,11 +523,6 @@ CREATE TABLE IF NOT EXISTS `wp_nf_objects` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
--- Truncate table before insert `wp_nf_objects`
---
-
-TRUNCATE TABLE `wp_nf_objects`;
---
 -- Dumping data for table `wp_nf_objects`
 --
 
@@ -583,11 +548,6 @@ CREATE TABLE IF NOT EXISTS `wp_nf_relationships` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Truncate table before insert `wp_nf_relationships`
---
-
-TRUNCATE TABLE `wp_nf_relationships`;
---
 -- Dumping data for table `wp_nf_relationships`
 --
 
@@ -611,11 +571,6 @@ CREATE TABLE IF NOT EXISTS `wp_ninja_forms_fav_fields` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `wp_ninja_forms_fav_fields`
---
-
-TRUNCATE TABLE `wp_ninja_forms_fav_fields`;
 --
 -- Dumping data for table `wp_ninja_forms_fav_fields`
 --
@@ -656,11 +611,6 @@ CREATE TABLE IF NOT EXISTS `wp_ninja_forms_fields` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Truncate table before insert `wp_ninja_forms_fields`
---
-
-TRUNCATE TABLE `wp_ninja_forms_fields`;
---
 -- Dumping data for table `wp_ninja_forms_fields`
 --
 
@@ -684,13 +634,8 @@ CREATE TABLE IF NOT EXISTS `wp_options` (
   `option_name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `option_value` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `autoload` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'yes'
-) ENGINE=InnoDB AUTO_INCREMENT=819 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=841 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_options`
---
-
-TRUNCATE TABLE `wp_options`;
 --
 -- Dumping data for table `wp_options`
 --
@@ -728,7 +673,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (30, 'hack_file', '0', 'yes'),
 (31, 'blog_charset', 'UTF-8', 'yes'),
 (32, 'moderation_keys', '', 'no'),
-(33, 'active_plugins', 'a:3:{i:0;s:37:"login-customizer/login-customizer.php";i:1;s:20:"visualizer/index.php";i:2;s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";}', 'yes'),
+(33, 'active_plugins', 'a:4:{i:0;s:37:"login-customizer/login-customizer.php";i:1;s:42:"peters-login-redirect/wplogin_redirect.php";i:2;s:20:"visualizer/index.php";i:3;s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";}', 'yes'),
 (34, 'category_base', '', 'yes'),
 (35, 'ping_sites', 'http://rpc.pingomatic.com/', 'yes'),
 (36, 'advanced_edit', '0', 'yes'),
@@ -777,7 +722,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (79, 'widget_categories', 'a:2:{i:2;a:4:{s:5:"title";s:10:"Categories";s:5:"count";i:0;s:12:"hierarchical";i:0;s:8:"dropdown";i:0;}s:12:"_multiwidget";i:1;}', 'yes'),
 (80, 'widget_text', 'a:2:{i:1;a:0:{}s:12:"_multiwidget";i:1;}', 'yes'),
 (81, 'widget_rss', 'a:2:{i:1;a:0:{}s:12:"_multiwidget";i:1;}', 'yes'),
-(82, 'uninstall_plugins', 'a:0:{}', 'no'),
+(82, 'uninstall_plugins', 'a:1:{s:42:"peters-login-redirect/wplogin_redirect.php";s:13:"rul_uninstall";}', 'no'),
 (83, 'timezone_string', '', 'yes'),
 (84, 'page_for_posts', '0', 'yes'),
 (85, 'page_on_front', '25', 'yes'),
@@ -793,8 +738,8 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (95, 'widget_meta', 'a:2:{i:2;a:1:{s:5:"title";s:0:"";}s:12:"_multiwidget";i:1;}', 'yes'),
 (96, 'sidebars_widgets', 'a:7:{s:19:"wp_inactive_widgets";a:2:{i:0;s:17:"ctup-ads-widget-2";i:1;s:10:"archives-2";}s:9:"sidebar-1";a:6:{i:0;s:8:"search-2";i:1;s:10:"nav_menu-3";i:2;s:14:"recent-posts-2";i:3;s:17:"recent-comments-2";i:4;s:12:"categories-2";i:5;s:6:"meta-2";}s:15:"sidebar-aboutus";a:0:{}s:16:"sidebar-ourfocus";a:3:{i:0;s:17:"ctup-ads-widget-1";i:1;s:17:"ctup-ads-widget-3";i:2;s:17:"ctup-ads-widget-4";}s:20:"sidebar-testimonials";a:3:{i:0;s:21:"zerif_testim-widget-1";i:1;s:21:"zerif_testim-widget-2";i:2;s:21:"zerif_testim-widget-3";}s:15:"sidebar-ourteam";a:6:{i:0;s:19:"zerif_team-widget-1";i:1;s:19:"zerif_team-widget-2";i:2;s:19:"zerif_team-widget-3";i:3;s:19:"zerif_team-widget-4";i:4;s:19:"zerif_team-widget-6";i:5;s:19:"zerif_team-widget-7";}s:13:"array_version";i:3;}', 'yes'),
 (98, 'cron', 'a:7:{i:1449460521;a:1:{s:29:"wp_session_garbage_collection";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1449467855;a:1:{s:24:"ninja_forms_daily_action";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1449474960;a:1:{s:20:"wp_maybe_auto_update";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1449475166;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1449518387;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1449520644;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
-(102, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:59:"https://downloads.wordpress.org/release/wordpress-4.3.1.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:59:"https://downloads.wordpress.org/release/wordpress-4.3.1.zip";s:10:"no_content";s:70:"https://downloads.wordpress.org/release/wordpress-4.3.1-no-content.zip";s:11:"new_bundled";s:71:"https://downloads.wordpress.org/release/wordpress-4.3.1-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:5:"4.3.1";s:7:"version";s:5:"4.3.1";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.1";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1449433997;s:15:"version_checked";s:5:"4.3.1";s:12:"translations";a:0:{}}', 'yes'),
-(109, '_transient_random_seed', '98584ff856b31aa0724388e63ffdd51b', 'yes'),
+(102, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:59:"https://downloads.wordpress.org/release/wordpress-4.3.1.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:59:"https://downloads.wordpress.org/release/wordpress-4.3.1.zip";s:10:"no_content";s:70:"https://downloads.wordpress.org/release/wordpress-4.3.1-no-content.zip";s:11:"new_bundled";s:71:"https://downloads.wordpress.org/release/wordpress-4.3.1-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:5:"4.3.1";s:7:"version";s:5:"4.3.1";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.1";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1449440670;s:15:"version_checked";s:5:"4.3.1";s:12:"translations";a:0:{}}', 'yes'),
+(109, '_transient_random_seed', '2a56923d59ce32d95b4e9fce9451ae34', 'yes'),
 (113, 'can_compress_scripts', '1', 'yes'),
 (131, '_transient_twentyfifteen_categories', '1', 'yes'),
 (132, 'theme_mods_twentyfifteen', 'a:1:{s:16:"sidebars_widgets";a:2:{s:4:"time";i:1448136158;s:4:"data";a:2:{s:19:"wp_inactive_widgets";a:0:{}s:9:"sidebar-1";a:6:{i:0;s:8:"search-2";i:1;s:14:"recent-posts-2";i:2;s:17:"recent-comments-2";i:3;s:10:"archives-2";i:4;s:12:"categories-2";i:5;s:6:"meta-2";}}}}', 'yes'),
@@ -811,9 +756,9 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (183, '_site_transient_wporg_theme_feature_list', 'a:4:{s:6:"Colors";a:15:{i:0;s:5:"black";i:1;s:4:"blue";i:2;s:5:"brown";i:3;s:4:"gray";i:4;s:5:"green";i:5;s:6:"orange";i:6;s:4:"pink";i:7;s:6:"purple";i:8;s:3:"red";i:9;s:6:"silver";i:10;s:3:"tan";i:11;s:5:"white";i:12;s:6:"yellow";i:13;s:4:"dark";i:14;s:5:"light";}s:6:"Layout";a:9:{i:0;s:12:"fixed-layout";i:1;s:12:"fluid-layout";i:2;s:17:"responsive-layout";i:3;s:10:"one-column";i:4;s:11:"two-columns";i:5;s:13:"three-columns";i:6;s:12:"four-columns";i:7;s:12:"left-sidebar";i:8;s:13:"right-sidebar";}s:8:"Features";a:20:{i:0;s:19:"accessibility-ready";i:1;s:8:"blavatar";i:2;s:10:"buddypress";i:3;s:17:"custom-background";i:4;s:13:"custom-colors";i:5;s:13:"custom-header";i:6;s:11:"custom-menu";i:7;s:12:"editor-style";i:8;s:21:"featured-image-header";i:9;s:15:"featured-images";i:10;s:15:"flexible-header";i:11;s:20:"front-page-post-form";i:12;s:19:"full-width-template";i:13;s:12:"microformats";i:14;s:12:"post-formats";i:15;s:20:"rtl-language-support";i:16;s:11:"sticky-post";i:17;s:13:"theme-options";i:18;s:17:"threaded-comments";i:19;s:17:"translation-ready";}s:7:"Subject";a:3:{i:0;s:7:"holiday";i:1;s:13:"photoblogging";i:2;s:8:"seasonal";}}', 'yes'),
 (184, 'widget_zerif_clients-widget', 'a:2:{i:1;a:0:{}s:12:"_multiwidget";i:1;}', 'yes'),
 (185, 'widget_ctup-ads-widget', 'a:4:{i:1;a:4:{s:5:"title";s:5:"Match";s:4:"text";s:154:"Dream Extreme takes the guesswork (and the legwork) out of matching and makes more compatible, and therefore lasting, matches between mentors and mentees.";s:4:"link";s:31:"http://localhost/find-a-mentor/";s:9:"image_uri";s:74:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/match.png";}i:3;a:4:{s:5:"title";s:6:"Manage";s:4:"text";s:156:"Track participation, mentor-mentee activities/feedback and match satisfaction in real-time through our proprietary tracking system. Peace out, spreadsheets!";s:4:"link";s:29:"http://localhost/my-finances/";s:9:"image_uri";s:75:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/manage.png";}i:4;a:4:{s:5:"title";s:7:"Measure";s:4:"text";s:160:"Data. Data. Data. Our actionable intelligence and easy reporting will improve your program by helping you measure program outcomes…and secure that next grant!";s:4:"link";s:25:"http://localhost/history/";s:9:"image_uri";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/measure.png";}s:12:"_multiwidget";i:1;}', 'yes'),
-(186, 'widget_zerif_team-widget', 'a:7:{i:1;a:10:{s:4:"name";s:13:"Eric Anderson";s:8:"position";s:9:"Developer";s:11:"description";s:186:"Eric is deeply interested in Mentoring, he has mentored High School and College students in both programming and Innovation.  He is the inventor of several leading software applications.";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:74:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/hobbs.png";s:15:"open_new_window";s:0:"";}i:2;a:10:{s:4:"name";s:11:"Andy Garcia";s:8:"position";s:9:"Developer";s:11:"description";s:271:"I am a senior in Computer Science and Electrical Engineering. I have been designing website for 2 years and have been programming for 4 years. Along with programming, I love to ski, snowboard, and play video games. I also love to eat all types of food, especially sushi. ";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:116:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/12/11892243_10206667708765297_872494357420705217_n.jpg";s:15:"open_new_window";s:0:"";}i:3;a:10:{s:4:"name";s:18:"Martha Gebremariam";s:8:"position";s:9:"Developer";s:11:"description";s:337:"Martha is a Computer Science student at Oregon State University.  She is a strong advocate of mentorship programs. She believes having mentors with some experience in a field one is planning to pursue is essential to achieve one’s career goal.  Martha is happy to be part of the team that developed this mentorship management platform.";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:75:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Martha.jpg";s:15:"open_new_window";s:0:"";}i:4;a:10:{s:4:"name";s:17:"Martin Stryffeler";s:8:"position";s:9:"Developer";s:11:"description";s:159:"Martin is a 26 year old developer living near Seattle. When he''s not coding, he spends his time hiking, listening to edm, and relaxing with friends and family.";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:75:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Martin.png";s:15:"open_new_window";s:0:"";}s:12:"_multiwidget";i:1;i:6;a:10:{s:4:"name";s:15:"Kimberly McLeod";s:8:"position";s:9:"Developer";s:11:"description";s:129:"Kim is a computer science major that spent two years in Japan teaching English. She uses her teaching experience to help others. ";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:72:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Kim.jpg";s:15:"open_new_window";s:0:"";}i:7;a:10:{s:4:"name";s:7:"Rob Tan";s:8:"position";s:9:"Developer";s:11:"description";s:355:"Robert taught at the following institutions: \r\n\r\n2 years at Beauxbatons Academy of Magic \r\n\r\n2 years at Dumstrang Institute \r\n\r\n4 years to present at Hogwarts School of Witchcraft and Wizardry.\r\n\r\nFocus: \r\n\r\nTransformation of objects temporarily and permanently \r\n\r\nExamples\r\n\r\nHair Color \r\n\r\nHeight \r\n\r\nGood Students to Bad Students \r\n\r\nPyrotechnic Magic";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:74:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/photo.png";s:15:"open_new_window";s:0:"";}}', 'yes'),
+(186, 'widget_zerif_team-widget', 'a:7:{i:1;a:10:{s:4:"name";s:13:"Eric Anderson";s:8:"position";s:9:"Developer";s:11:"description";s:186:"Eric is deeply interested in Mentoring, he has mentored High School and College students in both programming and Innovation.  He is the inventor of several leading software applications.";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:74:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/hobbs.png";s:15:"open_new_window";s:0:"";}i:2;a:10:{s:4:"name";s:11:"Andy Garcia";s:8:"position";s:9:"Developer";s:11:"description";s:271:"I am a senior in Computer Science and Electrical Engineering. I have been designing website for 2 years and have been programming for 4 years. Along with programming, I love to ski, snowboard, and play video games. I also love to eat all types of food, especially sushi. ";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:116:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/12/11892243_10206667708765297_872494357420705217_n.jpg";s:15:"open_new_window";s:0:"";}i:3;a:10:{s:4:"name";s:18:"Martha Gebremariam";s:8:"position";s:9:"Developer";s:11:"description";s:337:"Martha is a Computer Science student at Oregon State University.  She is a strong advocate of mentorship programs. She believes having mentors with some experience in a field one is planning to pursue is essential to achieve one’s career goal.  Martha is happy to be part of the team that developed this mentorship management platform.";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:78:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/12/©golish6.jpg";s:15:"open_new_window";s:0:"";}i:4;a:10:{s:4:"name";s:17:"Martin Stryffeler";s:8:"position";s:9:"Developer";s:11:"description";s:159:"Martin is a 26 year old developer living near Seattle. When he''s not coding, he spends his time hiking, listening to edm, and relaxing with friends and family.";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:75:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Martin.png";s:15:"open_new_window";s:0:"";}s:12:"_multiwidget";i:1;i:6;a:10:{s:4:"name";s:15:"Kimberly McLeod";s:8:"position";s:9:"Developer";s:11:"description";s:129:"Kim is a computer science major that spent two years in Japan teaching English. She uses her teaching experience to help others. ";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:72:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Kim.jpg";s:15:"open_new_window";s:0:"";}i:7;a:10:{s:4:"name";s:7:"Rob Tan";s:8:"position";s:9:"Developer";s:11:"description";s:355:"Robert taught at the following institutions: \r\n\r\n2 years at Beauxbatons Academy of Magic \r\n\r\n2 years at Dumstrang Institute \r\n\r\n4 years to present at Hogwarts School of Witchcraft and Wizardry.\r\n\r\nFocus: \r\n\r\nTransformation of objects temporarily and permanently \r\n\r\nExamples\r\n\r\nHair Color \r\n\r\nHeight \r\n\r\nGood Students to Bad Students \r\n\r\nPyrotechnic Magic";s:7:"fb_link";s:1:"#";s:7:"tw_link";s:1:"#";s:7:"bh_link";s:0:"";s:7:"db_link";s:0:"";s:7:"ln_link";s:1:"#";s:9:"image_uri";s:74:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/photo.png";s:15:"open_new_window";s:0:"";}}', 'yes'),
 (187, 'widget_zerif_testim-widget', 'a:2:{i:1;a:0:{}s:12:"_multiwidget";i:1;}', 'yes'),
-(188, 'theme_mods_zerif-lite', 'a:28:{s:19:"zerif_parallax_img1";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/mentor6.jpg";s:19:"zerif_parallax_img2";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/header1.png";s:19:"zerif_parallax_show";s:1:"1";s:16:"background_image";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/mentor2.jpg";s:23:"zerif_testimonials_show";s:1:"1";s:10:"zerif_logo";s:73:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/logo.png";s:18:"nav_menu_locations";a:1:{s:7:"primary";i:2;}s:20:"zerif_bigtitle_title";s:153:"Dream Extreme’s smart, intuitive platform unlocks potential inside organizations, companies and communities, while delivering great mentoring outcomes.";s:11:"zerif_email";s:59:"<a href="mailto:dreamextreme@site.com">contact@site.com</a>";s:11:"zerif_phone";s:43:"<a href="tel:5417371000">(541) 737-1000</a>";s:13:"zerif_address";s:19:"Corvallis, OR 97331";s:22:"zerif_aboutus_subtitle";s:42:"Learn all about being a Mentor or a Mentee";s:26:"zerif_aboutus_biglefttitle";s:55:"Everything you see here can help you reach your dreams.";s:18:"zerif_aboutus_text";s:616:"Thinking about becoming a mentor?  Everything from how to register, what it takes to be a good mentor and how to communicate with the mentee can be found here.<br /><br /> So you would like advice from those who are successfully doing what you aspire to do?  Learn how to become a mentee, find a mentor, begin to build a relationship and get to where you dream to be. <br /><br />Changing carreers can be hard, especially when you have to hold down your current job while learning the needed skills to get your dream job.  In this section we look at how to fuel your dream with resources for jobs, finances and more!";s:28:"zerif_aboutus_feature1_title";s:9:"Mentoring";s:27:"zerif_aboutus_feature1_text";s:34:"Everything about becoming a mentor";s:28:"zerif_aboutus_feature2_title";s:6:"Mentee";s:27:"zerif_aboutus_feature2_text";s:31:"Everything about being a mentee";s:28:"zerif_aboutus_feature3_title";s:16:"Financing Change";s:27:"zerif_aboutus_feature3_text";s:50:"Sources to finance your new career, Career search.";s:25:"zerif_aboutus_feature3_nr";s:2:"82";s:28:"zerif_aboutus_feature4_title";s:0:"";s:25:"zerif_aboutus_feature4_nr";s:0:"";s:23:"zerif_ourfocus_subtitle";s:40:"How to get Dream Extreme to work for you";s:32:"zerif_bigtitle_greenbutton_label";s:6:"Log In";s:30:"zerif_bigtitle_greenbutton_url";s:50:"http://dreamplanner.campuslifeohs.com/wp-login.php";s:30:"zerif_bigtitle_redbutton_label";s:12:"Register Now";s:28:"zerif_bigtitle_redbutton_url";s:66:"http://dreamplanner.campuslifeohs.com/wp-login.php?action=register";}', 'yes'),
+(188, 'theme_mods_zerif-lite', 'a:30:{s:19:"zerif_parallax_img1";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/mentor6.jpg";s:19:"zerif_parallax_img2";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/header1.png";s:19:"zerif_parallax_show";s:1:"1";s:16:"background_image";s:76:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/mentor2.jpg";s:23:"zerif_testimonials_show";s:1:"1";s:10:"zerif_logo";s:73:"http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/logo.png";s:18:"nav_menu_locations";a:1:{s:7:"primary";i:2;}s:20:"zerif_bigtitle_title";s:153:"Dream Extreme’s smart, intuitive platform unlocks potential inside organizations, companies and communities, while delivering great mentoring outcomes.";s:11:"zerif_email";s:59:"<a href="mailto:dreamextreme@site.com">contact@site.com</a>";s:11:"zerif_phone";s:43:"<a href="tel:5417371000">(541) 737-1000</a>";s:13:"zerif_address";s:19:"Corvallis, OR 97331";s:22:"zerif_aboutus_subtitle";s:42:"Learn all about being a Mentor or a Mentee";s:26:"zerif_aboutus_biglefttitle";s:55:"Everything you see here can help you reach your dreams.";s:18:"zerif_aboutus_text";s:616:"Thinking about becoming a mentor?  Everything from how to register, what it takes to be a good mentor and how to communicate with the mentee can be found here.<br /><br /> So you would like advice from those who are successfully doing what you aspire to do?  Learn how to become a mentee, find a mentor, begin to build a relationship and get to where you dream to be. <br /><br />Changing carreers can be hard, especially when you have to hold down your current job while learning the needed skills to get your dream job.  In this section we look at how to fuel your dream with resources for jobs, finances and more!";s:28:"zerif_aboutus_feature1_title";s:9:"Mentoring";s:27:"zerif_aboutus_feature1_text";s:34:"Everything about becoming a mentor";s:28:"zerif_aboutus_feature2_title";s:6:"Mentee";s:27:"zerif_aboutus_feature2_text";s:31:"Everything about being a mentee";s:28:"zerif_aboutus_feature3_title";s:16:"Financing Change";s:27:"zerif_aboutus_feature3_text";s:50:"Sources to finance your new career, Career search.";s:25:"zerif_aboutus_feature3_nr";s:2:"82";s:28:"zerif_aboutus_feature4_title";s:0:"";s:25:"zerif_aboutus_feature4_nr";s:0:"";s:23:"zerif_ourfocus_subtitle";s:40:"How to get Dream Extreme to work for you";s:32:"zerif_bigtitle_greenbutton_label";s:6:"Log In";s:30:"zerif_bigtitle_greenbutton_url";s:50:"http://dreamplanner.campuslifeohs.com/wp-login.php";s:30:"zerif_bigtitle_redbutton_label";s:12:"Register Now";s:28:"zerif_bigtitle_redbutton_url";s:66:"http://dreamplanner.campuslifeohs.com/wp-login.php?action=register";s:21:"zerif_socials_behance";s:0:"";s:22:"zerif_socials_dribbble";s:0:"";}', 'yes'),
 (189, 'theme_switched_via_customizer', '', 'yes'),
 (192, 'site_icon', '38', 'yes'),
 (199, 'nav_menu_options', 'a:1:{s:8:"auto_add";a:0:{}}', 'yes'),
@@ -864,7 +809,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (501, '_wp_session_expires_80396f32c7f4aef4eee74d47645f6aca', '1448731530', 'no'),
 (508, '_site_transient_timeout_browser_f8a099bca29aa2c619cac9ba4e343a6b', '1449370201', 'yes'),
 (509, '_site_transient_browser_f8a099bca29aa2c619cac9ba4e343a6b', 'a:9:{s:8:"platform";s:9:"Macintosh";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"46.0.2490.86";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
-(510, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1449433998;s:7:"checked";a:4:{s:13:"twentyfifteen";s:3:"1.3";s:14:"twentyfourteen";s:3:"1.5";s:14:"twentythirteen";s:3:"1.6";s:10:"zerif-lite";s:7:"1.8.3.0";}s:8:"response";a:0:{}s:12:"translations";a:0:{}}', 'yes'),
+(510, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1449440671;s:7:"checked";a:4:{s:13:"twentyfifteen";s:3:"1.3";s:14:"twentyfourteen";s:3:"1.5";s:14:"twentythirteen";s:3:"1.6";s:10:"zerif-lite";s:7:"1.8.3.0";}s:8:"response";a:0:{}s:12:"translations";a:0:{}}', 'yes'),
 (536, '_site_transient_timeout_browser_6cc177c48101636a194a81603fdb2927', '1449513136', 'yes'),
 (537, '_site_transient_browser_6cc177c48101636a194a81603fdb2927', 'a:9:{s:8:"platform";s:9:"Macintosh";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"46.0.2490.86";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
 (561, '_site_transient_timeout_browser_6baf0cc1025c43fb6b5e5d0255f4549a', '1449529130', 'yes'),
@@ -883,11 +828,8 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (652, '_site_transient_browser_aae735ec03f1638322dc78928464f33f', 'a:9:{s:8:"platform";s:7:"Windows";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"46.0.2490.86";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
 (660, '_site_transient_timeout_browser_ede57006e09c5046dfd62ebcccb21f00', '1449773750', 'yes'),
 (661, '_site_transient_browser_ede57006e09c5046dfd62ebcccb21f00', 'a:9:{s:8:"platform";s:9:"Macintosh";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"47.0.2526.73";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
-(681, '_site_transient_timeout_poptags_40cd750bba9870f18aada2478b24840a', '1449200338', 'yes'),
-(682, '_site_transient_poptags_40cd750bba9870f18aada2478b24840a', 'a:100:{s:6:"widget";a:3:{s:4:"name";s:6:"widget";s:4:"slug";s:6:"widget";s:5:"count";s:4:"5590";}s:4:"post";a:3:{s:4:"name";s:4:"Post";s:4:"slug";s:4:"post";s:5:"count";s:4:"3496";}s:6:"plugin";a:3:{s:4:"name";s:6:"plugin";s:4:"slug";s:6:"plugin";s:5:"count";s:4:"3442";}s:5:"admin";a:3:{s:4:"name";s:5:"admin";s:4:"slug";s:5:"admin";s:5:"count";s:4:"2953";}s:5:"posts";a:3:{s:4:"name";s:5:"posts";s:4:"slug";s:5:"posts";s:5:"count";s:4:"2691";}s:9:"shortcode";a:3:{s:4:"name";s:9:"shortcode";s:4:"slug";s:9:"shortcode";s:5:"count";s:4:"2153";}s:7:"sidebar";a:3:{s:4:"name";s:7:"sidebar";s:4:"slug";s:7:"sidebar";s:5:"count";s:4:"2143";}s:6:"google";a:3:{s:4:"name";s:6:"google";s:4:"slug";s:6:"google";s:5:"count";s:4:"1967";}s:7:"twitter";a:3:{s:4:"name";s:7:"twitter";s:4:"slug";s:7:"twitter";s:5:"count";s:4:"1927";}s:6:"images";a:3:{s:4:"name";s:6:"images";s:4:"slug";s:6:"images";s:5:"count";s:4:"1908";}s:4:"page";a:3:{s:4:"name";s:4:"page";s:4:"slug";s:4:"page";s:5:"count";s:4:"1902";}s:8:"comments";a:3:{s:4:"name";s:8:"comments";s:4:"slug";s:8:"comments";s:5:"count";s:4:"1859";}s:5:"image";a:3:{s:4:"name";s:5:"image";s:4:"slug";s:5:"image";s:5:"count";s:4:"1755";}s:8:"facebook";a:3:{s:4:"name";s:8:"Facebook";s:4:"slug";s:8:"facebook";s:5:"count";s:4:"1564";}s:3:"seo";a:3:{s:4:"name";s:3:"seo";s:4:"slug";s:3:"seo";s:5:"count";s:4:"1481";}s:9:"wordpress";a:3:{s:4:"name";s:9:"wordpress";s:4:"slug";s:9:"wordpress";s:5:"count";s:4:"1454";}s:11:"woocommerce";a:3:{s:4:"name";s:11:"woocommerce";s:4:"slug";s:11:"woocommerce";s:5:"count";s:4:"1339";}s:6:"social";a:3:{s:4:"name";s:6:"social";s:4:"slug";s:6:"social";s:5:"count";s:4:"1272";}s:5:"links";a:3:{s:4:"name";s:5:"links";s:4:"slug";s:5:"links";s:5:"count";s:4:"1243";}s:7:"gallery";a:3:{s:4:"name";s:7:"gallery";s:4:"slug";s:7:"gallery";s:5:"count";s:4:"1221";}s:5:"email";a:3:{s:4:"name";s:5:"email";s:4:"slug";s:5:"email";s:5:"count";s:4:"1117";}s:7:"widgets";a:3:{s:4:"name";s:7:"widgets";s:4:"slug";s:7:"widgets";s:5:"count";s:4:"1048";}s:5:"pages";a:3:{s:4:"name";s:5:"pages";s:4:"slug";s:5:"pages";s:5:"count";s:4:"1011";}s:6:"jquery";a:3:{s:4:"name";s:6:"jquery";s:4:"slug";s:6:"jquery";s:5:"count";s:3:"968";}s:5:"media";a:3:{s:4:"name";s:5:"media";s:4:"slug";s:5:"media";s:5:"count";s:3:"928";}s:3:"rss";a:3:{s:4:"name";s:3:"rss";s:4:"slug";s:3:"rss";s:5:"count";s:3:"898";}s:4:"ajax";a:3:{s:4:"name";s:4:"AJAX";s:4:"slug";s:4:"ajax";s:5:"count";s:3:"864";}s:5:"video";a:3:{s:4:"name";s:5:"video";s:4:"slug";s:5:"video";s:5:"count";s:3:"856";}s:9:"ecommerce";a:3:{s:4:"name";s:9:"ecommerce";s:4:"slug";s:9:"ecommerce";s:5:"count";s:3:"856";}s:7:"content";a:3:{s:4:"name";s:7:"content";s:4:"slug";s:7:"content";s:5:"count";s:3:"855";}s:5:"login";a:3:{s:4:"name";s:5:"login";s:4:"slug";s:5:"login";s:5:"count";s:3:"831";}s:10:"javascript";a:3:{s:4:"name";s:10:"javascript";s:4:"slug";s:10:"javascript";s:5:"count";s:3:"792";}s:10:"buddypress";a:3:{s:4:"name";s:10:"buddypress";s:4:"slug";s:10:"buddypress";s:5:"count";s:3:"754";}s:5:"photo";a:3:{s:4:"name";s:5:"photo";s:4:"slug";s:5:"photo";s:5:"count";s:3:"723";}s:4:"feed";a:3:{s:4:"name";s:4:"feed";s:4:"slug";s:4:"feed";s:5:"count";s:3:"717";}s:7:"youtube";a:3:{s:4:"name";s:7:"youtube";s:4:"slug";s:7:"youtube";s:5:"count";s:3:"717";}s:8:"security";a:3:{s:4:"name";s:8:"security";s:4:"slug";s:8:"security";s:5:"count";s:3:"716";}s:10:"responsive";a:3:{s:4:"name";s:10:"responsive";s:4:"slug";s:10:"responsive";s:5:"count";s:3:"711";}s:4:"link";a:3:{s:4:"name";s:4:"link";s:4:"slug";s:4:"link";s:5:"count";s:3:"705";}s:4:"spam";a:3:{s:4:"name";s:4:"spam";s:4:"slug";s:4:"spam";s:5:"count";s:3:"696";}s:5:"share";a:3:{s:4:"name";s:5:"Share";s:4:"slug";s:5:"share";s:5:"count";s:3:"694";}s:10:"e-commerce";a:3:{s:4:"name";s:10:"e-commerce";s:4:"slug";s:10:"e-commerce";s:5:"count";s:3:"678";}s:6:"photos";a:3:{s:4:"name";s:6:"photos";s:4:"slug";s:6:"photos";s:5:"count";s:3:"671";}s:8:"category";a:3:{s:4:"name";s:8:"category";s:4:"slug";s:8:"category";s:5:"count";s:3:"664";}s:5:"embed";a:3:{s:4:"name";s:5:"embed";s:4:"slug";s:5:"embed";s:5:"count";s:3:"638";}s:9:"analytics";a:3:{s:4:"name";s:9:"analytics";s:4:"slug";s:9:"analytics";s:5:"count";s:3:"638";}s:4:"form";a:3:{s:4:"name";s:4:"form";s:4:"slug";s:4:"form";s:5:"count";s:3:"628";}s:3:"css";a:3:{s:4:"name";s:3:"CSS";s:4:"slug";s:3:"css";s:5:"count";s:3:"624";}s:6:"search";a:3:{s:4:"name";s:6:"search";s:4:"slug";s:6:"search";s:5:"count";s:3:"621";}s:9:"slideshow";a:3:{s:4:"name";s:9:"slideshow";s:4:"slug";s:9:"slideshow";s:5:"count";s:3:"618";}s:6:"custom";a:3:{s:4:"name";s:6:"custom";s:4:"slug";s:6:"custom";s:5:"count";s:3:"593";}s:5:"stats";a:3:{s:4:"name";s:5:"stats";s:4:"slug";s:5:"stats";s:5:"count";s:3:"588";}s:6:"slider";a:3:{s:4:"name";s:6:"slider";s:4:"slug";s:6:"slider";s:5:"count";s:3:"580";}s:7:"comment";a:3:{s:4:"name";s:7:"comment";s:4:"slug";s:7:"comment";s:5:"count";s:3:"575";}s:6:"button";a:3:{s:4:"name";s:6:"button";s:4:"slug";s:6:"button";s:5:"count";s:3:"569";}s:4:"menu";a:3:{s:4:"name";s:4:"menu";s:4:"slug";s:4:"menu";s:5:"count";s:3:"566";}s:5:"theme";a:3:{s:4:"name";s:5:"theme";s:4:"slug";s:5:"theme";s:5:"count";s:3:"564";}s:4:"tags";a:3:{s:4:"name";s:4:"tags";s:4:"slug";s:4:"tags";s:5:"count";s:3:"562";}s:9:"dashboard";a:3:{s:4:"name";s:9:"dashboard";s:4:"slug";s:9:"dashboard";s:5:"count";s:3:"558";}s:10:"categories";a:3:{s:4:"name";s:10:"categories";s:4:"slug";s:10:"categories";s:5:"count";s:3:"551";}s:10:"statistics";a:3:{s:4:"name";s:10:"statistics";s:4:"slug";s:10:"statistics";s:5:"count";s:3:"537";}s:3:"ads";a:3:{s:4:"name";s:3:"ads";s:4:"slug";s:3:"ads";s:5:"count";s:3:"524";}s:6:"mobile";a:3:{s:4:"name";s:6:"mobile";s:4:"slug";s:6:"mobile";s:5:"count";s:3:"520";}s:4:"user";a:3:{s:4:"name";s:4:"user";s:4:"slug";s:4:"user";s:5:"count";s:3:"512";}s:6:"editor";a:3:{s:4:"name";s:6:"editor";s:4:"slug";s:6:"editor";s:5:"count";s:3:"509";}s:5:"users";a:3:{s:4:"name";s:5:"users";s:4:"slug";s:5:"users";s:5:"count";s:3:"498";}s:7:"picture";a:3:{s:4:"name";s:7:"picture";s:4:"slug";s:7:"picture";s:5:"count";s:3:"497";}s:4:"list";a:3:{s:4:"name";s:4:"list";s:4:"slug";s:4:"list";s:5:"count";s:3:"494";}s:7:"plugins";a:3:{s:4:"name";s:7:"plugins";s:4:"slug";s:7:"plugins";s:5:"count";s:3:"493";}s:9:"affiliate";a:3:{s:4:"name";s:9:"affiliate";s:4:"slug";s:9:"affiliate";s:5:"count";s:3:"489";}s:9:"multisite";a:3:{s:4:"name";s:9:"multisite";s:4:"slug";s:9:"multisite";s:5:"count";s:3:"464";}s:6:"simple";a:3:{s:4:"name";s:6:"simple";s:4:"slug";s:6:"simple";s:5:"count";s:3:"461";}s:12:"contact-form";a:3:{s:4:"name";s:12:"contact form";s:4:"slug";s:12:"contact-form";s:5:"count";s:3:"453";}s:8:"pictures";a:3:{s:4:"name";s:8:"pictures";s:4:"slug";s:8:"pictures";s:5:"count";s:3:"448";}s:7:"contact";a:3:{s:4:"name";s:7:"contact";s:4:"slug";s:7:"contact";s:5:"count";s:3:"442";}s:12:"social-media";a:3:{s:4:"name";s:12:"social media";s:4:"slug";s:12:"social-media";s:5:"count";s:3:"442";}s:10:"navigation";a:3:{s:4:"name";s:10:"navigation";s:4:"slug";s:10:"navigation";s:5:"count";s:3:"425";}s:5:"flash";a:3:{s:4:"name";s:5:"flash";s:4:"slug";s:5:"flash";s:5:"count";s:3:"420";}s:3:"url";a:3:{s:4:"name";s:3:"url";s:4:"slug";s:3:"url";s:5:"count";s:3:"414";}s:4:"html";a:3:{s:4:"name";s:4:"html";s:4:"slug";s:4:"html";s:5:"count";s:3:"413";}s:10:"newsletter";a:3:{s:4:"name";s:10:"newsletter";s:4:"slug";s:10:"newsletter";s:5:"count";s:3:"406";}s:3:"api";a:3:{s:4:"name";s:3:"api";s:4:"slug";s:3:"api";s:5:"count";s:3:"406";}s:4:"shop";a:3:{s:4:"name";s:4:"shop";s:4:"slug";s:4:"shop";s:5:"count";s:3:"400";}s:4:"meta";a:3:{s:4:"name";s:4:"meta";s:4:"slug";s:4:"meta";s:5:"count";s:3:"396";}s:4:"news";a:3:{s:4:"name";s:4:"News";s:4:"slug";s:4:"news";s:5:"count";s:3:"393";}s:9:"marketing";a:3:{s:4:"name";s:9:"marketing";s:4:"slug";s:9:"marketing";s:5:"count";s:3:"392";}s:3:"tag";a:3:{s:4:"name";s:3:"tag";s:4:"slug";s:3:"tag";s:5:"count";s:3:"390";}s:6:"events";a:3:{s:4:"name";s:6:"events";s:4:"slug";s:6:"events";s:5:"count";s:3:"385";}s:8:"tracking";a:3:{s:4:"name";s:8:"tracking";s:4:"slug";s:8:"tracking";s:5:"count";s:3:"382";}s:8:"calendar";a:3:{s:4:"name";s:8:"calendar";s:4:"slug";s:8:"calendar";s:5:"count";s:3:"380";}s:9:"thumbnail";a:3:{s:4:"name";s:9:"thumbnail";s:4:"slug";s:9:"thumbnail";s:5:"count";s:3:"379";}s:11:"advertising";a:3:{s:4:"name";s:11:"advertising";s:4:"slug";s:11:"advertising";s:5:"count";s:3:"377";}s:4:"text";a:3:{s:4:"name";s:4:"text";s:4:"slug";s:4:"text";s:5:"count";s:3:"376";}s:4:"code";a:3:{s:4:"name";s:4:"code";s:4:"slug";s:4:"code";s:5:"count";s:3:"374";}s:8:"lightbox";a:3:{s:4:"name";s:8:"lightbox";s:4:"slug";s:8:"lightbox";s:5:"count";s:3:"368";}s:6:"upload";a:3:{s:4:"name";s:6:"upload";s:4:"slug";s:6:"upload";s:5:"count";s:3:"368";}s:10:"shortcodes";a:3:{s:4:"name";s:10:"shortcodes";s:4:"slug";s:10:"shortcodes";s:5:"count";s:3:"365";}s:9:"automatic";a:3:{s:4:"name";s:9:"automatic";s:4:"slug";s:9:"automatic";s:5:"count";s:3:"363";}s:7:"profile";a:3:{s:4:"name";s:7:"profile";s:4:"slug";s:7:"profile";s:5:"count";s:3:"361";}s:7:"sharing";a:3:{s:4:"name";s:7:"sharing";s:4:"slug";s:7:"sharing";s:5:"count";s:3:"360";}}', 'yes'),
-(697, '_site_transient_update_plugins', 'O:8:"stdClass":4:{s:12:"last_checked";i:1449439897;s:8:"response";a:0:{}s:12:"translations";a:0:{}s:9:"no_update";a:5:{s:19:"akismet/akismet.php";O:8:"stdClass":6:{s:2:"id";s:2:"15";s:4:"slug";s:7:"akismet";s:6:"plugin";s:19:"akismet/akismet.php";s:11:"new_version";s:5:"3.1.5";s:3:"url";s:38:"https://wordpress.org/plugins/akismet/";s:7:"package";s:56:"https://downloads.wordpress.org/plugin/akismet.3.1.5.zip";}s:37:"login-customizer/login-customizer.php";O:8:"stdClass":6:{s:2:"id";s:5:"55995";s:4:"slug";s:16:"login-customizer";s:6:"plugin";s:37:"login-customizer/login-customizer.php";s:11:"new_version";s:5:"1.0.5";s:3:"url";s:47:"https://wordpress.org/plugins/login-customizer/";s:7:"package";s:59:"https://downloads.wordpress.org/plugin/login-customizer.zip";}s:9:"hello.php";O:8:"stdClass":6:{s:2:"id";s:4:"3564";s:4:"slug";s:11:"hello-dolly";s:6:"plugin";s:9:"hello.php";s:11:"new_version";s:3:"1.6";s:3:"url";s:42:"https://wordpress.org/plugins/hello-dolly/";s:7:"package";s:58:"https://downloads.wordpress.org/plugin/hello-dolly.1.6.zip";}s:20:"visualizer/index.php";O:8:"stdClass":6:{s:2:"id";s:5:"42616";s:4:"slug";s:10:"visualizer";s:6:"plugin";s:20:"visualizer/index.php";s:11:"new_version";s:5:"1.5.1";s:3:"url";s:41:"https://wordpress.org/plugins/visualizer/";s:7:"package";s:53:"https://downloads.wordpress.org/plugin/visualizer.zip";}s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";O:8:"stdClass":6:{s:2:"id";s:5:"40482";s:4:"slug";s:29:"wp-business-intelligence-lite";s:6:"plugin";s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";s:11:"new_version";s:5:"1.6.4";s:3:"url";s:60:"https://wordpress.org/plugins/wp-business-intelligence-lite/";s:7:"package";s:78:"https://downloads.wordpress.org/plugin/wp-business-intelligence-lite.1.6.4.zip";}}}', 'yes'),
-(728, '_transient_timeout_plugin_slugs', '1449526297', 'no'),
-(729, '_transient_plugin_slugs', 'a:5:{i:0;s:19:"akismet/akismet.php";i:1;s:37:"login-customizer/login-customizer.php";i:2;s:9:"hello.php";i:3;s:20:"visualizer/index.php";i:4;s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";}', 'no'),
+(728, '_transient_timeout_plugin_slugs', '1449527184', 'no'),
+(729, '_transient_plugin_slugs', 'a:6:{i:0;s:19:"akismet/akismet.php";i:1;s:37:"login-customizer/login-customizer.php";i:2;s:9:"hello.php";i:3;s:42:"peters-login-redirect/wplogin_redirect.php";i:4;s:20:"visualizer/index.php";i:5;s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";}', 'no'),
 (780, '_transient_timeout_rn_last_notification_480f7b6', '1449522775', 'no'),
 (781, '_transient_rn_last_notification_480f7b6', 'O:8:"stdClass":1:{s:5:"error";s:7:"nothing";}', 'no'),
 (785, '_transient_timeout_feed_ac0b00fe65abe10e0c5b588f3ed8c7ca', '1449464625', 'no');
@@ -908,13 +850,18 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (796, '_transient_feed_mod_b9388c83948825c1edaef0d856b7b109', '1449421425', 'no'),
 (797, '_transient_timeout_dash_88ae138922fe95674369b1cb3d215a2b', '1449464625', 'no'),
 (798, '_transient_dash_88ae138922fe95674369b1cb3d215a2b', '<div class="rss-widget"><ul><li><a class=''rsswidget'' href=''https://wordpress.org/news/2015/11/wordpress-4-4-release-candidate/''>WordPress 4.4 Release Candidate</a> <span class="rss-date">November 25, 2015</span><div class="rssSummary">The release candidate for WordPress 4.4 is now available. RC means we think we’re done, but with millions of users and thousands of plugins and themes, it’s possible we’ve missed something. We hope to ship WordPress 4.4 on Tuesday, December 8, but we need your help to get there. If you haven’t tested 4.4 yet, [&hellip;]</div></li></ul></div><div class="rss-widget"><ul><li><a class=''rsswidget'' href=''https://poststatus.com/state-of-the-word-2015/''>Post Status: State of the Word, 2015</a></li><li><a class=''rsswidget'' href=''http://ma.tt/2015/12/php7-and-letsencrypt/''>Matt: PHP7 and LetsEncrypt</a></li><li><a class=''rsswidget'' href=''http://wptavern.com/day-one-a-live-streamers-perspective-of-wordcamp-us''>WPTavern: Day One: A Live Streamer’s Perspective of WordCamp US</a></li></ul></div><div class="rss-widget"><ul><li class=''dashboard-news-plugin''><span>Popular Plugin:</span> <a href=''https://wordpress.org/plugins/siteorigin-panels/'' class=''dashboard-news-plugin-link''>Page Builder by SiteOrigin</a>&nbsp;<span>(<a href=''plugin-install.php?tab=plugin-information&amp;plugin=siteorigin-panels&amp;_wpnonce=be1ec687d7&amp;TB_iframe=true&amp;width=600&amp;height=800'' class=''thickbox'' title=''Page Builder by SiteOrigin''>Install</a>)</span></li></ul></div>', 'no'),
-(801, '_transient_is_multi_author', '0', 'yes'),
-(813, '_site_transient_timeout_theme_roots', '1449440490', 'yes'),
-(814, '_site_transient_theme_roots', 'a:4:{s:13:"twentyfifteen";s:7:"/themes";s:14:"twentyfourteen";s:7:"/themes";s:14:"twentythirteen";s:7:"/themes";s:10:"zerif-lite";s:7:"/themes";}', 'yes'),
 (815, '_site_transient_timeout_browser_aaa2c20d7bf00bbeae56cba8f0350cee', '1450044306', 'yes'),
 (816, '_site_transient_browser_aaa2c20d7bf00bbeae56cba8f0350cee', 'a:9:{s:8:"platform";s:7:"Windows";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"47.0.2526.73";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
 (817, '_site_transient_timeout_browser_8e7e243612c58ca9b7515ec937bfb4fa', '1450044581', 'yes'),
-(818, '_site_transient_browser_8e7e243612c58ca9b7515ec937bfb4fa', 'a:9:{s:8:"platform";s:7:"Windows";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"47.0.2526.73";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes');
+(818, '_site_transient_browser_8e7e243612c58ca9b7515ec937bfb4fa', 'a:9:{s:8:"platform";s:7:"Windows";s:4:"name";s:6:"Chrome";s:7:"version";s:12:"47.0.2526.73";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
+(819, '_site_transient_timeout_theme_roots', '1449442337', 'yes'),
+(820, '_site_transient_theme_roots', 'a:4:{s:13:"twentyfifteen";s:7:"/themes";s:14:"twentyfourteen";s:7:"/themes";s:14:"twentythirteen";s:7:"/themes";s:10:"zerif-lite";s:7:"/themes";}', 'yes'),
+(821, '_site_transient_timeout_poptags_40cd750bba9870f18aada2478b24840a', '1449451455', 'yes');
+INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
+(822, '_site_transient_poptags_40cd750bba9870f18aada2478b24840a', 'a:100:{s:6:"widget";a:3:{s:4:"name";s:6:"widget";s:4:"slug";s:6:"widget";s:5:"count";s:4:"5590";}s:4:"post";a:3:{s:4:"name";s:4:"Post";s:4:"slug";s:4:"post";s:5:"count";s:4:"3496";}s:6:"plugin";a:3:{s:4:"name";s:6:"plugin";s:4:"slug";s:6:"plugin";s:5:"count";s:4:"3442";}s:5:"admin";a:3:{s:4:"name";s:5:"admin";s:4:"slug";s:5:"admin";s:5:"count";s:4:"2953";}s:5:"posts";a:3:{s:4:"name";s:5:"posts";s:4:"slug";s:5:"posts";s:5:"count";s:4:"2691";}s:9:"shortcode";a:3:{s:4:"name";s:9:"shortcode";s:4:"slug";s:9:"shortcode";s:5:"count";s:4:"2153";}s:7:"sidebar";a:3:{s:4:"name";s:7:"sidebar";s:4:"slug";s:7:"sidebar";s:5:"count";s:4:"2143";}s:6:"google";a:3:{s:4:"name";s:6:"google";s:4:"slug";s:6:"google";s:5:"count";s:4:"1967";}s:7:"twitter";a:3:{s:4:"name";s:7:"twitter";s:4:"slug";s:7:"twitter";s:5:"count";s:4:"1927";}s:6:"images";a:3:{s:4:"name";s:6:"images";s:4:"slug";s:6:"images";s:5:"count";s:4:"1908";}s:4:"page";a:3:{s:4:"name";s:4:"page";s:4:"slug";s:4:"page";s:5:"count";s:4:"1902";}s:8:"comments";a:3:{s:4:"name";s:8:"comments";s:4:"slug";s:8:"comments";s:5:"count";s:4:"1859";}s:5:"image";a:3:{s:4:"name";s:5:"image";s:4:"slug";s:5:"image";s:5:"count";s:4:"1755";}s:8:"facebook";a:3:{s:4:"name";s:8:"Facebook";s:4:"slug";s:8:"facebook";s:5:"count";s:4:"1564";}s:3:"seo";a:3:{s:4:"name";s:3:"seo";s:4:"slug";s:3:"seo";s:5:"count";s:4:"1481";}s:9:"wordpress";a:3:{s:4:"name";s:9:"wordpress";s:4:"slug";s:9:"wordpress";s:5:"count";s:4:"1454";}s:11:"woocommerce";a:3:{s:4:"name";s:11:"woocommerce";s:4:"slug";s:11:"woocommerce";s:5:"count";s:4:"1339";}s:6:"social";a:3:{s:4:"name";s:6:"social";s:4:"slug";s:6:"social";s:5:"count";s:4:"1272";}s:5:"links";a:3:{s:4:"name";s:5:"links";s:4:"slug";s:5:"links";s:5:"count";s:4:"1243";}s:7:"gallery";a:3:{s:4:"name";s:7:"gallery";s:4:"slug";s:7:"gallery";s:5:"count";s:4:"1221";}s:5:"email";a:3:{s:4:"name";s:5:"email";s:4:"slug";s:5:"email";s:5:"count";s:4:"1117";}s:7:"widgets";a:3:{s:4:"name";s:7:"widgets";s:4:"slug";s:7:"widgets";s:5:"count";s:4:"1048";}s:5:"pages";a:3:{s:4:"name";s:5:"pages";s:4:"slug";s:5:"pages";s:5:"count";s:4:"1011";}s:6:"jquery";a:3:{s:4:"name";s:6:"jquery";s:4:"slug";s:6:"jquery";s:5:"count";s:3:"968";}s:5:"media";a:3:{s:4:"name";s:5:"media";s:4:"slug";s:5:"media";s:5:"count";s:3:"928";}s:3:"rss";a:3:{s:4:"name";s:3:"rss";s:4:"slug";s:3:"rss";s:5:"count";s:3:"898";}s:4:"ajax";a:3:{s:4:"name";s:4:"AJAX";s:4:"slug";s:4:"ajax";s:5:"count";s:3:"864";}s:5:"video";a:3:{s:4:"name";s:5:"video";s:4:"slug";s:5:"video";s:5:"count";s:3:"856";}s:9:"ecommerce";a:3:{s:4:"name";s:9:"ecommerce";s:4:"slug";s:9:"ecommerce";s:5:"count";s:3:"856";}s:7:"content";a:3:{s:4:"name";s:7:"content";s:4:"slug";s:7:"content";s:5:"count";s:3:"855";}s:5:"login";a:3:{s:4:"name";s:5:"login";s:4:"slug";s:5:"login";s:5:"count";s:3:"831";}s:10:"javascript";a:3:{s:4:"name";s:10:"javascript";s:4:"slug";s:10:"javascript";s:5:"count";s:3:"792";}s:10:"buddypress";a:3:{s:4:"name";s:10:"buddypress";s:4:"slug";s:10:"buddypress";s:5:"count";s:3:"754";}s:5:"photo";a:3:{s:4:"name";s:5:"photo";s:4:"slug";s:5:"photo";s:5:"count";s:3:"723";}s:4:"feed";a:3:{s:4:"name";s:4:"feed";s:4:"slug";s:4:"feed";s:5:"count";s:3:"717";}s:7:"youtube";a:3:{s:4:"name";s:7:"youtube";s:4:"slug";s:7:"youtube";s:5:"count";s:3:"717";}s:8:"security";a:3:{s:4:"name";s:8:"security";s:4:"slug";s:8:"security";s:5:"count";s:3:"716";}s:10:"responsive";a:3:{s:4:"name";s:10:"responsive";s:4:"slug";s:10:"responsive";s:5:"count";s:3:"711";}s:4:"link";a:3:{s:4:"name";s:4:"link";s:4:"slug";s:4:"link";s:5:"count";s:3:"705";}s:4:"spam";a:3:{s:4:"name";s:4:"spam";s:4:"slug";s:4:"spam";s:5:"count";s:3:"696";}s:5:"share";a:3:{s:4:"name";s:5:"Share";s:4:"slug";s:5:"share";s:5:"count";s:3:"694";}s:10:"e-commerce";a:3:{s:4:"name";s:10:"e-commerce";s:4:"slug";s:10:"e-commerce";s:5:"count";s:3:"678";}s:6:"photos";a:3:{s:4:"name";s:6:"photos";s:4:"slug";s:6:"photos";s:5:"count";s:3:"671";}s:8:"category";a:3:{s:4:"name";s:8:"category";s:4:"slug";s:8:"category";s:5:"count";s:3:"664";}s:5:"embed";a:3:{s:4:"name";s:5:"embed";s:4:"slug";s:5:"embed";s:5:"count";s:3:"638";}s:9:"analytics";a:3:{s:4:"name";s:9:"analytics";s:4:"slug";s:9:"analytics";s:5:"count";s:3:"638";}s:4:"form";a:3:{s:4:"name";s:4:"form";s:4:"slug";s:4:"form";s:5:"count";s:3:"628";}s:3:"css";a:3:{s:4:"name";s:3:"CSS";s:4:"slug";s:3:"css";s:5:"count";s:3:"624";}s:6:"search";a:3:{s:4:"name";s:6:"search";s:4:"slug";s:6:"search";s:5:"count";s:3:"621";}s:9:"slideshow";a:3:{s:4:"name";s:9:"slideshow";s:4:"slug";s:9:"slideshow";s:5:"count";s:3:"618";}s:6:"custom";a:3:{s:4:"name";s:6:"custom";s:4:"slug";s:6:"custom";s:5:"count";s:3:"593";}s:5:"stats";a:3:{s:4:"name";s:5:"stats";s:4:"slug";s:5:"stats";s:5:"count";s:3:"588";}s:6:"slider";a:3:{s:4:"name";s:6:"slider";s:4:"slug";s:6:"slider";s:5:"count";s:3:"580";}s:7:"comment";a:3:{s:4:"name";s:7:"comment";s:4:"slug";s:7:"comment";s:5:"count";s:3:"575";}s:6:"button";a:3:{s:4:"name";s:6:"button";s:4:"slug";s:6:"button";s:5:"count";s:3:"569";}s:4:"menu";a:3:{s:4:"name";s:4:"menu";s:4:"slug";s:4:"menu";s:5:"count";s:3:"566";}s:5:"theme";a:3:{s:4:"name";s:5:"theme";s:4:"slug";s:5:"theme";s:5:"count";s:3:"564";}s:4:"tags";a:3:{s:4:"name";s:4:"tags";s:4:"slug";s:4:"tags";s:5:"count";s:3:"562";}s:9:"dashboard";a:3:{s:4:"name";s:9:"dashboard";s:4:"slug";s:9:"dashboard";s:5:"count";s:3:"558";}s:10:"categories";a:3:{s:4:"name";s:10:"categories";s:4:"slug";s:10:"categories";s:5:"count";s:3:"551";}s:10:"statistics";a:3:{s:4:"name";s:10:"statistics";s:4:"slug";s:10:"statistics";s:5:"count";s:3:"537";}s:3:"ads";a:3:{s:4:"name";s:3:"ads";s:4:"slug";s:3:"ads";s:5:"count";s:3:"524";}s:6:"mobile";a:3:{s:4:"name";s:6:"mobile";s:4:"slug";s:6:"mobile";s:5:"count";s:3:"520";}s:4:"user";a:3:{s:4:"name";s:4:"user";s:4:"slug";s:4:"user";s:5:"count";s:3:"512";}s:6:"editor";a:3:{s:4:"name";s:6:"editor";s:4:"slug";s:6:"editor";s:5:"count";s:3:"509";}s:5:"users";a:3:{s:4:"name";s:5:"users";s:4:"slug";s:5:"users";s:5:"count";s:3:"498";}s:7:"picture";a:3:{s:4:"name";s:7:"picture";s:4:"slug";s:7:"picture";s:5:"count";s:3:"497";}s:4:"list";a:3:{s:4:"name";s:4:"list";s:4:"slug";s:4:"list";s:5:"count";s:3:"494";}s:7:"plugins";a:3:{s:4:"name";s:7:"plugins";s:4:"slug";s:7:"plugins";s:5:"count";s:3:"493";}s:9:"affiliate";a:3:{s:4:"name";s:9:"affiliate";s:4:"slug";s:9:"affiliate";s:5:"count";s:3:"489";}s:9:"multisite";a:3:{s:4:"name";s:9:"multisite";s:4:"slug";s:9:"multisite";s:5:"count";s:3:"464";}s:6:"simple";a:3:{s:4:"name";s:6:"simple";s:4:"slug";s:6:"simple";s:5:"count";s:3:"461";}s:12:"contact-form";a:3:{s:4:"name";s:12:"contact form";s:4:"slug";s:12:"contact-form";s:5:"count";s:3:"453";}s:8:"pictures";a:3:{s:4:"name";s:8:"pictures";s:4:"slug";s:8:"pictures";s:5:"count";s:3:"448";}s:7:"contact";a:3:{s:4:"name";s:7:"contact";s:4:"slug";s:7:"contact";s:5:"count";s:3:"442";}s:12:"social-media";a:3:{s:4:"name";s:12:"social media";s:4:"slug";s:12:"social-media";s:5:"count";s:3:"442";}s:10:"navigation";a:3:{s:4:"name";s:10:"navigation";s:4:"slug";s:10:"navigation";s:5:"count";s:3:"425";}s:5:"flash";a:3:{s:4:"name";s:5:"flash";s:4:"slug";s:5:"flash";s:5:"count";s:3:"420";}s:3:"url";a:3:{s:4:"name";s:3:"url";s:4:"slug";s:3:"url";s:5:"count";s:3:"414";}s:4:"html";a:3:{s:4:"name";s:4:"html";s:4:"slug";s:4:"html";s:5:"count";s:3:"413";}s:10:"newsletter";a:3:{s:4:"name";s:10:"newsletter";s:4:"slug";s:10:"newsletter";s:5:"count";s:3:"406";}s:3:"api";a:3:{s:4:"name";s:3:"api";s:4:"slug";s:3:"api";s:5:"count";s:3:"406";}s:4:"shop";a:3:{s:4:"name";s:4:"shop";s:4:"slug";s:4:"shop";s:5:"count";s:3:"400";}s:4:"meta";a:3:{s:4:"name";s:4:"meta";s:4:"slug";s:4:"meta";s:5:"count";s:3:"396";}s:4:"news";a:3:{s:4:"name";s:4:"News";s:4:"slug";s:4:"news";s:5:"count";s:3:"393";}s:9:"marketing";a:3:{s:4:"name";s:9:"marketing";s:4:"slug";s:9:"marketing";s:5:"count";s:3:"392";}s:3:"tag";a:3:{s:4:"name";s:3:"tag";s:4:"slug";s:3:"tag";s:5:"count";s:3:"390";}s:6:"events";a:3:{s:4:"name";s:6:"events";s:4:"slug";s:6:"events";s:5:"count";s:3:"385";}s:8:"tracking";a:3:{s:4:"name";s:8:"tracking";s:4:"slug";s:8:"tracking";s:5:"count";s:3:"382";}s:8:"calendar";a:3:{s:4:"name";s:8:"calendar";s:4:"slug";s:8:"calendar";s:5:"count";s:3:"380";}s:9:"thumbnail";a:3:{s:4:"name";s:9:"thumbnail";s:4:"slug";s:9:"thumbnail";s:5:"count";s:3:"379";}s:11:"advertising";a:3:{s:4:"name";s:11:"advertising";s:4:"slug";s:11:"advertising";s:5:"count";s:3:"377";}s:4:"text";a:3:{s:4:"name";s:4:"text";s:4:"slug";s:4:"text";s:5:"count";s:3:"376";}s:4:"code";a:3:{s:4:"name";s:4:"code";s:4:"slug";s:4:"code";s:5:"count";s:3:"374";}s:8:"lightbox";a:3:{s:4:"name";s:8:"lightbox";s:4:"slug";s:8:"lightbox";s:5:"count";s:3:"368";}s:6:"upload";a:3:{s:4:"name";s:6:"upload";s:4:"slug";s:6:"upload";s:5:"count";s:3:"368";}s:10:"shortcodes";a:3:{s:4:"name";s:10:"shortcodes";s:4:"slug";s:10:"shortcodes";s:5:"count";s:3:"365";}s:9:"automatic";a:3:{s:4:"name";s:9:"automatic";s:4:"slug";s:9:"automatic";s:5:"count";s:3:"363";}s:7:"profile";a:3:{s:4:"name";s:7:"profile";s:4:"slug";s:7:"profile";s:5:"count";s:3:"361";}s:7:"sharing";a:3:{s:4:"name";s:7:"sharing";s:4:"slug";s:7:"sharing";s:5:"count";s:3:"360";}}', 'yes'),
+(823, '_site_transient_update_plugins', 'O:8:"stdClass":5:{s:12:"last_checked";i:1449440673;s:7:"checked";a:6:{s:19:"akismet/akismet.php";s:5:"3.1.5";s:37:"login-customizer/login-customizer.php";s:5:"1.0.5";s:9:"hello.php";s:3:"1.6";s:42:"peters-login-redirect/wplogin_redirect.php";s:5:"2.9.0";s:20:"visualizer/index.php";s:5:"1.5.1";s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";s:5:"1.6.4";}s:8:"response";a:0:{}s:12:"translations";a:0:{}s:9:"no_update";a:6:{s:19:"akismet/akismet.php";O:8:"stdClass":6:{s:2:"id";s:2:"15";s:4:"slug";s:7:"akismet";s:6:"plugin";s:19:"akismet/akismet.php";s:11:"new_version";s:5:"3.1.5";s:3:"url";s:38:"https://wordpress.org/plugins/akismet/";s:7:"package";s:56:"https://downloads.wordpress.org/plugin/akismet.3.1.5.zip";}s:37:"login-customizer/login-customizer.php";O:8:"stdClass":6:{s:2:"id";s:5:"55995";s:4:"slug";s:16:"login-customizer";s:6:"plugin";s:37:"login-customizer/login-customizer.php";s:11:"new_version";s:5:"1.0.5";s:3:"url";s:47:"https://wordpress.org/plugins/login-customizer/";s:7:"package";s:59:"https://downloads.wordpress.org/plugin/login-customizer.zip";}s:9:"hello.php";O:8:"stdClass":6:{s:2:"id";s:4:"3564";s:4:"slug";s:11:"hello-dolly";s:6:"plugin";s:9:"hello.php";s:11:"new_version";s:3:"1.6";s:3:"url";s:42:"https://wordpress.org/plugins/hello-dolly/";s:7:"package";s:58:"https://downloads.wordpress.org/plugin/hello-dolly.1.6.zip";}s:42:"peters-login-redirect/wplogin_redirect.php";O:8:"stdClass":6:{s:2:"id";s:4:"4633";s:4:"slug";s:21:"peters-login-redirect";s:6:"plugin";s:42:"peters-login-redirect/wplogin_redirect.php";s:11:"new_version";s:5:"2.9.0";s:3:"url";s:52:"https://wordpress.org/plugins/peters-login-redirect/";s:7:"package";s:64:"https://downloads.wordpress.org/plugin/peters-login-redirect.zip";}s:20:"visualizer/index.php";O:8:"stdClass":6:{s:2:"id";s:5:"42616";s:4:"slug";s:10:"visualizer";s:6:"plugin";s:20:"visualizer/index.php";s:11:"new_version";s:5:"1.5.1";s:3:"url";s:41:"https://wordpress.org/plugins/visualizer/";s:7:"package";s:53:"https://downloads.wordpress.org/plugin/visualizer.zip";}s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";O:8:"stdClass":6:{s:2:"id";s:5:"40482";s:4:"slug";s:29:"wp-business-intelligence-lite";s:6:"plugin";s:63:"wp-business-intelligence-lite/wp-business-intelligence-lite.php";s:11:"new_version";s:5:"1.6.4";s:3:"url";s:60:"https://wordpress.org/plugins/wp-business-intelligence-lite/";s:7:"package";s:78:"https://downloads.wordpress.org/plugin/wp-business-intelligence-lite.1.6.4.zip";}}}', 'yes'),
+(824, 'rul_version', '2.9.0', 'no'),
+(840, '_transient_is_multi_author', '0', 'yes');
 
 -- --------------------------------------------------------
 
@@ -927,13 +874,8 @@ CREATE TABLE IF NOT EXISTS `wp_postmeta` (
   `post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci
-) ENGINE=InnoDB AUTO_INCREMENT=384 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=386 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_postmeta`
---
-
-TRUNCATE TABLE `wp_postmeta`;
 --
 -- Dumping data for table `wp_postmeta`
 --
@@ -1041,7 +983,7 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (115, 57, '_edit_lock', '1449425299:1'),
 (116, 57, '_wp_page_template', 'mentee_home.php'),
 (117, 59, '_edit_last', '1'),
-(118, 59, '_edit_lock', '1449421423:1'),
+(118, 59, '_edit_lock', '1449441797:1'),
 (119, 59, '_wp_page_template', 'mentor_home.php'),
 (222, 79, '_edit_lock', '1448506463:1'),
 (223, 82, '_edit_lock', '1448489936:1'),
@@ -1196,7 +1138,9 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (380, 192, '_wp_attached_file', '2015/12/©golish6.jpg'),
 (381, 192, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:629;s:6:"height";i:960;s:4:"file";s:21:"2015/12/©golish6.jpg";s:5:"sizes";a:8:{s:9:"thumbnail";a:4:{s:4:"file";s:21:"©golish6-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:21:"©golish6-197x300.jpg";s:5:"width";i:197;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:14:"post-thumbnail";a:4:{s:4:"file";s:21:"©golish6-250x250.jpg";s:5:"width";i:250;s:6:"height";i:250;s:9:"mime-type";s:10:"image/jpeg";}s:20:"post-thumbnail-large";a:4:{s:4:"file";s:21:"©golish6-629x500.jpg";s:5:"width";i:629;s:6:"height";i:500;s:9:"mime-type";s:10:"image/jpeg";}s:26:"post-thumbnail-large-table";a:4:{s:4:"file";s:21:"©golish6-600x300.jpg";s:5:"width";i:600;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:27:"post-thumbnail-large-mobile";a:4:{s:4:"file";s:21:"©golish6-400x200.jpg";s:5:"width";i:400;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:19:"zerif_project_photo";a:4:{s:4:"file";s:21:"©golish6-285x214.jpg";s:5:"width";i:285;s:6:"height";i:214;s:9:"mime-type";s:10:"image/jpeg";}s:20:"zerif_our_team_photo";a:4:{s:4:"file";s:21:"©golish6-174x174.jpg";s:5:"width";i:174;s:6:"height";i:174;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}'),
 (382, 193, '_wp_attached_file', '2015/12/11892243_10206667708765297_872494357420705217_n.jpg'),
-(383, 193, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:450;s:6:"height";i:450;s:4:"file";s:59:"2015/12/11892243_10206667708765297_872494357420705217_n.jpg";s:5:"sizes";a:7:{s:9:"thumbnail";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:14:"post-thumbnail";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-250x250.jpg";s:5:"width";i:250;s:6:"height";i:250;s:9:"mime-type";s:10:"image/jpeg";}s:26:"post-thumbnail-large-table";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-450x300.jpg";s:5:"width";i:450;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:27:"post-thumbnail-large-mobile";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-400x200.jpg";s:5:"width";i:400;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:19:"zerif_project_photo";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-285x214.jpg";s:5:"width";i:285;s:6:"height";i:214;s:9:"mime-type";s:10:"image/jpeg";}s:20:"zerif_our_team_photo";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-174x174.jpg";s:5:"width";i:174;s:6:"height";i:174;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}');
+(383, 193, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:450;s:6:"height";i:450;s:4:"file";s:59:"2015/12/11892243_10206667708765297_872494357420705217_n.jpg";s:5:"sizes";a:7:{s:9:"thumbnail";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:14:"post-thumbnail";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-250x250.jpg";s:5:"width";i:250;s:6:"height";i:250;s:9:"mime-type";s:10:"image/jpeg";}s:26:"post-thumbnail-large-table";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-450x300.jpg";s:5:"width";i:450;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:27:"post-thumbnail-large-mobile";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-400x200.jpg";s:5:"width";i:400;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:19:"zerif_project_photo";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-285x214.jpg";s:5:"width";i:285;s:6:"height";i:214;s:9:"mime-type";s:10:"image/jpeg";}s:20:"zerif_our_team_photo";a:4:{s:4:"file";s:59:"11892243_10206667708765297_872494357420705217_n-174x174.jpg";s:5:"width";i:174;s:6:"height";i:174;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}'),
+(384, 59, '_oembed_0f378b020df9b4b38a92cb5e0c2262da', '{{unknown}}'),
+(385, 59, '_oembed_a81642ac9dc83c30e3eed5bf60073186', '{{unknown}}');
 
 -- --------------------------------------------------------
 
@@ -1228,13 +1172,8 @@ CREATE TABLE IF NOT EXISTS `wp_posts` (
   `post_type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'post',
   `post_mime_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `comment_count` bigint(20) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_posts`
---
-
-TRUNCATE TABLE `wp_posts`;
 --
 -- Dumping data for table `wp_posts`
 --
@@ -1292,14 +1231,15 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (56, 1, '2015-11-22 04:20:40', '2015-11-22 04:20:40', 'This is a place holder for tracking finances', 'My Finances', '', 'inherit', 'closed', 'closed', '', '55-revision-v1', '', '', '2015-11-22 04:20:40', '2015-11-22 04:20:40', '', 55, 'http://dreamplanner.campuslifeohs.com/2015/11/22/55-revision-v1/', 0, 'revision', '', 0),
 (57, 1, '2015-11-22 04:21:52', '2015-11-22 04:21:52', 'Think about your career goals. What do you really want to do? Where do you want to be? \r\nLook for a person who is currently there and ask him/her to be your mentor. Ideally, this person is someone who has been in your shoes and can easily relate to your current situation.\r\n\r\n[embed]https://www.youtube.com/watch?v=bvAEJ8G9l9U[/embed]\r\n&nbsp;', 'Mentee Home', '', 'publish', 'closed', 'closed', '', 'become-a-mentee', '', '', '2015-12-06 17:16:18', '2015-12-06 17:16:18', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=57', 0, 'page', '', 0),
 (58, 1, '2015-11-22 04:21:52', '2015-11-22 04:21:52', 'This page will become a form to apply to be a mentee', 'Become a Mentee', '', 'inherit', 'closed', 'closed', '', '57-revision-v1', '', '', '2015-11-22 04:21:52', '2015-11-22 04:21:52', '', 57, 'http://dreamplanner.campuslifeohs.com/2015/11/22/57-revision-v1/', 0, 'revision', '', 0),
-(59, 1, '2015-11-22 04:22:24', '2015-11-22 04:22:24', '<h2>Mentor Home</h2>\r\nThis is the home page for mentors, may add news or post or graphic here.  Navigation is from the side bar.', 'Mentor Home', '', 'publish', 'closed', 'closed', '', 'become-a-mentor', '', '', '2015-11-27 17:02:56', '2015-11-27 17:02:56', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=59', 0, 'page', '', 0),
+(59, 1, '2015-11-22 04:22:24', '2015-11-22 04:22:24', '<h2> How To Become A Great Mentor </h2>\r\n\r\n\r\nThe mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires. - William Arthur Ward\r\n\r\nHave you employed a mentor to help you navigate the professional world? Maybe you found her during your first job search; perhaps it was when you transitioned careers. Either way—your mentor most likely provided guidance and helped you overcome challenges. And if you’re really lucky, she inspired you along the way.\r\n\r\nAccording to David Parnell, a legal consultant, communication coach and author, when it comes to mentorship, it is an unwritten rule that “one should give back at least what they’ve received.”\r\n\r\nSo, if you’ve ever had a mentor, you might want to think about paying it forward.\r\n\r\n“Mentoring—or at minimum connecting with a variety of people in all industries and age groups—has never been more important,” says Pamela Ryckman, author of Stiletto Network: Inside the Women’s Power Circles That Are Changing the Face of Business.\r\n\r\nBut it’s a big responsibility.\r\n\r\nA mentor must believe in her mentee, both personally and professionally, Ryckman explains. “Mentors help fill your knowledge gaps and seek opportunities to help you grow and excel. A mentor is someone with whom you can let down your guard, share your insecurities, and ask the ‘stupid’ questions we all have sometimes.”\r\n\r\nA great mentor also sees her mentee as a person, not just an employee. She knows enough about their personal life to understand the external factors that impact their work, and cares about their happiness. “A [great] mentor is honest and unafraid to tell you hard truths about yourself and your work,” Ryckman adds. “She helps you navigate the politics of your organization or profession, and avoid the land mines. She pushes you to take risks and aim higher, and advocates for you when you’re not there.”\r\n\r\nThere’s a lot of personal satisfaction that comes from watching someone you care about reach his full potential. But as it turns out, mentoring goes far beyond that.\r\n\r\n“Helping someone else succeed can be immensely gratifying,” Ryckman says. “But what I’ve heard time and again from executive ‘elders’ is how much they gain in return when they mentor young people. They’re often surprised at how much they learn from their mentees. Mentoring really goes both ways; when different generations come together, their blend of skills can be highly complementary.”\r\n\r\nRyan Kahn, a career coach, founder of The Hired Group, star of MTV’s Hired, and author of Hired! The Guide for the Recent Grad, adds: “By investing in others you’re also investing in yourself. For example, as you move forward in your career, you’ll need to be able to identify and recruit fresh talent. Having a strong network of mentees can help you find and grow these rising stars.”\r\n\r\nWant to become a great mentor? Here are 9 things you’ll need to do:\r\n\r\nAlways play both roles. Ideally, one would never have to make the transition from mentee to mentor, Ryckman says. “We should all be learning from others (playing the mentee role) and teaching others (being the mentor) throughout our careers.”\r\n\r\nBe committed.  Being a mentor is a commitment, Kahn says. “If you’re offering to help someone you need to follow through with that promise by being there for them when needed.”\r\n\r\nKnow that your mentee can be anyone, anywhere. “Mentoring needn’t follow the traditional ‘elder-upstart’ prescription anymore. It can be peer-to-peer across functions or industries,” Rychman says. “It’s about supplementing skill gaps and helping each person learn and grow.”\r\n\r\nAs a mentor, you’re someone who knows something your mentee doesn’t, and you care enough to help them learn and succeed.\r\n\r\n“Today, industries overlap and are interdependent in ways that were inconceivable a decade ago, and employees can no longer afford to stay stuck in a particular silo, oblivious to developments in other fields,” she says. “Companies have realized that when people from different backgrounds with varying skills convene to debate and brainstorm, advances occur. In the ‘new,’ conceptual economy, the ability to draw knowledge from diverse spheres is prized.”\r\n\r\nListen. One of your jobs a mentor is to provide advice and encouragement, but in order to do so, you need to make the time to listen and understand the situation, Kahn says.\r\n\r\n“Intently listening to a mentee as they vent and, ideally, sort their way through confusion, is often more than enough to get them through the day,” Parnell says. “If you ask any therapist about the power of listening, they will tell you the same thing: It is massive. Any mentor that is worth their weight spends considerably more time listening than they do speaking.”\r\n\r\nHave your own mentor(s) and network. Today, the most successful people build relationships and gather intelligence from a wide variety of experts in all industries and age brackets, Rychman says. “People who are insular—who always return to the same small circle for advice and support—become closed off from opportunities.” In order to be the very best mentor, you need to continue building your network and taking advice from those you trust.\r\n\r\nBe open-minded and compassionate. “If you’ve ever argued with someone, you know that they will never see your side until they’re convinced that you’ve seen theirs,” Parnell says. “And to provide valuable guidance and advice that is well received, it is necessary to first understand the mentee’s needs, wants, feelings, et cetera. This can only come in the form of deep and implicit empathy.”\r\n\r\nHave patience. Much like parenting, mentoring can be a satisfying, but also long-term and trying, endeavor, Parnell says. “While the mentee needs and wants direction, often times this requires a bit of constructive criticism, which can be hard to take.  It is vital that a mentor be a patient soul, because tempers may flare, and quick fixes are few and far between.”\r\n\r\nBe a role model.  As a mentor, your actions are being evaluated, so you must set the bar for yourself just as high, or higher, than you’d expect from your mentee, Kahn says.\r\n\r\n“Your goal is to not only provide direction and advice, but to get your mentee to act upon them,” Parnell adds. “And while conversations can be motivating, few things are more impactful than to lead by example. A mentor’s mantra must be: ‘Do as I do, not just as I say.’”\r\n\r\nCare about the relationship. “Invest yourself in your mentee and you’ll get so much more out of the experience,” Kahn says.\r\n\r\n“Mentees are usually eager, invested, and can be a bit vulnerable, leaving them to hang on your words and to pay close attention to, well, everything you do,” Parnell says. “Few things are more demotivating than ‘phoning in’ your time and efforts; it takes a sincere interest in the betterment of your mentee to avoid this. So, if you can’t muster a sincere desire right from the beginning, you’ll do better to find a more suitable fit, because you may do more harm than good,” he concludes.\r\n\r\nExcerpt from\r\n <a href="http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/2/">http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/2/</a>', 'Mentor Home', '', 'publish', 'closed', 'closed', '', 'become-a-mentor', '', '', '2015-12-06 22:42:56', '2015-12-06 22:42:56', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=59', 0, 'page', '', 0),
 (60, 1, '2015-11-22 04:22:24', '2015-11-22 04:22:24', 'This page will become a form to apply to be a mentor', 'Become a Mentor', '', 'inherit', 'closed', 'closed', '', '59-revision-v1', '', '', '2015-11-22 04:22:24', '2015-11-22 04:22:24', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/11/22/59-revision-v1/', 0, 'revision', '', 0),
-(61, 1, '2015-11-27 17:02:46', '2015-11-27 17:02:46', '<h2>Mentor Home</h2>\nTHis is the home page for mentors, may add news or post or graphic here.  Navigatio', 'Mentor Home', '', 'inherit', 'closed', 'closed', '', '59-autosave-v1', '', '', '2015-11-27 17:02:46', '2015-11-27 17:02:46', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/11/22/59-autosave-v1/', 0, 'revision', '', 0),
+(61, 1, '2015-12-06 22:42:40', '2015-12-06 22:42:40', '<h2> How To Become A Great Mentor </h2>\r\n\r\n\r\nThe mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires. - William Arthur Ward\r\n\r\nHave you employed a mentor to help you navigate the professional world? Maybe you found her during your first job search; perhaps it was when you transitioned careers. Either way—your mentor most likely provided guidance and helped you overcome challenges. And if you’re really lucky, she inspired you along the way.\r\n\r\nAccording to David Parnell, a legal consultant, communication coach and author, when it comes to mentorship, it is an unwritten rule that “one should give back at least what they’ve received.”\r\n\r\nSo, if you’ve ever had a mentor, you might want to think about paying it forward.\r\n\r\n“Mentoring—or at minimum connecting with a variety of people in all industries and age groups—has never been more important,” says Pamela Ryckman, author of Stiletto Network: Inside the Women’s Power Circles That Are Changing the Face of Business.\r\n\r\nBut it’s a big responsibility.\r\n\r\nA mentor must believe in her mentee, both personally and professionally, Ryckman explains. “Mentors help fill your knowledge gaps and seek opportunities to help you grow and excel. A mentor is someone with whom you can let down your guard, share your insecurities, and ask the ‘stupid’ questions we all have sometimes.”\r\n\r\nA great mentor also sees her mentee as a person, not just an employee. She knows enough about their personal life to understand the external factors that impact their work, and cares about their happiness. “A [great] mentor is honest and unafraid to tell you hard truths about yourself and your work,” Ryckman adds. “She helps you navigate the politics of your organization or profession, and avoid the land mines. She pushes you to take risks and aim higher, and advocates for you when you’re not there.”\r\n\r\nThere’s a lot of personal satisfaction that comes from watching someone you care about reach his full potential. But as it turns out, mentoring goes far beyond that.\r\n\r\n“Helping someone else succeed can be immensely gratifying,” Ryckman says. “But what I’ve heard time and again from executive ‘elders’ is how much they gain in return when they mentor young people. They’re often surprised at how much they learn from their mentees. Mentoring really goes both ways; when different generations come together, their blend of skills can be highly complementary.”\r\n\r\nRyan Kahn, a career coach, founder of The Hired Group, star of MTV’s Hired, and author of Hired! The Guide for the Recent Grad, adds: “By investing in others you’re also investing in yourself. For example, as you move forward in your career, you’ll need to be able to identify and recruit fresh talent. Having a strong network of mentees can help you find and grow these rising stars.”\r\n\r\nWant to become a great mentor? Here are 9 things you’ll need to do:\r\n\r\nAlways play both roles. Ideally, one would never have to make the transition from mentee to mentor, Ryckman says. “We should all be learning from others (playing the mentee role) and teaching others (being the mentor) throughout our careers.”\r\n\r\nBe committed.  Being a mentor is a commitment, Kahn says. “If you’re offering to help someone you need to follow through with that promise by being there for them when needed.”\r\n\r\nKnow that your mentee can be anyone, anywhere. “Mentoring needn’t follow the traditional ‘elder-upstart’ prescription anymore. It can be peer-to-peer across functions or industries,” Rychman says. “It’s about supplementing skill gaps and helping each person learn and grow.”\r\n\r\nAs a mentor, you’re someone who knows something your mentee doesn’t, and you care enough to help them learn and succeed.\r\n\r\n“Today, industries overlap and are interdependent in ways that were inconceivable a decade ago, and employees can no longer afford to stay stuck in a particular silo, oblivious to developments in other fields,” she says. “Companies have realized that when people from different backgrounds with varying skills convene to debate and brainstorm, advances occur. In the ‘new,’ conceptual economy, the ability to draw knowledge from diverse spheres is prized.”\r\n\r\nListen. One of your jobs a mentor is to provide advice and encouragement, but in order to do so, you need to make the time to listen and understand the situation, Kahn says.\r\n\r\n“Intently listening to a mentee as they vent and, ideally, sort their way through confusion, is often more than enough to get them through the day,” Parnell says. “If you ask any therapist about the power of listening, they will tell you the same thing: It is massive. Any mentor that is worth their weight spends considerably more time listening than they do speaking.”\r\n\r\nHave your own mentor(s) and network. Today, the most successful people build relationships and gather intelligence from a wide variety of experts in all industries and age brackets, Rychman says. “People who are insular—who always return to the same small circle for advice and support—become closed off from opportunities.” In order to be the very best mentor, you need to continue building your network and taking advice from those you trust.\r\n\r\nBe open-minded and compassionate. “If you’ve ever argued with someone, you know that they will never see your side until they’re convinced that you’ve seen theirs,” Parnell says. “And to provide valuable guidance and advice that is well received, it is necessary to first understand the mentee’s needs, wants, feelings, et cetera. This can only come in the form of deep and implicit empathy.”\r\n\r\nHave patience. Much like parenting, mentoring can be a satisfying, but also long-term and trying, endeavor, Parnell says. “While the mentee needs and wants direction, often times this requires a bit of constructive criticism, which can be hard to take.  It is vital that a mentor be a patient soul, because tempers may flare, and quick fixes are few and far between.”\r\n\r\nBe a role model.  As a mentor, your actions are being evaluated, so you must set the bar for yourself just as high, or higher, than you’d expect from your mentee, Kahn says.\r\n\r\n“Your goal is to not only provide direction and advice, but to get your mentee to act upon them,” Parnell adds. “And while conversations can be motivating, few things are more impactful than to lead by example. A mentor’s mantra must be: ‘Do as I do, not just as I say.’”\r\n\r\nCare about the relationship. “Invest yourself in your mentee and you’ll get so much more out of the experience,” Kahn says.\r\n\r\n“Mentees are usually eager, invested, and can be a bit vulnerable, leaving them to hang on your words and to pay close attention to, well, everything you do,” Parnell says. “Few things are more demotivating than ‘phoning in’ your time and efforts; it takes a sincere interest in the betterment of your mentee to avoid this. So, if you can’t muster a sincere desire right from the beginning, you’ll do better to find a more suitable fit, because you may do more harm than good,” he concludes.\r\n\r\nExcerpt from\r\n <a href="http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/2/">http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/2/</a>', 'Mentor Home', '', 'inherit', 'closed', 'closed', '', '59-autosave-v1', '', '', '2015-12-06 22:42:40', '2015-12-06 22:42:40', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/11/22/59-autosave-v1/', 0, 'revision', '', 0),
 (62, 1, '2015-11-22 04:26:32', '2015-11-22 04:26:32', '<h2>Become a Mentor</h2>\r\n<ul>\r\n	<li>a form to apply to be a mentor</li>\r\n</ul>\r\n<strong>Update my Profile</strong>\r\n<ul>\r\n	<li>a form to edit my profile</li>\r\n</ul>\r\n<strong>List my Mentees</strong>\r\n<ul>\r\n	<li>a list of mentees assigned to me and actions I can take for them\r\n<ul>\r\n	<li>Post something</li>\r\n	<li>Communicate with them</li>\r\n	<li>update their progress page</li>\r\n</ul>\r\n</li>\r\n</ul>', 'Become a Mentor', '', 'inherit', 'closed', 'closed', '', '59-revision-v1', '', '', '2015-11-22 04:26:32', '2015-11-22 04:26:32', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/11/22/59-revision-v1/', 0, 'revision', '', 0),
 (64, 1, '2015-11-22 04:29:50', '2015-11-22 04:29:50', '<h2>Become a Mentee</h2>\r\n<ul>\r\n	<li>a form to apply to be a mentee</li>\r\n</ul>\r\n<h3>Update<strong> my Profile</strong></h3>\r\n<ul>\r\n	<li>a form to edit my profile</li>\r\n</ul>\r\n<h3>Search for Mentors</h3>\r\n<ul>\r\n	<li>Browse a list of possible mentors and indicate that I''d like to talk to them.</li>\r\n</ul>\r\n<h3>List my Mentors</h3>\r\n<ul>\r\n	<li>a list of mentors assigned to me and actions I can take for them\r\n<ul>\r\n	<li>Post something</li>\r\n	<li>Communicate with them</li>\r\n</ul>\r\n</li>\r\n</ul>\r\n<h3>My Progress</h3>\r\n<ul>\r\n	<li>Update my progress page with a note</li>\r\n</ul>', 'Become a Mentee', '', 'inherit', 'closed', 'closed', '', '57-revision-v1', '', '', '2015-11-22 04:29:50', '2015-11-22 04:29:50', '', 57, 'http://dreamplanner.campuslifeohs.com/2015/11/22/57-revision-v1/', 0, 'revision', '', 0),
 (79, 1, '2015-11-26 02:56:12', '2015-11-26 02:56:12', 'This is a preview of how this form will appear on your website', 'ninja_forms_preview_page', '', 'trash', 'closed', 'closed', '', 'ninja_forms_preview_page', '', '', '2015-11-26 02:56:53', '2015-11-26 02:56:53', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=79', 0, 'page', '', 0),
 (80, 1, '2015-11-25 04:15:42', '2015-11-25 04:15:42', '[abase table="wp_users"]\r\n\r\n<h4>James T. Kirk, Starship Captain</h4>\r\n<img class="alignright wp-image-34 size-thumbnail" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/James-Kirk-150x150.jpg" alt="James Kirk" width="150" height="150" />James Tiberius Kirk was born on March 22, 2233, in Riverside, Iowa. He was raised there by his parents, George and Winona Kirk. Although born on Earth, Kirk for a time lived on Tarsus IV, where he was one of nine surviving witnesses to the massacre of 4,000 colonists by Kodos the Executioner. James Kirk''s brother George Samuel Kirk is killed in "Operation: Annihilate!", leaving behind three children.\r\n<h4>Mr. Spock, Science Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-33" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Mr-Spock-150x150.jpg" alt="Mr Spock" width="150" height="150" />\r\n\r\nSpock serves aboard the starship Enterprise, as science officer and first officer, and later as commanding officer of two iterations of the vessel. Spock''s mixed human-Vulcan heritage serves as an important plot element in many of the character''s appearances. Along with Captain James T. Kirk and Dr. Leonard "Bones" McCoy, he is one of the three central characters in the original Star Trek series and its films. After retiring from Starfleet, Spock serves as a Federation ambassador, contributing toward the easing of the strained relationship between the Federation and the Klingon Empire.\r\n<h4>Leonard McCoy, Chief Medical Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-35" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Leonard-McCoy-150x150.jpg" alt="Leonard McCoy" width="150" height="150" />\r\n\r\nMcCoy was born in Georgia, January 20, 2227. The son of David, he attended the University of Mississippi and is a divorcé, but later married Natira, the priestess of Yonada, In 2266, McCoy was posted as chief medical officer of the USS Enterprise under Captain James T. Kirk who often calls him "Bones". McCoy and Kirk are good friends.\r\n<h4>Uhura, Chief Communications Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-32" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Uhura-150x150.jpg" alt="Uhura" width="150" height="150" />\r\n\r\nUhura, from the United States of Africa, speaks Swahili and was born January 19, 2233. Uhura first appears joining the crew of the USS Enterprise as a lieutenant, and serves as chief communications officer under Captain Kirk. She is a capable bridge officer and readily manned the helm, navigation and science stations on the bridge when the need arose. Uhura was also a talented singer, and enjoyed serenading her shipmates when off-duty.\r\n<h4>Montgomery Scott, Chief Engineer</h4>\r\n<img class="alignright size-thumbnail wp-image-31" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Montgomery-Scott-150x150.jpg" alt="Montgomery Scott" width="150" height="150" />\r\n\r\nScotty spent part of his life in Aberdeen, Scotland, on March 3, 2222. Scotty holds the rank of lieutenant commander and serves as the Enterprise‍ ''​s second officer and chief engineer. Scotty''s technical knowledge and skill allow him to devise unconventional and effective last-minute solutions to dire problems. As second officer, he commands the ship when both Captain Kirk and first officer Spock (Leonard Nimoy) are off the ship', 'Find a Mentor', '', 'inherit', 'closed', 'closed', '', '30-revision-v1', '', '', '2015-11-25 04:15:42', '2015-11-25 04:15:42', '', 30, 'http://dreamplanner.campuslifeohs.com/2015/11/25/30-revision-v1/', 0, 'revision', '', 0),
-(81, 1, '2015-11-25 05:04:47', '2015-11-25 05:04:47', '[abase db=2 table="mentor"]\r\n\r\n<h4>James T. Kirk, Starship Captain</h4>\r\n<img class="alignright wp-image-34 size-thumbnail" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/James-Kirk-150x150.jpg" alt="James Kirk" width="150" height="150" />James Tiberius Kirk was born on March 22, 2233, in Riverside, Iowa. He was raised there by his parents, George and Winona Kirk. Although born on Earth, Kirk for a time lived on Tarsus IV, where he was one of nine surviving witnesses to the massacre of 4,000 colonists by Kodos the Executioner. James Kirk''s brother George Samuel Kirk is killed in "Operation: Annihilate!", leaving behind three children.\r\n<h4>Mr. Spock, Science Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-33" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Mr-Spock-150x150.jpg" alt="Mr Spock" width="150" height="150" />\r\n\r\nSpock serves aboard the starship Enterprise, as science officer and first officer, and later as commanding officer of two iterations of the vessel. Spock''s mixed human-Vulcan heritage serves as an important plot element in many of the character''s appearances. Along with Captain James T. Kirk and Dr. Leonard "Bones" McCoy, he is one of the three central characters in the original Star Trek series and its films. After retiring from Starfleet, Spock serves as a Federation ambassador, contributing toward the easing of the strained relationship between the Federation and the Klingon Empire.\r\n<h4>Leonard McCoy, Chief Medical Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-35" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Leonard-McCoy-150x150.jpg" alt="Leonard McCoy" width="150" height="150" />\r\n\r\nMcCoy was born in Georgia, January 20, 2227. The son of David, he attended the University of Mississippi and is a divorcé, but later married Natira, the priestess of Yonada, In 2266, McCoy was posted as chief medical officer of the USS Enterprise under Captain James T. Kirk who often calls him "Bones". McCoy and Kirk are good friends.\r\n<h4>Uhura, Chief Communications Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-32" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Uhura-150x150.jpg" alt="Uhura" width="150" height="150" />\r\n\r\nUhura, from the United States of Africa, speaks Swahili and was born January 19, 2233. Uhura first appears joining the crew of the USS Enterprise as a lieutenant, and serves as chief communications officer under Captain Kirk. She is a capable bridge officer and readily manned the helm, navigation and science stations on the bridge when the need arose. Uhura was also a talented singer, and enjoyed serenading her shipmates when off-duty.\r\n<h4>Montgomery Scott, Chief Engineer</h4>\r\n<img class="alignright size-thumbnail wp-image-31" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Montgomery-Scott-150x150.jpg" alt="Montgomery Scott" width="150" height="150" />\r\n\r\nScotty spent part of his life in Aberdeen, Scotland, on March 3, 2222. Scotty holds the rank of lieutenant commander and serves as the Enterprise‍ ''​s second officer and chief engineer. Scotty''s technical knowledge and skill allow him to devise unconventional and effective last-minute solutions to dire problems. As second officer, he commands the ship when both Captain Kirk and first officer Spock (Leonard Nimoy) are off the ship', 'Find a Mentor', '', 'inherit', 'closed', 'closed', '', '30-revision-v1', '', '', '2015-11-25 05:04:47', '2015-11-25 05:04:47', '', 30, 'http://dreamplanner.campuslifeohs.com/2015/11/25/30-revision-v1/', 0, 'revision', '', 0),
+(81, 1, '2015-11-25 05:04:47', '2015-11-25 05:04:47', '[abase db=2 table="mentor"]\r\n\r\n<h4>James T. Kirk, Starship Captain</h4>\r\n<img class="alignright wp-image-34 size-thumbnail" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/James-Kirk-150x150.jpg" alt="James Kirk" width="150" height="150" />James Tiberius Kirk was born on March 22, 2233, in Riverside, Iowa. He was raised there by his parents, George and Winona Kirk. Although born on Earth, Kirk for a time lived on Tarsus IV, where he was one of nine surviving witnesses to the massacre of 4,000 colonists by Kodos the Executioner. James Kirk''s brother George Samuel Kirk is killed in "Operation: Annihilate!", leaving behind three children.\r\n<h4>Mr. Spock, Science Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-33" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Mr-Spock-150x150.jpg" alt="Mr Spock" width="150" height="150" />\r\n\r\nSpock serves aboard the starship Enterprise, as science officer and first officer, and later as commanding officer of two iterations of the vessel. Spock''s mixed human-Vulcan heritage serves as an important plot element in many of the character''s appearances. Along with Captain James T. Kirk and Dr. Leonard "Bones" McCoy, he is one of the three central characters in the original Star Trek series and its films. After retiring from Starfleet, Spock serves as a Federation ambassador, contributing toward the easing of the strained relationship between the Federation and the Klingon Empire.\r\n<h4>Leonard McCoy, Chief Medical Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-35" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Leonard-McCoy-150x150.jpg" alt="Leonard McCoy" width="150" height="150" />\r\n\r\nMcCoy was born in Georgia, January 20, 2227. The son of David, he attended the University of Mississippi and is a divorcé, but later married Natira, the priestess of Yonada, In 2266, McCoy was posted as chief medical officer of the USS Enterprise under Captain James T. Kirk who often calls him "Bones". McCoy and Kirk are good friends.\r\n<h4>Uhura, Chief Communications Officer</h4>\r\n<img class="alignright size-thumbnail wp-image-32" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Uhura-150x150.jpg" alt="Uhura" width="150" height="150" />\r\n\r\nUhura, from the United States of Africa, speaks Swahili and was born January 19, 2233. Uhura first appears joining the crew of the USS Enterprise as a lieutenant, and serves as chief communications officer under Captain Kirk. She is a capable bridge officer and readily manned the helm, navigation and science stations on the bridge when the need arose. Uhura was also a talented singer, and enjoyed serenading her shipmates when off-duty.\r\n<h4>Montgomery Scott, Chief Engineer</h4>\r\n<img class="alignright size-thumbnail wp-image-31" src="http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/Montgomery-Scott-150x150.jpg" alt="Montgomery Scott" width="150" height="150" />\r\n\r\nScotty spent part of his life in Aberdeen, Scotland, on March 3, 2222. Scotty holds the rank of lieutenant commander and serves as the Enterprise‍ ''​s second officer and chief engineer. Scotty''s technical knowledge and skill allow him to devise unconventional and effective last-minute solutions to dire problems. As second officer, he commands the ship when both Captain Kirk and first officer Spock (Leonard Nimoy) are off the ship', 'Find a Mentor', '', 'inherit', 'closed', 'closed', '', '30-revision-v1', '', '', '2015-11-25 05:04:47', '2015-11-25 05:04:47', '', 30, 'http://dreamplanner.campuslifeohs.com/2015/11/25/30-revision-v1/', 0, 'revision', '', 0);
+INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
 (82, 1, '2015-11-25 05:10:19', '2015-11-25 05:10:19', '[abase db=2 table="mentor" columns="fname,lname,email,bio" rlink="lname"]\r\n\r\n[abase db=2 form="1,update" table="mentor" elements="fname,lname,email,bio" fields="fname,lname,email,bio$Update mentor" ack="brown"]', 'Mentor Profile', '', 'trash', 'closed', 'closed', '', 'mentor-profile', '', '', '2015-11-25 22:21:25', '2015-11-25 22:21:25', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=82', 0, 'page', '', 0),
 (83, 1, '2015-11-25 05:10:19', '2015-11-25 05:10:19', '[abase db=2 table="mentors" columns="fname,lname,email,bio" rlink="lname" echo="blue"]\r\n\r\n[abase db=2 form="1,update" table="mentors" elements="fname,lname,email,bio" fields="fname,lname,email,bio$Update mentors" ack="brown" echo="blue"]', 'Mentor Profile', '', 'inherit', 'closed', 'closed', '', '82-revision-v1', '', '', '2015-11-25 05:10:19', '2015-11-25 05:10:19', '', 82, 'http://dreamplanner.campuslifeohs.com/2015/11/25/82-revision-v1/', 0, 'revision', '', 0),
 (84, 1, '2015-11-25 05:10:54', '2015-11-25 05:10:54', '[abase db=2 table="mentor" columns="fname,lname,email,bio" rlink="lname" echo="blue"]\r\n\r\n[abase db=2 form="1,update" table="mentor" elements="fname,lname,email,bio" fields="fname,lname,email,bio$Update mentor" ack="brown" echo="blue"]', 'Mentor Profile', '', 'inherit', 'closed', 'closed', '', '82-revision-v1', '', '', '2015-11-25 05:10:54', '2015-11-25 05:10:54', '', 82, 'http://dreamplanner.campuslifeohs.com/2015/11/25/82-revision-v1/', 0, 'revision', '', 0),
@@ -1324,8 +1264,7 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (109, 1, '2015-11-26 04:57:13', '2015-11-26 04:57:13', '', 'Become a Mentor', '', 'inherit', 'closed', 'closed', '', '59-revision-v1', '', '', '2015-11-26 04:57:13', '2015-11-26 04:57:13', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/11/26/59-revision-v1/', 0, 'revision', '', 0),
 (110, 1, '2015-11-26 16:56:35', '2015-11-26 16:56:35', '', 'Mentor Application', '', 'publish', 'closed', 'closed', '', 'mentor-application', '', '', '2015-11-27 16:38:41', '2015-11-27 16:38:41', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=110', 0, 'page', '', 0),
 (111, 1, '2015-11-26 16:56:35', '2015-11-26 16:56:35', '', 'Mentor Application', '', 'inherit', 'closed', 'closed', '', '110-revision-v1', '', '', '2015-11-26 16:56:35', '2015-11-26 16:56:35', '', 110, 'http://dreamplanner.campuslifeohs.com/2015/11/26/110-revision-v1/', 0, 'revision', '', 0),
-(112, 1, '2015-11-26 17:21:08', '2015-11-26 17:21:08', '', 'Mentee Application', '', 'publish', 'closed', 'closed', '', 'mentee-application', '', '', '2015-11-29 03:03:51', '2015-11-29 03:03:51', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=112', 0, 'page', '', 0);
-INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
+(112, 1, '2015-11-26 17:21:08', '2015-11-26 17:21:08', '', 'Mentee Application', '', 'publish', 'closed', 'closed', '', 'mentee-application', '', '', '2015-11-29 03:03:51', '2015-11-29 03:03:51', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=112', 0, 'page', '', 0),
 (113, 1, '2015-11-26 17:21:08', '2015-11-26 17:21:08', '', 'Mentee Application', '', 'inherit', 'closed', 'closed', '', '112-revision-v1', '', '', '2015-11-26 17:21:08', '2015-11-26 17:21:08', '', 112, 'http://dreamplanner.campuslifeohs.com/2015/11/26/112-revision-v1/', 0, 'revision', '', 0),
 (114, 1, '2015-11-26 17:37:07', '2015-11-26 17:37:07', '', 'Mentor Contact', '', 'publish', 'closed', 'closed', '', 'contact', '', '', '2015-11-27 17:54:51', '2015-11-27 17:54:51', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=114', 0, 'page', '', 0),
 (115, 1, '2015-11-26 17:37:07', '2015-11-26 17:37:07', '', 'Contact', '', 'inherit', 'closed', 'closed', '', '114-revision-v1', '', '', '2015-11-26 17:37:07', '2015-11-26 17:37:07', '', 114, 'http://dreamplanner.campuslifeohs.com/2015/11/26/114-revision-v1/', 0, 'revision', '', 0),
@@ -1378,7 +1317,8 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (173, 1, '2015-12-05 22:09:28', '2015-12-05 22:09:28', '', 'Goal Tracking Edit', '', 'inherit', 'closed', 'closed', '', '172-revision-v1', '', '', '2015-12-05 22:09:28', '2015-12-05 22:09:28', '', 172, 'http://dreamplanner.campuslifeohs.com/2015/12/05/172-revision-v1/', 0, 'revision', '', 0),
 (174, 1, '2015-12-06 00:18:00', '2015-12-06 00:18:00', '', 'My Goals', '', 'publish', 'closed', 'closed', '', 'my-goals', '', '', '2015-12-06 00:21:59', '2015-12-06 00:21:59', '', 0, 'http://dreamplanner.campuslifeohs.com/?page_id=174', 0, 'page', '', 0),
 (175, 1, '2015-12-06 00:18:00', '2015-12-06 00:18:00', '', 'My Goals', '', 'inherit', 'closed', 'closed', '', '174-revision-v1', '', '', '2015-12-06 00:18:00', '2015-12-06 00:18:00', '', 174, 'http://dreamplanner.campuslifeohs.com/2015/12/06/174-revision-v1/', 0, 'revision', '', 0),
-(176, 1, '2015-12-06 00:19:03', '2015-12-06 00:19:03', '', 'My Progress', '', 'inherit', 'closed', 'closed', '', '174-autosave-v1', '', '', '2015-12-06 00:19:03', '2015-12-06 00:19:03', '', 174, 'http://dreamplanner.campuslifeohs.com/2015/12/06/174-autosave-v1/', 0, 'revision', '', 0),
+(176, 1, '2015-12-06 00:19:03', '2015-12-06 00:19:03', '', 'My Progress', '', 'inherit', 'closed', 'closed', '', '174-autosave-v1', '', '', '2015-12-06 00:19:03', '2015-12-06 00:19:03', '', 174, 'http://dreamplanner.campuslifeohs.com/2015/12/06/174-autosave-v1/', 0, 'revision', '', 0);
+INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
 (177, 1, '2015-12-06 00:19:15', '2015-12-06 00:19:15', '', 'My Progress', '', 'inherit', 'closed', 'closed', '', '174-revision-v1', '', '', '2015-12-06 00:19:15', '2015-12-06 00:19:15', '', 174, 'http://dreamplanner.campuslifeohs.com/2015/12/06/174-revision-v1/', 0, 'revision', '', 0),
 (178, 1, '2015-12-06 00:21:59', '2015-12-06 00:21:59', '', 'My Goals', '', 'inherit', 'closed', 'closed', '', '174-revision-v1', '', '', '2015-12-06 00:21:59', '2015-12-06 00:21:59', '', 174, 'http://dreamplanner.campuslifeohs.com/2015/12/06/174-revision-v1/', 0, 'revision', '', 0),
 (179, 1, '2015-12-06 00:27:19', '2015-12-06 00:27:19', '<table>\r\n  <tr><td colspan=2>[wpbusinessintelligence id="2" type="table" iframe="n"]</td></tr>\r\n  <tr><td>[wpbusinessintelligence id="8" type="chart" iframe="n"]</td><td>[wpbusinessintelligence id="9" type="chart" iframe="n"]</td></tr>\r\n  <tr><td>[wpbusinessintelligence id="10" type="chart" iframe="n"]</td><td>[wpbusinessintelligence id="11" type="chart" iframe="n"]</td></tr>\r\n</table>', 'My Chart', '', 'inherit', 'closed', 'closed', '', '167-revision-v1', '', '', '2015-12-06 00:27:19', '2015-12-06 00:27:19', '', 167, 'http://dreamplanner.campuslifeohs.com/2015/12/06/167-revision-v1/', 0, 'revision', '', 0),
@@ -1394,7 +1334,10 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (190, 1, '2015-12-06 17:14:12', '2015-12-06 17:14:12', '<h2>Mentee Home</h2>\r\n\r\nThink about your career goals. What do you really want to do? Where do you want to be? \r\nLook for a person who is currently there and ask him/her to be your mentor. Ideally, this person is someone who has been in your shoes and can easily relate to your current situation.\r\n\r\n[embed]https://www.youtube.com/watch?v=bvAEJ8G9l9U[/embed]\r\n&nbsp;', 'Mentee Home', '', 'inherit', 'closed', 'closed', '', '57-revision-v1', '', '', '2015-12-06 17:14:12', '2015-12-06 17:14:12', '', 57, 'http://dreamplanner.campuslifeohs.com/2015/12/06/57-revision-v1/', 0, 'revision', '', 0),
 (191, 1, '2015-12-06 17:16:18', '2015-12-06 17:16:18', 'Think about your career goals. What do you really want to do? Where do you want to be? \r\nLook for a person who is currently there and ask him/her to be your mentor. Ideally, this person is someone who has been in your shoes and can easily relate to your current situation.\r\n\r\n[embed]https://www.youtube.com/watch?v=bvAEJ8G9l9U[/embed]\r\n&nbsp;', 'Mentee Home', '', 'inherit', 'closed', 'closed', '', '57-revision-v1', '', '', '2015-12-06 17:16:18', '2015-12-06 17:16:18', '', 57, 'http://dreamplanner.campuslifeohs.com/2015/12/06/57-revision-v1/', 0, 'revision', '', 0),
 (192, 1, '2015-12-06 18:12:23', '2015-12-06 18:12:23', '', '©golish6', '', 'inherit', 'open', 'closed', '', 'golish6', '', '', '2015-12-06 18:12:23', '2015-12-06 18:12:23', '', 0, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/12/©golish6.jpg', 0, 'attachment', 'image/jpeg', 0),
-(193, 1, '2015-12-06 19:36:35', '2015-12-06 19:36:35', '', '11892243_10206667708765297_872494357420705217_n', '', 'inherit', 'open', 'closed', '', '11892243_10206667708765297_872494357420705217_n', '', '', '2015-12-06 19:36:35', '2015-12-06 19:36:35', '', 0, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/12/11892243_10206667708765297_872494357420705217_n.jpg', 0, 'attachment', 'image/jpeg', 0);
+(193, 1, '2015-12-06 19:36:35', '2015-12-06 19:36:35', '', '11892243_10206667708765297_872494357420705217_n', '', 'inherit', 'open', 'closed', '', '11892243_10206667708765297_872494357420705217_n', '', '', '2015-12-06 19:36:35', '2015-12-06 19:36:35', '', 0, 'http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/12/11892243_10206667708765297_872494357420705217_n.jpg', 0, 'attachment', 'image/jpeg', 0),
+(194, 1, '2015-12-06 22:29:26', '2015-12-06 22:29:26', '<h2How To Become A Great Mentor </h2>\r\n\r\n<a href="http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/">http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/</a>\r\n\r\n', 'Mentor Home', '', 'inherit', 'closed', 'closed', '', '59-revision-v1', '', '', '2015-12-06 22:29:26', '2015-12-06 22:29:26', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/12/06/59-revision-v1/', 0, 'revision', '', 0),
+(195, 1, '2015-12-06 22:29:58', '2015-12-06 22:29:58', '<h2> How To Become A Great Mentor </h2>\r\n\r\n<a href="http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/">http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/</a>\r\n\r\n', 'Mentor Home', '', 'inherit', 'closed', 'closed', '', '59-revision-v1', '', '', '2015-12-06 22:29:58', '2015-12-06 22:29:58', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/12/06/59-revision-v1/', 0, 'revision', '', 0),
+(196, 1, '2015-12-06 22:42:56', '2015-12-06 22:42:56', '<h2> How To Become A Great Mentor </h2>\r\n\r\n\r\nThe mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires. - William Arthur Ward\r\n\r\nHave you employed a mentor to help you navigate the professional world? Maybe you found her during your first job search; perhaps it was when you transitioned careers. Either way—your mentor most likely provided guidance and helped you overcome challenges. And if you’re really lucky, she inspired you along the way.\r\n\r\nAccording to David Parnell, a legal consultant, communication coach and author, when it comes to mentorship, it is an unwritten rule that “one should give back at least what they’ve received.”\r\n\r\nSo, if you’ve ever had a mentor, you might want to think about paying it forward.\r\n\r\n“Mentoring—or at minimum connecting with a variety of people in all industries and age groups—has never been more important,” says Pamela Ryckman, author of Stiletto Network: Inside the Women’s Power Circles That Are Changing the Face of Business.\r\n\r\nBut it’s a big responsibility.\r\n\r\nA mentor must believe in her mentee, both personally and professionally, Ryckman explains. “Mentors help fill your knowledge gaps and seek opportunities to help you grow and excel. A mentor is someone with whom you can let down your guard, share your insecurities, and ask the ‘stupid’ questions we all have sometimes.”\r\n\r\nA great mentor also sees her mentee as a person, not just an employee. She knows enough about their personal life to understand the external factors that impact their work, and cares about their happiness. “A [great] mentor is honest and unafraid to tell you hard truths about yourself and your work,” Ryckman adds. “She helps you navigate the politics of your organization or profession, and avoid the land mines. She pushes you to take risks and aim higher, and advocates for you when you’re not there.”\r\n\r\nThere’s a lot of personal satisfaction that comes from watching someone you care about reach his full potential. But as it turns out, mentoring goes far beyond that.\r\n\r\n“Helping someone else succeed can be immensely gratifying,” Ryckman says. “But what I’ve heard time and again from executive ‘elders’ is how much they gain in return when they mentor young people. They’re often surprised at how much they learn from their mentees. Mentoring really goes both ways; when different generations come together, their blend of skills can be highly complementary.”\r\n\r\nRyan Kahn, a career coach, founder of The Hired Group, star of MTV’s Hired, and author of Hired! The Guide for the Recent Grad, adds: “By investing in others you’re also investing in yourself. For example, as you move forward in your career, you’ll need to be able to identify and recruit fresh talent. Having a strong network of mentees can help you find and grow these rising stars.”\r\n\r\nWant to become a great mentor? Here are 9 things you’ll need to do:\r\n\r\nAlways play both roles. Ideally, one would never have to make the transition from mentee to mentor, Ryckman says. “We should all be learning from others (playing the mentee role) and teaching others (being the mentor) throughout our careers.”\r\n\r\nBe committed.  Being a mentor is a commitment, Kahn says. “If you’re offering to help someone you need to follow through with that promise by being there for them when needed.”\r\n\r\nKnow that your mentee can be anyone, anywhere. “Mentoring needn’t follow the traditional ‘elder-upstart’ prescription anymore. It can be peer-to-peer across functions or industries,” Rychman says. “It’s about supplementing skill gaps and helping each person learn and grow.”\r\n\r\nAs a mentor, you’re someone who knows something your mentee doesn’t, and you care enough to help them learn and succeed.\r\n\r\n“Today, industries overlap and are interdependent in ways that were inconceivable a decade ago, and employees can no longer afford to stay stuck in a particular silo, oblivious to developments in other fields,” she says. “Companies have realized that when people from different backgrounds with varying skills convene to debate and brainstorm, advances occur. In the ‘new,’ conceptual economy, the ability to draw knowledge from diverse spheres is prized.”\r\n\r\nListen. One of your jobs a mentor is to provide advice and encouragement, but in order to do so, you need to make the time to listen and understand the situation, Kahn says.\r\n\r\n“Intently listening to a mentee as they vent and, ideally, sort their way through confusion, is often more than enough to get them through the day,” Parnell says. “If you ask any therapist about the power of listening, they will tell you the same thing: It is massive. Any mentor that is worth their weight spends considerably more time listening than they do speaking.”\r\n\r\nHave your own mentor(s) and network. Today, the most successful people build relationships and gather intelligence from a wide variety of experts in all industries and age brackets, Rychman says. “People who are insular—who always return to the same small circle for advice and support—become closed off from opportunities.” In order to be the very best mentor, you need to continue building your network and taking advice from those you trust.\r\n\r\nBe open-minded and compassionate. “If you’ve ever argued with someone, you know that they will never see your side until they’re convinced that you’ve seen theirs,” Parnell says. “And to provide valuable guidance and advice that is well received, it is necessary to first understand the mentee’s needs, wants, feelings, et cetera. This can only come in the form of deep and implicit empathy.”\r\n\r\nHave patience. Much like parenting, mentoring can be a satisfying, but also long-term and trying, endeavor, Parnell says. “While the mentee needs and wants direction, often times this requires a bit of constructive criticism, which can be hard to take.  It is vital that a mentor be a patient soul, because tempers may flare, and quick fixes are few and far between.”\r\n\r\nBe a role model.  As a mentor, your actions are being evaluated, so you must set the bar for yourself just as high, or higher, than you’d expect from your mentee, Kahn says.\r\n\r\n“Your goal is to not only provide direction and advice, but to get your mentee to act upon them,” Parnell adds. “And while conversations can be motivating, few things are more impactful than to lead by example. A mentor’s mantra must be: ‘Do as I do, not just as I say.’”\r\n\r\nCare about the relationship. “Invest yourself in your mentee and you’ll get so much more out of the experience,” Kahn says.\r\n\r\n“Mentees are usually eager, invested, and can be a bit vulnerable, leaving them to hang on your words and to pay close attention to, well, everything you do,” Parnell says. “Few things are more demotivating than ‘phoning in’ your time and efforts; it takes a sincere interest in the betterment of your mentee to avoid this. So, if you can’t muster a sincere desire right from the beginning, you’ll do better to find a more suitable fit, because you may do more harm than good,” he concludes.\r\n\r\nExcerpt from\r\n <a href="http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/2/">http://www.forbes.com/sites/jacquelynsmith/2013/05/17/how-to-become-a-great-mentor/2/</a>', 'Mentor Home', '', 'inherit', 'closed', 'closed', '', '59-revision-v1', '', '', '2015-12-06 22:42:56', '2015-12-06 22:42:56', '', 59, 'http://dreamplanner.campuslifeohs.com/2015/12/06/59-revision-v1/', 0, 'revision', '', 0);
 
 -- --------------------------------------------------------
 
@@ -1409,11 +1352,6 @@ CREATE TABLE IF NOT EXISTS `wp_terms` (
   `term_group` bigint(10) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_terms`
---
-
-TRUNCATE TABLE `wp_terms`;
 --
 -- Dumping data for table `wp_terms`
 --
@@ -1434,11 +1372,6 @@ CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
   `term_order` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_term_relationships`
---
-
-TRUNCATE TABLE `wp_term_relationships`;
 --
 -- Dumping data for table `wp_term_relationships`
 --
@@ -1468,11 +1401,6 @@ CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Truncate table before insert `wp_term_taxonomy`
---
-
-TRUNCATE TABLE `wp_term_taxonomy`;
---
 -- Dumping data for table `wp_term_taxonomy`
 --
 
@@ -1491,13 +1419,8 @@ CREATE TABLE IF NOT EXISTS `wp_usermeta` (
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci
-) ENGINE=MyISAM AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_usermeta`
---
-
-TRUNCATE TABLE `wp_usermeta`;
 --
 -- Dumping data for table `wp_usermeta`
 --
@@ -1520,7 +1443,7 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (15, 1, 'wp_dashboard_quick_press_last_post_id', '140'),
 (63, 4, 'session_tokens', 'a:1:{s:64:"fc1bb20f948f820de3dc17dcfeb0187cc010c266962c2488437876f6c7cecd44";a:4:{s:10:"expiration";i:1450318583;s:2:"ip";s:12:"66.249.84.80";s:2:"ua";s:142:"Mozilla/5.0 (Linux; Android 4.4.4; XT1031 Build/KXB21.14-L2.4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36";s:5:"login";i:1449108983;}}'),
 (16, 1, 'wp_user-settings', 'libraryContent=browse&editor=html&hidetb=1&post_dfw=off'),
-(17, 1, 'wp_user-settings-time', '1449422047'),
+(17, 1, 'wp_user-settings-time', '1449440722'),
 (18, 1, 'nav_menu_recently_edited', '2'),
 (19, 1, 'managenav-menuscolumnshidden', 'a:5:{i:0;s:11:"link-target";i:1;s:11:"css-classes";i:2;s:3:"xfn";i:3;s:11:"description";i:4;s:15:"title-attribute";}'),
 (20, 1, 'metaboxhidden_nav-menus', 'a:2:{i:0;s:12:"add-post_tag";i:1;s:15:"add-post_format";}'),
@@ -1619,7 +1542,6 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (116, 8, 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}'),
 (117, 8, 'wp_user_level', '0'),
 (118, 8, 'default_password_nag', ''),
-(119, 8, 'session_tokens', 'a:1:{s:64:"c63d9456a280337b73a70f52345e4707910b847ebf1f8342144c807f8632a923";a:4:{s:10:"expiration";i:1449607136;s:2:"ip";s:13:"104.220.28.38";s:2:"ua";s:116:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/601.2.7 (KHTML, like Gecko) Version/9.0.1 Safari/601.2.7";s:5:"login";i:1449434336;}}'),
 (120, 9, 'nickname', 'mcleodki'),
 (121, 9, 'first_name', ''),
 (122, 9, 'last_name', ''),
@@ -1632,6 +1554,8 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (129, 9, 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}'),
 (130, 9, 'wp_user_level', '0'),
 (131, 9, 'default_password_nag', ''),
+(189, 7, 'session_tokens', 'a:1:{s:64:"0ce867b1a8de1d3012b6909b21b465c911602149ea965b85fe7de682748a6214";a:4:{s:10:"expiration";i:1449614646;s:2:"ip";s:10:"129.7.0.59";s:2:"ua";s:73:"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0";s:5:"login";i:1449441846;}}'),
+(169, 12, 'comment_shortcuts', 'false'),
 (132, 10, 'nickname', 'testRT'),
 (133, 10, 'first_name', ''),
 (134, 10, 'last_name', ''),
@@ -1656,12 +1580,36 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (153, 11, 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}'),
 (154, 11, 'wp_user_level', '0'),
 (155, 11, 'default_password_nag', ''),
-(156, 10, 'session_tokens', 'a:1:{s:64:"33d303bab8ed1da7e088eb31a09fc2e2a4155fe9b6ef66aedd892a9afd8abe35";a:4:{s:10:"expiration";i:1449612568;s:2:"ip";s:13:"104.174.192.3";s:2:"ua";s:109:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36";s:5:"login";i:1449439768;}}'),
+(156, 10, 'session_tokens', 'a:2:{s:64:"33d303bab8ed1da7e088eb31a09fc2e2a4155fe9b6ef66aedd892a9afd8abe35";a:4:{s:10:"expiration";i:1449612568;s:2:"ip";s:13:"104.174.192.3";s:2:"ua";s:109:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36";s:5:"login";i:1449439768;}s:64:"e8de3dc4d4e16fc0bcfdf00d00295885c29bdcc7ff9c89434aa24f199d7a6449";a:4:{s:10:"expiration";i:1449615112;s:2:"ip";s:13:"104.174.192.3";s:2:"ua";s:109:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36";s:5:"login";i:1449442312;}}'),
 (157, 9, 'session_tokens', 'a:1:{s:64:"2178e629324949f347a86fe5c46557f47e9ec1ca111ab4606782e7d0813d7e74";a:4:{s:10:"expiration";i:1449612581;s:2:"ip";s:14:"50.165.244.188";s:2:"ua";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";s:5:"login";i:1449439781;}}'),
 (158, 10, 'wp_user-settings', 'mfold=f'),
 (159, 10, 'wp_user-settings-time', '1449439785'),
-(160, 11, 'session_tokens', 'a:2:{s:64:"bd0bfde317fa1af362ed95804658f5cde6c888008a16cc0e44532f376a298c4d";a:4:{s:10:"expiration";i:1449612633;s:2:"ip";s:14:"50.165.244.188";s:2:"ua";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";s:5:"login";i:1449439833;}s:64:"6310ac2a1e843cc1cf35747b61123daf785e3f42a8a5d66ef50b23d8f839696d";a:4:{s:10:"expiration";i:1449612705;s:2:"ip";s:14:"50.165.244.188";s:2:"ua";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";s:5:"login";i:1449439905;}}'),
-(161, 11, 'tgmpa_dismissed_notice_zerif-lite', '1');
+(160, 11, 'session_tokens', 'a:2:{s:64:"bd0bfde317fa1af362ed95804658f5cde6c888008a16cc0e44532f376a298c4d";a:4:{s:10:"expiration";i:1449612633;s:2:"ip";s:14:"50.165.244.188";s:2:"ua";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";s:5:"login";i:1449439833;}s:64:"d6987a04b6d691dcd7d96b30e72f1d15e25381c600853c7d55c37c98621c2dae";a:4:{s:10:"expiration";i:1449613556;s:2:"ip";s:14:"50.165.244.188";s:2:"ua";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";s:5:"login";i:1449440756;}}'),
+(161, 11, 'tgmpa_dismissed_notice_zerif-lite', '1'),
+(164, 12, 'nickname', 'neweruser'),
+(165, 12, 'first_name', ''),
+(166, 12, 'last_name', ''),
+(167, 12, 'description', ''),
+(168, 12, 'rich_editing', 'true'),
+(170, 12, 'admin_color', 'fresh'),
+(171, 12, 'use_ssl', '0'),
+(172, 12, 'show_admin_bar_front', 'true'),
+(173, 12, 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}'),
+(174, 12, 'wp_user_level', '0'),
+(175, 12, 'default_password_nag', '1'),
+(176, 13, 'nickname', 'newereruser'),
+(177, 13, 'first_name', ''),
+(178, 13, 'last_name', ''),
+(179, 13, 'description', ''),
+(180, 13, 'rich_editing', 'true'),
+(181, 13, 'comment_shortcuts', 'false'),
+(182, 13, 'admin_color', 'fresh'),
+(183, 13, 'use_ssl', '0'),
+(184, 13, 'show_admin_bar_front', 'true'),
+(185, 13, 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}'),
+(186, 13, 'wp_user_level', '0'),
+(187, 13, 'default_password_nag', ''),
+(190, 8, 'session_tokens', 'a:1:{s:64:"15bc05decc95f0c01d0a29d849623e3cf266cf4ebc21304243c054cfd0cf77f1";a:4:{s:10:"expiration";i:1449625306;s:2:"ip";s:13:"104.220.28.38";s:2:"ua";s:116:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/601.2.7 (KHTML, like Gecko) Version/9.0.1 Safari/601.2.7";s:5:"login";i:1449452506;}}');
 
 -- --------------------------------------------------------
 
@@ -1680,13 +1628,8 @@ CREATE TABLE IF NOT EXISTS `wp_users` (
   `user_activation_key` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_status` int(11) NOT NULL DEFAULT '0',
   `display_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Truncate table before insert `wp_users`
---
-
-TRUNCATE TABLE `wp_users`;
 --
 -- Dumping data for table `wp_users`
 --
@@ -1702,7 +1645,9 @@ INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_
 (8, 'newuser', '$P$B2ywDeElZvu3iwklMJbGmupWj4mcAH1', 'newuser', 'andygarcia@campuslifeohs.com', '', '2015-12-06 20:34:43', '1449434083:$P$BE2mSeTiFnPe824sYHojV28Fv/QQYq1', 0, 'newuser'),
 (9, 'mcleodki', '$P$Bz/nzGJnLlKLcYdDaydG3VmRqQSAIe0', 'mcleodki', 'mcleodki@oregonstate.edu', '', '2015-12-06 22:04:01', '1449439441:$P$B7dX6v2/B4LE3ByuVa.mQhSEP/LO8P/', 0, 'mcleodki'),
 (10, 'testRT', '$P$BXFkDiqKZ5jNDaBqjmb.Uq9tvE0kk50', 'testrt', 'tangr@oregonstate.edu', '', '2015-12-06 22:08:13', '', 0, 'testRT'),
-(11, 'mcleodkim', '$P$B32eR1O8tiQGmFy81n2jf5MgC1N12q/', 'mcleodkim', 'kim.anne.mcleod@gmail.com', '', '2015-12-06 22:08:13', '', 0, 'mcleodkim');
+(11, 'mcleodkim', '$P$B32eR1O8tiQGmFy81n2jf5MgC1N12q/', 'mcleodkim', 'kim.anne.mcleod@gmail.com', '', '2015-12-06 22:08:13', '', 0, 'mcleodkim'),
+(12, 'neweruser', '$P$B8QUY1gAbNAcOn1g8MyCD2.E1MYU4b.', 'neweruser', 'asdf@asdasd.com', '', '2015-12-06 22:27:23', '1449440843:$P$BH7PpM5.QBZQxc2x/FtGpFwWqw3VOe.', 0, 'neweruser'),
+(13, 'newereruser', '$P$BLlWmQV9BYLI7tZPI3aEgoHcAAiN2b0', 'newereruser', 'asdf@asdfasd.com', '', '2015-12-06 22:28:00', '1449440880:$P$BrXv90Vhb33IyjjlpgyiP46JFU8xgq/', 0, 'newereruser');
 
 -- --------------------------------------------------------
 
@@ -1756,11 +1701,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_charts` (
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Truncate table before insert `wp_wpbi_charts`
---
-
-TRUNCATE TABLE `wp_wpbi_charts`;
---
 -- Dumping data for table `wp_wpbi_charts`
 --
 
@@ -1787,11 +1727,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_ch_cols` (
   `IS_TIME` int(11) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Truncate table before insert `wp_wpbi_ch_cols`
---
-
-TRUNCATE TABLE `wp_wpbi_ch_cols`;
 --
 -- Dumping data for table `wp_wpbi_ch_cols`
 --
@@ -1843,11 +1778,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_databases` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Truncate table before insert `wp_wpbi_databases`
---
-
-TRUNCATE TABLE `wp_wpbi_databases`;
---
 -- Dumping data for table `wp_wpbi_databases`
 --
 
@@ -1867,11 +1797,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_queries` (
   `QUERY_STATEMENT` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Truncate table before insert `wp_wpbi_queries`
---
-
-TRUNCATE TABLE `wp_wpbi_queries`;
 --
 -- Dumping data for table `wp_wpbi_queries`
 --
@@ -1905,11 +1830,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_tables` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Truncate table before insert `wp_wpbi_tables`
---
-
-TRUNCATE TABLE `wp_wpbi_tables`;
---
 -- Dumping data for table `wp_wpbi_tables`
 --
 
@@ -1929,11 +1849,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_tb_cols` (
   `IS_VISIBLE` int(11) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Truncate table before insert `wp_wpbi_tb_cols`
---
-
-TRUNCATE TABLE `wp_wpbi_tb_cols`;
 --
 -- Dumping data for table `wp_wpbi_tb_cols`
 --
@@ -1958,11 +1873,6 @@ CREATE TABLE IF NOT EXISTS `wp_wpbi_vars` (
   `VAR_VALUE` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Truncate table before insert `wp_wpbi_vars`
---
-
-TRUNCATE TABLE `wp_wpbi_vars`;
 --
 -- Indexes for dumped tables
 --
@@ -2038,6 +1948,12 @@ ALTER TABLE `wp_comments`
 --
 ALTER TABLE `wp_links`
   ADD PRIMARY KEY (`link_id`), ADD KEY `link_visible` (`link_visible`);
+
+--
+-- Indexes for table `wp_login_redirects`
+--
+ALTER TABLE `wp_login_redirects`
+  ADD UNIQUE KEY `rul_type` (`rul_type`,`rul_value`);
 
 --
 -- Indexes for table `wp_nf_objectmeta`
@@ -2182,12 +2098,12 @@ ALTER TABLE `goal_progress`
 -- AUTO_INCREMENT for table `mentee`
 --
 ALTER TABLE `mentee`
-  MODIFY `mentee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `mentee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `mentor`
 --
 ALTER TABLE `mentor`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `mentor2mentee`
 --
@@ -2197,7 +2113,7 @@ ALTER TABLE `mentor2mentee`
 -- AUTO_INCREMENT for table `mentor_career`
 --
 ALTER TABLE `mentor_career`
-  MODIFY `mc_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+  MODIFY `mc_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `wp_commentmeta`
 --
@@ -2242,17 +2158,17 @@ ALTER TABLE `wp_ninja_forms_fields`
 -- AUTO_INCREMENT for table `wp_options`
 --
 ALTER TABLE `wp_options`
-  MODIFY `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=819;
+  MODIFY `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=841;
 --
 -- AUTO_INCREMENT for table `wp_postmeta`
 --
 ALTER TABLE `wp_postmeta`
-  MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=384;
+  MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=386;
 --
 -- AUTO_INCREMENT for table `wp_posts`
 --
 ALTER TABLE `wp_posts`
-  MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=194;
+  MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=197;
 --
 -- AUTO_INCREMENT for table `wp_terms`
 --
@@ -2267,12 +2183,12 @@ ALTER TABLE `wp_term_taxonomy`
 -- AUTO_INCREMENT for table `wp_usermeta`
 --
 ALTER TABLE `wp_usermeta`
-  MODIFY `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=162;
+  MODIFY `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=191;
 --
 -- AUTO_INCREMENT for table `wp_users`
 --
 ALTER TABLE `wp_users`
-  MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `wp_wpbi_charts`
 --
