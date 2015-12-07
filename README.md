@@ -18,35 +18,34 @@ REGISTERING ON THE SITE
 --------------------
 APPLYING AS A MENTOR
 --------------------
-NOTE: You must be logged in
 1. Go to dreamplanner.campuslifeohs.com
 2. Click "Mentor" in main menu
 3. Click "Become a Mentor" in right side menu
 4. Fill out application
 
+NOTE: You must be logged in
 --------------------
 APPLYING AS A MENTEE
 --------------------
-NOTE: You must be logged in
 1. Go to dreamplanner.campuslifeohs.com
 2. Click "Mentee" in main menu
 3. Click "Become a Mentee" in right side menu
 4. Fill out application
 
+NOTE: You must be logged in
 ---------------
 ADDING A MENTEE
 ---------------
-NOTE: You must have already applied as a mentor and be logged in
 1. Go to dreamplanner.campuslifeohs.com
 2. Click "Mentor" in main menu
 3. Click "Already a Mentor" in right side menu
 4. Click "Add Mentees" in right side menu
 5. Choose a mentee and click "Add Mentee"
 
+NOTE: You must have already applied as a mentor and be logged in
 ----------------------
 ADD A GOAL AS A MENTEE
 ----------------------
-NOTE: You must have already applied as a mentee and be logged in
 1. Go to dreamplanner.campuslifeohs.com
 2. Click "Mentee" in main menu
 3. Click "Already a Mentee" in right side menu
@@ -55,10 +54,10 @@ NOTE: You must have already applied as a mentee and be logged in
 6. Fill out goal information
 7. Click "Send" button in the form
 
+NOTE: You must have already applied as a mentee and be logged in
 -----------------------------
 SEARCH FOR MENTOR AS A MENTEE
 -----------------------------
-NOTE: You must have already applied as a mentee and be logged in
 1. Go to dreamplanner.campuslifeohs.com
 2. Click "Mentee" in main menu
 3. Click "Already a Mentee" in right side menu
@@ -67,4 +66,5 @@ NOTE: You must have already applied as a mentee and be logged in
 (Optional)
 6. Click "Contact Mentor" to move to email form with mentor information
 
+NOTE: You must have already applied as a mentee and be logged in
 
