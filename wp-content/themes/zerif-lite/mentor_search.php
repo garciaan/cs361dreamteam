@@ -38,7 +38,7 @@ get_header(); ?>
 						echo "<h1>Please Become a Mentee First!</h1>";
 					}
 					else {
-						//
+						// Check to see if we got a post, the first case cheks for an empty post, the remainder check for which combinations of items were selected.
 						if(isset($_POST['submit']))
 						{
 							$flag=1;
@@ -99,15 +99,17 @@ get_header(); ?>
 								
 								
 								
-
+								// this is testing coded to see what was returned by the user
 								echo $career." - ";
 								echo $location." - ";
 								echo $time_zone;
 
-								
+								// check the results of any of the queries
 								if(!empty($results)) {
 									$ids = array();
 									$career_name = '';
+									
+									// A mentor can have multiple career entries, build a string (in an array) of these careers so we can write it out as one item.
 									foreach($results as $r){
 										
 										$last_id = end($ids);
@@ -123,9 +125,13 @@ get_header(); ?>
 										}
 										
 									}
+
+									// build the table of mentors, add in careers and rest of bio data from DB
 									$ids = array();
 									echo '<form method="post" action="http://dreamplanner.campuslifeohs.com/contact/" id="contact_mentor">';
 									echo "<table border=0>";
+									
+									//populate the careers drop down with career names from the careers array
 									foreach($results as $r) {
 										$last_id = end($ids);
 										$ids[] = $r->id;
@@ -158,10 +164,13 @@ get_header(); ?>
 						}
 				?>
 
+			<!-- Draw three search filters for the user to query on, any combination can be selected -->
 			<h1>Please select your search criteria from the following:</h1>
 			<form method="post" id="contactus_form">
 			<?php
 				global $wpdb;
+				
+				// Career filter
 				$results = $wpdb->get_results("SELECT * from career_type");
 				echo "<select name='career_name' id='career_name'>";
 				echo "<option value=''>None</option>";
@@ -173,6 +182,7 @@ get_header(); ?>
 				} 
 				echo "</select>";
 
+				// location filter
 				$results = $wpdb->get_results("SELECT DISTINCT location from mentor");
 				echo "<select name='location_name' id='location_name'>";
 				echo "<option value=''>None</option>";
@@ -184,6 +194,7 @@ get_header(); ?>
 				}
 				echo "</select>";
 
+				// Timezone filter
 				$results = $wpdb->get_results("SELECT DISTINCT time_zone from mentor");
 				echo "<select name='tz_name' id='tz_name'>";
 				echo "<option value=''>None</option>";
