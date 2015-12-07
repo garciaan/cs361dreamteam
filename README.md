@@ -12,7 +12,7 @@ REGISTERING ON THE SITE
 1. Go to dreamplanner.campuslifeohs.com
 2. Click "Register Now" (red button) in center screen
 
-- OPTION 2
+OPTION 2
 1. Navigate to http://dreamplanner.campuslifeohs.com/wp-login.php?action=register
 
 --------------------
