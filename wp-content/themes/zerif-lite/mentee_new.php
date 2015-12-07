@@ -26,7 +26,7 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 				<?php while ( have_posts() ) : the_post(); 
-				
+					//page not used
 						get_template_part( 'content', 'page' );
 
 						if ( comments_open() || '0' != get_comments_number() ) :

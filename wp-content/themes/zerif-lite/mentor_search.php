@@ -26,15 +26,19 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 			
 				<?php
-					//$wpdb->show_errors();
+					// this test to see if the user is logged in when makes a 
+					// query to the DB to see if there is an id for the user 
+					// and if so to set it equal to mentee_id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
 
+					// If we got a valid id then go ahead, if not then ask the user to sign in.
 					if ($mentee_id == 0){
 						echo "<h1>Please Become a Mentee First!</h1>";
 					}
 					else {
+						//
 						if(isset($_POST['submit']))
 						{
 							$flag=1;
@@ -200,7 +204,10 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 	<?php
-	if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) )
+		// this builds all the sidebar content, it is an overide of sidebar.php as supplied in the theme.  The content is specific
+		// as to whether you are loggind in and what type of user you are.
+
+		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) )
 		{
 			echo '</div>';
 		}else 

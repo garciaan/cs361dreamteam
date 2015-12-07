@@ -30,23 +30,23 @@ get_header(); ?>
 				<?php
 					global $wpdb;
 
+					//get the current user id to find the mentor id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 
+					//if form was submitted and the mentee id is correctly matched (0 if their mentee id could not be found)
 					if(isset($_POST['add_mentee']) && (int)$_POST['add_menteee'] != 0) {
-						$mentee_id = $_POST['add_mentee'];
-						//echo "<h1>Mentee ID Chosen: " . $mentee_id . "</h1>";
-						//$sql = "SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentee.mentee_id = '" . $mentee_id . "'";
-						$sql = "INSERT INTO mentor2mentee (`mentor_id`,`mentee_id`) VALUES ('" . $mentor_id . "','" . $mentee_id . "') ON DUPLICATE KEY UPDATE `mentor_id` = `mentor_id`;";
-						//echo $sql; 
-						$wpdb->get_results($sql);
+						$mentee_id = $_POST['add_mentee']; //get the mentee id from form
+						$sql = "INSERT INTO mentor2mentee (`mentor_id`,`mentee_id`) VALUES ('" . $mentor_id . "','" . $mentee_id . "') ON DUPLICATE KEY UPDATE `mentor_id` = `mentor_id`;"; //create the sql command
+						$wpdb->get_results($sql); // run the sql command
 
 						echo "<h1>Thank you. You have successfully added a mentee!</h1>";
 
-						//TESTING
-						$test_sql = "SELECT * FROM mentor2mentee WHERE `mentor_id` = '" . $mentor_id . "' AND `mentee_id` = '" . $mentee_id . "'";
-						$result = $wpdb->get_row($test_sql);
+						////////////// TESTING //////////////
+						$test_sql = "SELECT * FROM mentor2mentee WHERE `mentor_id` = '" . $mentor_id . "' AND `mentee_id` = '" . $mentee_id . "'"; //create the sql command
+						$result = $wpdb->get_row($test_sql); // run the sql command
+						//create the testing block
 						echo "<hr><hr><hr><p><h1>FOR TESTING PURPOSES ONLY</h1></p><br><br>";
 						echo "<p>ORIGINAL SQL STATEMENT: " . $sql . "</p><br>";
 						echo "<p>TESTING SQL STATEMENT: " . $test_sql . "</p><br>";
@@ -54,6 +54,7 @@ get_header(); ?>
 						echo "<p>Expected output: (" . $mentor_id . "," . $mentee_id . ")";
 						echo "<p>Acual Output: (" . $result->mentor_id . "," . $result->mentee_id . ")";
 						echo '<table style="width:30%;float:center"><tr><td>Does input equal output?</td>';
+						//compares the input to the output and display with red or green text fail or pass
 						if ($mentor_id == $result->mentor_id && $mentee_id == $result->mentee_id){
 							echo '<td bgcolor="#008000"> PASS </td>';
 						}
@@ -63,23 +64,21 @@ get_header(); ?>
 						echo "</tr></table>";
 
 						echo "<hr><hr><hr><br><br>";
-
-						
-						//echo $sql;
+						////////////// END TESTING //////////////
 
 					}
-					else if($mentor_id == 0){
+					else if($mentor_id == 0){ //check to see if mentor first (id is 0 when not a mentor)
 						echo '<h1>Please Become a Mentor First!</h1>';
 					}
 					else {
-						$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By mentee.mentee_id");
+						$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By mentee.mentee_id"); //create and run the sql command
 
-						
+						//create the form
 						echo "<form method=post id=menteeadd_form>";
 						echo "<table border=0>";
 
-						if(!empty($results)) { 
-	     					foreach($results as $r) {	 
+						if(!empty($results)) { //makes sure the sql command got results
+	     					foreach($results as $r) {	 //displays each mentee
 	     						
 	          					echo "<tr>";
 	          					echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
@@ -114,6 +113,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

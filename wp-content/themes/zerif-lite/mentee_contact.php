@@ -25,23 +25,24 @@ get_header(); ?>
 
 			<main id="main" class="site-main" role="main">
 				<?php
+					//get current user id to get the mentor id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 
-					if ($mentor_id == 0){
+					if ($mentor_id == 0){ //checks to see if mentor first
 						echo "<h1>Please Become a Mentor First!";
 					}
 					else {
-					if(isset($_POST['contact_mentee'])) {
-						$mentee_id = $_POST['contact_mentee'];
-						$sql = 'SELECT `full_name`,`email` FROM mentee WHERE mentee.mentee_id = "' . $mentee_id . '"';
-						$results = $wpdb->get_row($sql);
-						$full_name = $results->full_name;
-						$email = $results->email;
+					if(isset($_POST['contact_mentee'])) { //if submit button pushed from "contact mentee" on "my mentees"
+						$mentee_id = $_POST['contact_mentee']; //get mentee id from form
+						$sql = 'SELECT `full_name`,`email` FROM mentee WHERE mentee.mentee_id = "' . $mentee_id . '"'; //create sql to get name a email from database with mentee id
+						$results = $wpdb->get_row($sql);//run sql
+						$full_name = $results->full_name; //store name
+						$email = $results->email; //store email
 
 					}
-					else {
+					else { //if not from another page, they are empty
 						$full_name = '';
 						$email = '';
 					}
@@ -50,6 +51,9 @@ get_header(); ?>
 					//echo "Email: " . $email;
 
 
+				?>
+				<?php
+				//create the form
 				?>
 				<form method="post" id="contactus_form">
 					Mentee Name:<input type="text" name="yourname" id="yourname" rows="1" value="<?php echo $full_name; ?>" />
@@ -65,9 +69,10 @@ get_header(); ?>
 
 
 				<?php
-
+					//if send button was pushed
 					if(isset($_POST['submit']))
 					{
+						//validate inputs
 						$flag=1;
 						if($_POST['yourname']=='')
 							{
@@ -108,9 +113,11 @@ get_header(); ?>
 							{ 
 								if($flag==1) 
 									{ 
+										//send a copy to admin
 										wp_mail(get_option("admin_email"),trim($_POST[yourname])." sent you a message from ".get_option("blogname"),stripslashes(trim($_POST[message])),"From: ".trim($_POST[yourname])." <".trim($_POST[email]).">rnReply-To:".trim($_POST[email]));
+										//send main to person
 										$sent = wp_mail(trim($_POST['email']),trim($_POST[yourname])." sent you a message from ".get_option("blogname"),stripslashes(trim($_POST[message])),"From: ".trim($_POST[yourname])." <".trim($_POST[email]).">rnReply-To:".trim($_POST[email]));
-										if ($sent){
+										if ($sent){ //validates send
 											echo "Mail Successfully Sent";
 										}
 										else {
@@ -127,6 +134,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

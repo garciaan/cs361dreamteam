@@ -64,7 +64,7 @@ get_header(); ?>
 							echo "<table>";
 							echo "<tr><td>#</td><td>Description</td><td>CompleteValue</td><td>Current Status</td><td>Threshold</td></tr>";
 							if(!empty($results)) { 
-								foreach($results as $r) {	 
+								foreach($results as $r) {	 //displays each goal as editable
 									echo "<tr>";
 									echo "<td>".$r->goal_id."<input type='hidden' name='myID' value= '".$r->goal_id."' ></td>";
 									echo "<td><input type='text' name='goal_description' value='".$r->goal_description."'></td>";
@@ -80,14 +80,15 @@ get_header(); ?>
 							echo "</table>";
 							echo "</form>";
 
-					} else if(isset($_POST['update'])) {
-
+					} else if(isset($_POST['update'])) { //script to run if update was pushed
+						//store variables
 						$goal_id= $_POST['myID'];
 						$description = $_POST["goal_description"];
 						$completion= $_POST['goal_completion'];
 						$status= $_POST['current_status'];
 						$threshold= $_POST['threshold'];
 
+						//print variables
 						echo $goal_id;
 						echo $description;
 						echo $completion;
@@ -95,6 +96,7 @@ get_header(); ?>
 						echo $threshold;
 						echo $mentee_id;
 
+						//updates the database with values
 						$results = $wpdb->update( 'goal_progress', 
 							array('goal_description' => $description, 'goal_completion' => $completion, 'current_status' => $status, 'threshold' => $threshold, 'mentee_id' => $mentee_id),
 							array('goal_id' => $goal_id), 
@@ -108,14 +110,14 @@ get_header(); ?>
 										{
 											echo "Congratulations, you have updated";
 										}
-
+						//create the ok form
 						echo "<form method='post' id='OK_form'>";
 						echo "<input type='hidden' name='mentee_id' value='".$mentee_id."'>";
 						echo "<br><br>";
 						echo "<input type='submit' name='ack_form' id='ack_form' value='OK'/>";
 						echo "</form>";
 
-					} else if(isset($_POST['add_new'])) {
+					} else if(isset($_POST['add_new'])) { //if add new button was pushed
 
 						//draw a blank form
 						echo"<h2>Please Enter or update your Goals</h2>";
@@ -137,8 +139,8 @@ get_header(); ?>
 						echo "<input type='submit' name='submit_form' id='submit_form' value='Send'/>";
 						echo "</form>";
 
-					} else if(isset($_POST['submit_form'])) {
-
+					} else if(isset($_POST['submit_form'])) { //if submit button on add new button
+						//validates inputs
 						$flag=0;
 						if (!empty($_POST["goal_description"])) {
 							$description = test_input($_POST["goal_description"]);	// check if name only contains letters and whitespace
@@ -192,7 +194,7 @@ get_header(); ?>
 							$flag=0;
 						}
 
-						if($flag == 1){
+						if($flag == 1){ //if no errors
 							//Insert goal here
 							echo "<h2>My Goals:</h2>";
 							echo $description;
@@ -206,7 +208,7 @@ get_header(); ?>
 							echo $mentee_id;
 							echo "<br>";
 
-
+							//insert the new goal
 							$results = $wpdb->insert( 'goal_progress', 
 								array('goal_description' => $description, 'goal_completion' => $completion, 'current_status' => $status, 'threshold' => $threshold, 'mentee_id' => $mentee_id),
 								array( '%s', '%d', '%d', '%d', '%d'));
@@ -218,7 +220,7 @@ get_header(); ?>
 										{
 											//echo "Congratulations, you have updated";
 										}
-
+							//adds the ok button
 							echo "<form method='post' id='OK_form'>";
 							echo "<input type='hidden' name='mentee_id' value='".$mentee_id."'>";
 							echo "<br><br>";
@@ -255,7 +257,7 @@ get_header(); ?>
 							echo "<table>";
 							echo "<tr><td>#</td><td>Description</td><td>CompleteValue</td><td>Current Status</td><td>Threshold</td></tr>";
 							if(!empty($results)) { 
-								foreach($results as $r) {	 
+								foreach($results as $r) {	 //display each goal
 									echo "<tr>";
 									echo "<td>".$r->goal_id."</td>";
 									echo "<td>".$r->goal_description."</td>";
@@ -274,7 +276,7 @@ get_header(); ?>
 
 				} else
 				{
-
+					//get goals
 					$sql = "SELECT * FROM goal_progress Where mentee_id = '".$mentee_id."'";
 
 					$results = $wpdb->get_results($sql);
@@ -284,7 +286,7 @@ get_header(); ?>
 						echo "<table>";
 						echo "<tr><td>#</td><td>Description</td><td>CompleteValue</td><td>Current Status</td><td>Threshold</td><td>&nbsp;</td></tr>";
 						if(!empty($results)) { 
-							foreach($results as $r) {	 
+							foreach($results as $r) {	 //display each goal
 								echo "<tr>";
 								echo "<td>".$r->goal_id."</td>";
 								echo "<td>".$r->goal_description."</td>";
@@ -295,9 +297,9 @@ get_header(); ?>
 								echo "</tr>";
 							}
 							
-						} else {
+						} else { //if not goals
 							echo '<tr><td colspan="6" style="text-align:center"><h3>You do not yet have any goals!</h3></td></tr>';
-							echo $wpdb->print_error();
+							echo $wpdb->print_error(); //if there was an error, print it. Doesn't print anything if no error
 						}
 						echo "<tr><td colspan='6'><form method='post' id='goalEdit_form'><input type='submit' name='add_new' id='add_new' value='Add New'></form></td></tr>";
 						echo "</table>";
@@ -316,6 +318,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+	//side links
 	if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) )
 		{
 			echo '</div>';

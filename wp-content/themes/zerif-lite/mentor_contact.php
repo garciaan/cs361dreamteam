@@ -26,20 +26,32 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 				<?php
+					// this test to see if the user is logged in when makes a 
+					// query to the DB to see if there is an id for the user 
+					// and if so to set it equal to mentee_id
+
 					$user_id = get_current_user_id();
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
 
+					// If we got a valid id then go ahead, if not then ask the user to sign in.
 					if ($mentee_id == 0){
 						echo "<h1>Please Become a Mentee First!</h1>";
 					}
 					else{
+						//THis is test code to see what the id is.
 						//echo "My mentee ID: " . $mentee_id . "<br>";
 						
+						//check to see if we got a contact name passed into the form.
+						// if we did look up the name and email to populate the form.
 						if(isset($_POST['contact_mentor'])) {
 							$mentor_id = $_POST['contact_mentor'];
 							$sql = 'SELECT `full_name`,`email` FROM mentor WHERE mentor.id = "' . $mentor_id . '"';
+							
+							//Test code to verify the results
 							//echo $sql;
+							
+							//set local variables to the name and email address
 							$results = $wpdb->get_row($sql);
 							$full_name = $results->full_name;
 							$email = $results->email;
@@ -56,6 +68,8 @@ get_header(); ?>
 
 
 				?>
+				
+				<!-- contact form -->
 				<form method="post" id="contactus_form">
 					Mentor Name:<input type="text" name="yourname" id="yourname" rows="1" value="<?php echo $full_name; ?>" />
 					<br /><br />
@@ -71,6 +85,9 @@ get_header(); ?>
 
 				<?php
 
+					// Check to see that the user sumitted something, then set a "dirty" flag
+					// check each input type to make sure is is in the correct format.  If it is wrong
+					//print a message.
 					if(isset($_POST['submit']))
 					{
 						$flag=1;
@@ -111,17 +128,11 @@ get_header(); ?>
 								exit; 
 							} else 
 							{ 
+								// everything is successful, format and send the email
 								if($flag==1) 
 									{ 
 										wp_mail(get_option("admin_email"),trim($_POST[yourname])." sent you a message from ".get_option("blogname"),stripslashes(trim($_POST[message])),"From: ".trim($_POST[yourname])." <".trim($_POST[email]).">rnReply-To:".trim($_POST[email]));
-										$sent = wp_mail(trim($_POST['email']),trim($_POST[yourname])." sent you a message from ".get_option("blogname"),stripslashes(trim($_POST[message])),"From: ".trim($_POST[yourname])." <".trim($_POST[email]).">rnReply-To:".trim($_POST[email]));
-										if ($sent){
-											echo "Mail Successfully Sent";
-										}
-										else {
-											echo "Mail Failed to send";
-										}
-										 
+										echo "Mail Successfully Sent"; 
 									}  
 							}
 					}
@@ -134,6 +145,9 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		// this builds all the sidebar content, it is an overide of sidebar.php as supplied in the theme.  The content is specific
+		// as to whether you are loggind in and what type of user you are.
+
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

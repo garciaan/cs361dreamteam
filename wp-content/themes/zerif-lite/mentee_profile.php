@@ -28,20 +28,20 @@ get_header(); ?>
 				
 				<?php
 
-					$wpdb->show_errors();
-
+					//temp photo
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
-
+					//get user id to get mentee id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
 
 					global $wpdb;
+					//get current mentee info
 					$sql = 'SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentee.mentee_id = "' . $mentee_id . '"';
 					$results = $wpdb->get_results($sql);
 
 					if(!empty($results)) { 
-						foreach($results as $r) {	 
+						foreach($results as $r) {	 //it really is only one ever, but it assigns each field to a variable
 							$mentee_id = $r->mentee_id;
 							$mentee_name = $r->full_name;
 							$mentee_phone = $r->phone;
@@ -61,7 +61,7 @@ get_header(); ?>
 							$mentee_qualification = $r->why_mentee;
 						}
 					} else {
-						if ($mentee_id == 0){
+						if ($mentee_id == 0){ //if mentee
 							echo "<h1>Please Become a Mentee First!</h1>";
 						}
 						else{
@@ -71,6 +71,7 @@ get_header(); ?>
 
 					if(isset($_POST['submit']) && $mentee_id != 0) 
 					{ 
+						//validate inputs
 						$flag=1;
 						if($_POST['mentee_name']=='') 
 						{ 
@@ -202,6 +203,7 @@ get_header(); ?>
 							{ 
 								if($flag==1) 
 									{ 
+										//assign inputs to variables
 										$mentee_name = $_POST['mentee_name'];
 										$mentee_phone = $_POST['mentee_phone'];
 										$mentee_email = $_POST['mentee_email'];
@@ -219,6 +221,7 @@ get_header(); ?>
 										$mentee_ref2 = $_POST['mentee_ref2'];
 										$mentee_qualification = $_POST['mentee_qualification'];
 
+										//displays the inputs
 										echo "Photo: ".$photo."<br/>";
 										echo "Name: ".$mentee_name."<br/>";
 										echo "Phone: ".$mentee_phone."<br/>";
@@ -237,7 +240,7 @@ get_header(); ?>
 										echo "Reference 2: ".$mentee_ref2."<br/>";
 										echo "Qualifications: ".$mentee_qualification."<br/>";
 
-
+										//updates the database
 										$results = $wpdb->update( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array('mentee_id' => $mentee_id), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'), array('%s'));
 														
 										if(! $results)
@@ -251,6 +254,9 @@ get_header(); ?>
 							}
 					}
 
+				?>
+				<?php 
+				//Displays and populates the current mentee profile
 				?>
 				<?php if ($mentee_id != 0){ ?>
 				<h2>MENTEE PROFILE</h2>
@@ -367,6 +373,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+	//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

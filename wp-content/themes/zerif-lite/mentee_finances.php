@@ -33,11 +33,11 @@ get_header(); ?>
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
 
-					if ($mentee_id == 0){
+					if ($mentee_id == 0){ //checks to see if mentee first
 						echo "<h1>Please Become a Mentee First!</h1>";
 					}
 					else {
-
+						//get the stuff written on the page from wordpress pages
 						get_template_part( 'content', 'page' );
 					}
 
@@ -45,7 +45,7 @@ get_header(); ?>
 
 
 
-
+					//wordpress comments
 					if ( comments_open() || '0' != get_comments_number() ) :
 
 						comments_template();
@@ -61,6 +61,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

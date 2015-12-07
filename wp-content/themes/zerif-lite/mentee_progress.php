@@ -26,11 +26,12 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 				<?php 
+					//gets current user id to get the mentor id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 					
-					if ($mentor_id == 0){
+					if ($mentor_id == 0){ //if not a mentor
 						echo "<h1>Please Become a Mentor First!</h1>";
 					}
 					else {
@@ -45,6 +46,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

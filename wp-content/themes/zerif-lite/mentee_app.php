@@ -24,13 +24,16 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 
 			<main id="main" class="site-main" role="main">
-				<?php if (is_user_logged_in()){
+				<?php if (is_user_logged_in()){ //check if user is logged in
 				?>
 				<h2>MENTEE QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentors can verify the authenticity and qualifications of mentees.</p>
 				<p><h3>ALL FIELDS REQUIRED</h3></p>
 				<?php
-					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
+					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type"); //gets the list of categories for the dropdown
+				?>
+				<?php 
+				//create the form
 				?>
 				<form method="post" id="menteeapp_form">
 					<table>
@@ -55,6 +58,7 @@ get_header(); ?>
 								Career Category Sought:&nbsp
 								<select name="mentee_category" id="mentee_category">
 									<?php
+									//display each category as an option
 										foreach ($categories as $category){
 											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
 											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
@@ -74,7 +78,7 @@ get_header(); ?>
 							<td>
 								Preferred method of contact for mentee sessions:
 									<?php
-									//global $wpdb;
+									//get the methods of contact and put them in a dropdown
 									$results = $wpdb->get_results("SELECT * from contact_method");
 									echo "<select name='mentee_contact' id='mentee_contact'>";
 
@@ -122,9 +126,10 @@ get_header(); ?>
 
 				<?php
 
-					//$wpdb->show_errors();
+					//get current user id
 					$user_id = get_current_user_id();
 
+					//get the form inputs
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$mentee_name = $_POST['mentee_name'];
 					$mentee_phone = $_POST['mentee_phone'];
@@ -143,6 +148,7 @@ get_header(); ?>
 					$mentee_ref2 = $_POST['mentee_ref2'];
 					$mentee_qualification = $_POST['mentee_qualification'];
 
+					//validates the inputs
 					if(isset($_POST['submit'])) 
 					{ 
 						$flag=1;
@@ -277,7 +283,8 @@ get_header(); ?>
 								if($flag==1) 
 									{ 
 										
-
+										//TESTING
+										//Displays the input
 										echo "Photo: ".$photo."<br/>";
 										echo "Name: ".$mentee_name."<br/>";
 										echo "Phone: ".$mentee_phone."<br/>";
@@ -296,27 +303,28 @@ get_header(); ?>
 										echo "Reference 2: ".$mentee_ref2."<br/>";
 										echo "Qualifications: ".$mentee_qualification."<br/>";
 
+										//Not sure why these 2 lines stopped working..
 										//$insert_result = $wpdb->insert( 'mentee', array('photo' => $photo, 'full_name' => $mentee_name, 'phone' => $mentee_phone, 'email' => $mentee_email, 'address' => $mentee_address, 'Country' => $country, 'State' => $state, 'employer' => $mentee_employer, 'career_cat' => $mentee_category, 'yrs_exp' => $mentee_years, 'desc_exp' => $mentee_experience, 'contact_meth' => $mentee_contact, 'session_num' => $mentee_year1, 'session_time' => $mentee_sessiontime, 'ref_1' => $mentee_ref1, 'ref_2' => $mentee_ref2, 'why_mentee' => $mentee_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%s', '%s'));
 										//$mentee_id = $wpdb->insert_id;
 										
-
+										//create the sql command
 										$sql = "INSERT INTO `mentee` (`photo`,`full_name`,`phone`,`email`,`address`,`Country`,`State`,`employer`,`career_cat`,`yrs_exp`,`desc_exp`,`contact_meth`,`session_num`,`session_time`,`ref_1`,`ref_2`,`why_mentee`) VALUES ('" . $photo . "', '" . $mentee_name . "', '" . $mentee_phone . "', '" . $mentee_email . "', '" . $mentee_address . "', '" . $country . "', '" . $state . "','" . $mentee_employer . "' , '" . $mentee_category . "', '" . $mentee_years . "', '" . $mentee_experience . "', '" . $mentee_contact . "', '" . $mentee_year1 . "', '" . $mentee_sessiontime . "', '" . $mentee_ref1 . "', '" . $mentee_ref2 . "', '" . $mentee_qualification . "')";
-										$result = $wpdb->query($sql);
-										//echo "Mentee ID: " . $mentee_id . "<br />";
+										$result = $wpdb->query($sql); //run the sql command (inserts the data into the database)
 										if($result === False) //$wpdb->insert returns False if error, but must check type too (===)
 										{
 											echo "ERROR: INSERT Mentee returned with ".$wpdb->print_error();
 										} else
 										{	$user_id = get_current_user_id();
-											$sql = "SELECT `mentee_id` FROM `mentee` WHERE `email` = '" . $mentee_email . "'";
-											$mentee_id = $wpdb->get_var($sql);
+											$sql = "SELECT `mentee_id` FROM `mentee` WHERE `email` = '" . $mentee_email . "'"; //create the sql to get the mentee id
+											$mentee_id = $wpdb->get_var($sql); //run the sql to get the mentee id
+											//inserts data to the mentor career table that connects each mentee to a career category
 											$insert_result = $wpdb->insert( 'mentor_career', array('mentee_ID' => $wpdb->insert_id, 'career_ID' => $mentee_category), array( '%d', '%d'));
 											if($insert_result == False) //$wpdb->insert returns 0 if error, 1 if pass
 											{
 												echo "ERROR: INSERT mentor_career returned with ".$wpdb->print_error();
 											} else
 											{
-												//This connects the wp_id to the mentee id. Inserts if not there, updates if there
+												//This connects the wordpress id to the mentee id. Inserts if not there, updates if there
 												$sql = "INSERT INTO `wpid_to_mid` (`wp_id`, `mentee_id`) VALUES(" . $user_id . "," . $mentee_id . ") ON DUPLICATE KEY UPDATE `mentee_id` = " . $mentee_id;
 												//echo "<p>" . $sql . "</p>";
 												$result = $wpdb->query($sql);
@@ -338,6 +346,7 @@ get_header(); ?>
 				<?php 
 				} //ends the if user is logged in
 				else { 
+					//Adds log in or register button if they are not logged in
 					echo "<h1>Please register or log in first!</h1>";
 					echo '<a href="http://dreamplanner.campuslifeohs.com/wp-login.php?action=register" class="btn btn-primary custom-button red-btn">Register Now</a>';
 					echo '<a href="http://dreamplanner.campuslifeohs.com/wp-login.php" class="btn btn-primary custom-button green-btn">Log In</a>';
@@ -348,6 +357,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

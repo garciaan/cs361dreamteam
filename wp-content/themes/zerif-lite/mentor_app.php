@@ -24,12 +24,19 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 
 			<main id="main" class="site-main" role="main">
-				<?php if (is_user_logged_in()){
+				
+
+				<?php 
+				// test to see if the user has logged in
+				if (is_user_logged_in()){
+				
 				?>
+				<!-- Questionnaire form -->
 				<h2>MENTOR QUESTIONNAIRE</h2>
 				<p>This questionnaire is designed so that mentees can verify the authenticity and qualifications of mentors.</p>
-				<p><h3>ALL FIELDS REQUIRED</h3></p>
+				
 				<?php
+					// use sql select to get the list of possible careers for a user to chose from
 					$categories = $wpdb->get_results("select career_type.Career_id,career_type.Career_Name from career_type");
 				?>
 				<form method="post" id="mentorapp_form">
@@ -57,7 +64,6 @@ get_header(); ?>
 								<select name="mentor_category" id="mentor_category">
 									<?php
 										foreach ($categories as $category){
-											//echo "Category ID: " . $category->career_cat_id . " -- Category: " . $category->category . "<br>";
 											echo '<option value="' . $category->Career_id . '" >' . $category->Career_Name . '</option>'; ;
 										}
 
@@ -75,7 +81,7 @@ get_header(); ?>
 							<td>
 								Preferred method of contact for mentor sessions:
 									<?php
-									//global $wpdb;
+									//this auto populates the contact methods in our DB
 									$results = $wpdb->get_results("SELECT * from contact_method");
 									echo "<select name='mentor_contact' id='mentor_contact'>";
 
@@ -123,7 +129,8 @@ get_header(); ?>
 
 				<?php
 
-					//$wpdb->show_errors();
+					// This gets all the vales the user posted and assigns them t variables.  We use this for input
+					// validation
 
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
 					$mentor_name = $_POST['mentor_name'];
@@ -143,6 +150,10 @@ get_header(); ?>
 					$mentor_ref2 = $_POST['mentor_ref2'];
 					$mentor_qualification = $_POST['mentor_qualification'];
 
+					
+					// Check to see that the user sumitted something, then set a "dirty" flag
+					// check each input type to make sure is is in the correct format.  If it is wrong
+					//print a message.
 					if(isset($_POST['submit'])) 
 					{ 
 						$flag=1;
@@ -276,7 +287,8 @@ get_header(); ?>
 								if($flag==1) 
 									{ 
 										
-
+										// This is for testing purposes.  Check to see that all the input we got is what was expected.
+										// Unit testing of the same thing is done in "insert_test.php"
 										echo "Photo: ".$photo."<br/>";
 										echo "Name: ".$mentor_name."<br/>";
 										echo "Phone: ".$mentor_phone."<br/>";
@@ -295,13 +307,11 @@ get_header(); ?>
 										echo "Reference 2: ".$mentor_ref2."<br/>";
 										echo "Qualifications: ".$mentor_qualification."<br/>";
 
-
-
-
-
-
+										// all the data is OK so insert it into the DB
 										$insert_result = $wpdb->insert( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'address' => $mentor_address, 'state' => $state, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'email' => $mentor_email, 'location' => $country, 'time_zone' => $time_zone, 'desc_exp' => $mentor_experience, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s'));
 										$mentor_id = $wpdb->insert_id;			
+										
+										// check the return to make sure the insert worked
 										if($insert_result == False)
 										{
 											echo "ERROR: INSERT returned with ".$wpdb->print_error();
@@ -346,6 +356,9 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		// this builds all the sidebar content, it is an overide of sidebar.php as supplied in the theme.  The content is specific
+		// as to whether you are loggind in and what type of user you are.
+
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

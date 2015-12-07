@@ -31,18 +31,24 @@ get_header(); ?>
 
 					global $wpdb;
 
+					// this test to see if the user is logged in when makes a 
+					// query to the DB to see if there is an id for the user 
+					// and if so to set it equal to mentee_id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentee_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentee_id = (int)($wpdb->get_var($sql));
-					//$results = $wpdb->get_results("SELECT * FROM mentor JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By id");
-					
+
+					// If we got a valid id then go ahead, if not then ask the user to sign in.
 					if ($mentee_id == 0){
 						echo "<h1>Please Become a Mentee First!</h1>";
 					}
 					else {
+						// SQL query to get the mentor data based on my mentee id (my mentors) we also
+						// join the careers table and contact method tables so we can print out the full
+						// names for these items rather than the indexes
 						$results = $wpdb->get_results("SELECT * FROM mentor Join mentor2mentee ON mentor.id = mentor2mentee.mentor_id JOIN mentor_career ON id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentor2mentee.mentee_id = '".$mentee_id."' GROUP By id");
 						
-
+						// iterate through the results and print it out on the web page.
 						if(!empty($results)) { 
 							echo '<form method="post" action="http://dreamplanner.campuslifeohs.com/contact/" id="contact_mentee">';
 							echo "<table border=0>";
@@ -77,6 +83,9 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		// this builds all the sidebar content, it is an overide of sidebar.php as supplied in the theme.  The content is specific
+		// as to whether you are loggind in and what type of user you are.
+
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

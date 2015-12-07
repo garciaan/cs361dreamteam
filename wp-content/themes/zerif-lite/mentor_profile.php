@@ -29,21 +29,35 @@ get_header(); ?>
 
 					$wpdb->show_errors();
 
+					// this sets a default photo value if one is not already in the DB
 					$photo = "http://dreamplanner.campuslifeohs.com/wp-content/uploads/2015/11/person-150x150.jpg";
-					//$user = "Lt Uhura";
 
+					// this test to see if the user is logged in when makes a 
+					// query to the DB to see if there is an id for the user 
+					// and if so to set it equal to mentee_id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
+					
+					// If we got a valid id then go ahead, if not then ask the user to sign in.
 					if ($mentor_id == 0){
 						echo "<h1>Please Become a Mentor First!</h1>";
 					}
 					else {
 						global $wpdb;
+						
+						// SQL query to get the mentor data based on mentor id we also
+						// join the careers table and contact method tables so we can print out the full
+						// names for these items rather than the indexes
 						$sql = "SELECT * FROM mentor JOIN mentor_career ON mentor.id = mentor_career.mentor_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID Where mentor.id = '".$mentor_id."'";
+						
+						// this is test code to verify the output
 						//echo "SQL Command: " . $sql . "<br>";
+						
+
 						$results = $wpdb->get_results($sql);
 
+						// iterate through the results and set variables
 						if(!empty($results)) { 
 							foreach($results as $r) {	 
 								$mentor_id = $r->id;
@@ -69,6 +83,9 @@ get_header(); ?>
 							echo "ERROR: SELECT returned with ".$wpdb->print_error();
 						}
 
+						
+						// This gets all the vales the user posted and assigns them to variables.  We use this for input
+						// validation
 						if(isset($_POST['submit'])) 
 						{ 
 							$flag=1;
@@ -199,6 +216,8 @@ get_header(); ?>
 									exit; 
 								} else 
 								{ 
+									// This is for testing purposes.  Check to see that all the input we got is what was expected.
+									// Unit testing of the same thing is done in "update_test.php"
 									if($flag==1) 
 										{ 
 											
@@ -219,8 +238,10 @@ get_header(); ?>
 											$mentor_ref2 = $_POST['mentor_ref2'];
 											$mentor_qualification = $_POST['mentor_qualification'];
 
+											// this is the sql to do the actual update.
 											$results = $wpdb->update( 'mentor', array('photo' => $photo, 'full_name' => $mentor_name, 'phone' => $mentor_phone, 'email' => $mentor_email, 'address' => $mentor_address, 'location' => $country, 'State' => $state, 'time_zone' => $time_zone, 'employer' => $mentor_employer, 'career_cat' => $mentor_category, 'yrs_exp' => $mentor_years, 'desc_exp' => $mentor_experience, 'contact_meth' => $mentor_contact, 'session_num' => $mentor_year1, 'session_time' => $mentor_sessiontime, 'ref_1' => $mentor_ref1, 'ref_2' => $mentor_ref2, 'why_mentor' => $mentor_qualification), array('id' => $mentor_id), array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%d', '%d', '%s', '%s', '%s'), array('%s'));
 					
+											// check the results of our update and indicate success or failure.
 											if(! $results)
 											{
 												echo "ERROR: UPDATE returned with ".$results;
@@ -234,6 +255,7 @@ get_header(); ?>
 
 				?>
 
+				<!-- Profile form  Values from the DB are inserted into the form for editing -->
 				<h2>My Profile</h2>
 				<p>Update your profile</p>
 				<?php
@@ -346,6 +368,9 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		// this builds all the sidebar content, it is an overide of sidebar.php as supplied in the theme.  The content is specific
+		// as to whether you are loggind in and what type of user you are.
+
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

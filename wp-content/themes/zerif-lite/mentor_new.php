@@ -26,7 +26,9 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 	
-				<?php while ( have_posts() ) : the_post(); 
+				<?php 
+				// this defines the container for page content
+				while ( have_posts() ) : the_post(); 
 				
 					get_template_part( 'content', 'page' );
 
@@ -44,6 +46,9 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		// this builds all the sidebar content, it is an overide of sidebar.php as supplied in the theme.  The content is specific
+		// as to whether you are loggind in and what type of user you are.
+
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

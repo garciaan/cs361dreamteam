@@ -26,7 +26,7 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 				<?php while ( have_posts() ) : the_post(); 
-				
+					//normal wordpress page
 					get_template_part( 'content', 'page' );
 
 					if ( comments_open() || '0' != get_comments_number() ) :
@@ -45,6 +45,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

@@ -29,23 +29,24 @@ get_header(); ?>
 				
 				<?php
 					global $wpdb;
-
+					//get current user id to get current mentor id
 					$user_id = get_current_user_id();
 					$sql = 'select `mentor_id` from wpid_to_mid where `wp_id`= ' . $user_id;
 					$mentor_id = (int)($wpdb->get_var($sql));
 					
-					if ($mentor_id == 0){
+					if ($mentor_id == 0){ //if not mentor
 						echo "<h1>Please Become a Mentor First!</h1>";
 					}
 					else {
-					//$results = $wpdb->get_results("SELECT * FROM mentee JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID GROUP By mentee.mentee_id");
+					//get all the mentees of the current mentor
 					$results = $wpdb->get_results("SELECT * FROM mentee Join mentor2mentee ON mentee.mentee_id = mentor2mentee.mentee_id JOIN mentor_career ON mentee.mentee_id = mentor_career.mentee_ID JOIN career_type ON career_type.Career_id = mentor_career.career_ID WHERE mentor2mentee.mentor_id = '".$mentor_id."'");
 					
 		
-						if(!empty($results)) { 
+						if(!empty($results)) { //makes sure there are some
+							//create the form to contact mentee
 							echo '<form method="post" action="http://dreamplanner.campuslifeohs.com/mentee-contact/" id="contact_mentee">';
 							echo "<table border=0>";
-	     					foreach($results as $r) {	 
+	     					foreach($results as $r) {	 //display each mentee
 	          					
 	          					echo "<tr>";
 	          					echo "<td rowspan=2 width=200><img class= wp-image-34 size-thumbnail src=" .$r->photo. " width= 150 /></td>";
@@ -66,8 +67,7 @@ get_header(); ?>
 	     					}
 	     					echo "</table>";
 	     					echo '</form>';
-						} else {
-	     					//echo "ERROR: SELECT returned with ".$wpdb->print_error();
+						} else { //either no mentees or error
 	     					$error = $wpdb->print_error();
 	     					if ($error){
 	     						echo "<p>ERROR: SELECT returned with ". $error . "</p>";
@@ -86,6 +86,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}

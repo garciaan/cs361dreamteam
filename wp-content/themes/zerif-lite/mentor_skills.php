@@ -26,29 +26,24 @@ get_header(); ?>
 			<main id="main" class="site-main" role="main">
 
 			<?php
-				// define variables and set to empty values	
-				//$skillErr = "";
-
-				//$skill1 = $skill2 = $skill3 = $skill4 = $skill5 = $skill6 = $skill7 = $skill8 = $skill9 = $skill10 = "";
-				
 				function test_input($data) {
 					$data = trim($data);
 					$data = stripslashes($data);
 					$data = htmlspecialchars($data);
 					return $data;
 				}
-
+				//create arrays for skills and skills errors
 				$skillErrs = array();
 				$skills = array();
 				for ($i = 0; $i < 10; $i++){
 					$skills[] = NULL;
 				}
-
+				//get user id
 				$wp_id = get_current_user_id();
 
-				if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				if ($_SERVER["REQUEST_METHOD"] == "POST") { //if submitted
 					
-
+					//if there is a skill box filled, validate it and store it
 					for ($i = 0; $i < 10; $i++){
 						$skill_name = "skill" . ($i + 1);
 						if (!empty($_POST[$skill_name])){
@@ -66,7 +61,7 @@ get_header(); ?>
 
 					}
 
-					//insert into the database
+					//insert into the database by creating a crazy sql string.
 					$sql = "INSERT INTO `skills` (`wp_id`, `skill1`, `skill2`, `skill3`, `skill4`, `skill5`, `skill6`, `skill7`, `skill8`, `skill9`, `skill10`) VALUES(" . $wp_id;
 					for ($i = 0; $i < 10; $i++){
 						$sql .= ", ";
@@ -90,10 +85,11 @@ get_header(); ?>
 							$sql .= "'" . $skills[$i] . "'";
 						}
 					}
+					//runs the sql command
 					$results = $wpdb->get_results($sql);
 
 					//TESTING
-					//sleep(3);
+					//gets the result from select and stores them in an array
 					$output_skills = array();
 					$test_sql = 'SELECT * FROM `skills` WHERE `wp_id` = ' . $wp_id;
 					$row = $wpdb->get_row($test_sql);
@@ -118,6 +114,7 @@ get_header(); ?>
 					print_r($output_skills);
 					echo "<hr>";
 					echo '<table style="width:30%"><tr><td>Does input equal output?</td>';
+					//compares input to output and displays in a green or red box for  pass or fail
 					if ($skills == $output_skills){
 						echo '<td bgcolor="#008000"> PASS </td>';
 					}
@@ -129,7 +126,7 @@ get_header(); ?>
 
 					//END TESTING
 
-					
+					//displays each skill
 					echo "<h2>Your Skills:</h2>";
 					foreach ($skills as $skill){
 						if (!empty($skill)){
@@ -143,10 +140,11 @@ get_header(); ?>
 
 				<h2>Please Enter Relevant Skills</h2>
 				<?php 
+				//displays form for editing current skills
 				$skills = array();
 				$sql = 'SELECT * FROM `skills` WHERE `wp_id` = ' . $wp_id;
-				//echo "<br><br>" . $sql . "<br><br>";
 
+				//get current skills (even if null)
 				$row = $wpdb->get_row($sql);
 				$skills[] = $row->skill1;
 				$skills[] = $row->skill2;
@@ -161,7 +159,7 @@ get_header(); ?>
 				?>
 				<form method="post" id="mentorskill_form">
 					<?php 
-					for ($i = 0; $i < 10; $i++){
+					for ($i = 0; $i < 10; $i++){ //creates entries and pre fills them with current skills
 						$skill_display_name = "Skill" . ($i + 1);
 						$skill__form_name = "skill" . ($i + 1);
 						$skill_err_name = "skillErr" . ($i + 1);
@@ -185,6 +183,7 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	<?php
+		//side links
 		if( (function_exists('is_cart') && is_cart()) || (function_exists('is_account_page') && is_account_page()) || (function_exists('is_checkout') && is_checkout() ) ) {
 			echo '</div>';
 		}
