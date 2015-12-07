@@ -5,11 +5,6 @@ A hosted version of the Dream Planner site is at dreamplanner.campuslifeohs.com.
 
 Testing is embedded within the site. You will see TESTING PURPOSES ONLY throughout some of the site. You will also see your inputs displayed after a submission underneath forms. These are for displaying our unit testing and would not normally be included in our site. 
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-                            BASIC USAGES
-----------------------------------------------------------------------
-----------------------------------------------------------------------
 
 -----------------------
 REGISTERING ON THE SITE
