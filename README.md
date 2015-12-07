@@ -24,6 +24,7 @@ APPLYING AS A MENTOR
 4. Fill out application
 
 NOTE: You must be logged in
+
 --------------------
 APPLYING AS A MENTEE
 --------------------
@@ -33,6 +34,7 @@ APPLYING AS A MENTEE
 4. Fill out application
 
 NOTE: You must be logged in
+
 ---------------
 ADDING A MENTEE
 ---------------
@@ -43,6 +45,7 @@ ADDING A MENTEE
 5. Choose a mentee and click "Add Mentee"
 
 NOTE: You must have already applied as a mentor and be logged in
+
 ----------------------
 ADD A GOAL AS A MENTEE
 ----------------------
@@ -55,6 +58,7 @@ ADD A GOAL AS A MENTEE
 7. Click "Send" button in the form
 
 NOTE: You must have already applied as a mentee and be logged in
+
 -----------------------------
 SEARCH FOR MENTOR AS A MENTEE
 -----------------------------
